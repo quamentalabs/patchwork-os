@@ -16,3 +16,58 @@ def test_patchwork_satellite_passes_tier0() -> None:
     assert result.verdict == EvaluationVerdict.PASS
     assert result.tier_reached == EscalationTier.TIER_0_DETERMINISTIC
     assert result.escalated_to_main_llm is False
+
+
+def test_claude_code_custom_statusline_hybrid_renders_two_rows() -> None:
+    import json
+    import subprocess
+    from pathlib import Path
+
+    repo_root = Path(__file__).resolve().parents[1]
+    settings_path = repo_root / ".claude" / "settings.json"
+    hybrid_script = repo_root / ".claude" / "helpers" / "patchwork-statusline-hybrid.cjs"
+    primary_script = repo_root / ".claude" / "helpers" / "statusline.js"
+    graft_script = repo_root / ".claude" / "helpers" / "graft-statusline.cjs"
+
+    assert settings_path.is_file()
+    assert hybrid_script.is_file()
+    assert primary_script.is_file()
+    assert graft_script.is_file()
+
+    settings = json.loads(settings_path.read_text(encoding="utf-8"))
+    assert "patchwork-statusline-hybrid.cjs" in settings["statusLine"]["command"]
+    assert "graft-statusline.cjs" in settings["subagentStatusLine"]["command"]
+
+    sample_payload = {
+        "model": {"display_name": "Opus 5 (1M context)", "id": "claude-opus-5"},
+        "fast_mode": True,
+        "workspace": {"project_dir": "/workspace/patchwork-os"},
+        "cost": {"total_cost_usd": 1.25},
+        "context_window": {
+            "total_input_tokens": 880000,
+            "context_window_size": 1000000,
+            "used_percentage": 88.0,
+            "total_output_tokens": 14200,
+            "current_usage": {"input_tokens": 3200, "cache_creation_input_tokens": 800},
+        },
+        "rate_limits": {
+            "five_hour": {"used_percentage": 42.0},
+            "seven_day": {"used_percentage": 19.0},
+        },
+    }
+    proc = subprocess.run(
+        ["node", str(hybrid_script)],
+        input=json.dumps(sample_payload),
+        text=True,
+         encoding="utf-8",
+        capture_output=True,
+        cwd=str(repo_root),
+        check=True,
+    )
+    lines = [line for line in proc.stdout.splitlines() if line.strip()]
+    assert len(lines) == 2
+    assert "Opus 5 (1M)" in lines[0]
+    assert "patchwork-os" in lines[0]
+    assert "$1.25" in lines[0]
+    assert "88%" in lines[1]
+    assert "120k left" in lines[1]

@@ -34,6 +34,7 @@ flowchart TD
 - `docs/architecture/patchwork-os-blueprint.md` — Full architectural blueprint
 - `knowledge/` — CMDS 3-layer knowledge hub (`index.md`, `raw/`, `wiki/`, `rules/`)
 - `src/patchwork_os/` — Host/Runtime-Agnostic Hub-Spoke Binder & Near-Deterministic 3-Tier Escalation Ladder (`Tier 0 Deterministic CLI -> Tier 1 Local LLM no-thinking -> Tier 2 Main LLM escalation`)
+- `.claude/` — Custom **Claude Code (`cc-cli`) Hybrid Statusline Configuration** (`.claude/settings.json`, `.claude/helpers/statusline.js` 2-row card + ADHD-support `█▓░` gradient context bar + remaining-token hazard alerts + rate-limit countdowns, `.claude/helpers/patchwork-statusline-hybrid.cjs` multi-row composer, and `.claude/helpers/graft-statusline.cjs`)
 - `tests/` — Deterministic unit and contract verification suite
 
 ## 4. License
