@@ -71,3 +71,28 @@ def test_claude_code_custom_statusline_hybrid_renders_two_rows() -> None:
     assert "$1.25" in lines[0]
     assert "88%" in lines[1]
     assert "120k left" in lines[1]
+
+
+def test_obsidian_free_llm_wiki_hygiene_and_graph() -> None:
+    from pathlib import Path
+    from patchwork_os.llm_wiki import (
+        audit_itar_and_obsidian_hygiene,
+        build_llm_wiki_graph,
+        normalize_wikilinks_to_markdown,
+        query_llm_wiki,
+    )
+
+    repo_root = Path(__file__).resolve().parents[1]
+    hygiene = audit_itar_and_obsidian_hygiene(repo_root)
+    assert hygiene["zero_obsidian_dependency"] is True
+    assert hygiene["itar_airgap_plain_markdown_ready"] is True
+
+    graph = build_llm_wiki_graph(repo_root / "knowledge")
+    assert graph["valid"] is True
+    assert graph["node_count"] == 4
+    assert graph["orphan_nodes"] == []
+
+    converted = normalize_wikilinks_to_markdown("See [[Patchwork Blueprint|Blueprint]].")
+    assert converted == "See [Blueprint](patchwork-blueprint.md)."
+    hits = query_llm_wiki(repo_root / "knowledge", "Patchwork")
+    assert len(hits) >= 1

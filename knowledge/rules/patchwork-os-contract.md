@@ -9,7 +9,7 @@ updated: 2026-10-19
 1. **Four Mandatory Paradigms**: Every non-trivial workflow combines `workflow`, `meta-prompting`, `graph-prompting`, and `prompt-flow`.
 2. **Three-Layer CMDS Separation**:
    - `raw/` stores immutable source manifests.
-   - `wiki/` stores synthesized architectural nodes linked via `[[...]]`.
+   - `wiki/` stores synthesized architectural nodes linked via standard POSIX Markdown links (`[label](path.md)`).
    - `rules/` stores deterministic invariants enforced at Tier 0.
 3. **Zero Credential or Internal Host Leak**:
    - Satellite and blueprint files must pass `validate_patchwork_satellite` with zero live tokens, API keys, or internal hostnames.

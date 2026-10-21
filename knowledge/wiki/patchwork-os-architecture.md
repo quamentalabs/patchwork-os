@@ -6,7 +6,7 @@ updated: 2026-10-19
 
 # Wiki Layer: 5-Pillar Hybrid Architecture
 
-Synthesized from [[raw/source-manifest.md]] and governed by [[rules/patchwork-os-contract.md]].
+Synthesized from [raw/source-manifest.md](../raw/source-manifest.md) and governed by [rules/patchwork-os-contract.md](../rules/patchwork-os-contract.md).
 
 ```mermaid
 flowchart TD

@@ -20,6 +20,6 @@ flowchart TD
 
 ## Spoke Directory
 
-- **Raw Layer (Immutable Source Manifest)**: [[raw/source-manifest.md]]
-- **Wiki Layer (5-Pillar Hybrid Synthesis)**: [[wiki/patchwork-os-architecture.md]]
-- **Rules Layer (Deterministic Contracts & Hygiene Gates)**: [[rules/patchwork-os-contract.md]]
+- **Raw Layer (Immutable Source Manifest)**: [raw/source-manifest.md](raw/source-manifest.md)
+- **Wiki Layer (5-Pillar Hybrid Synthesis)**: [wiki/patchwork-os-architecture.md](wiki/patchwork-os-architecture.md)
+- **Rules Layer (Deterministic Contracts & Hygiene Gates)**: [rules/patchwork-os-contract.md](rules/patchwork-os-contract.md)
