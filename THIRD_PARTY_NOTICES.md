@@ -12,8 +12,8 @@ Its architecture synthesizes patterns and concepts inspired by the following ope
 | **`mattpocock/skills`** | `https://github.com/mattpocock/skills` | **MIT License** (`SPDX: MIT`) | Wayfinder deterministic CLI skill scripts and task decomposition |
 | **`johnfkoo951/cmds-share`** | `https://github.com/johnfkoo951/cmds-share` | **MIT License** (`SPDX: MIT`) | Selective, hygiene-gated knowledge satellite sharing |
 | **`Leonxlnx/unlazy`** | `https://github.com/Leonxlnx/unlazy` | **MIT License** (`SPDX: MIT`) | Placeholder-first lazy loading and on-demand context hydration |
-| **`johnfkoo951/cmds-llm-wiki`** | `https://github.com/johnfkoo951/cmds-llm-wiki` | **MIT / Companion to `cmds-share`** | CMDS 3-layer (`raw/`, `wiki/`, `rules/`) Markdown knowledge architecture |
-| **`nateherkai/AIS-OS`** | `https://github.com/nateherkai/AIS-OS` | **Permissive Open-Source** | Role-separated Prompt-Flow multi-agent routing |
-| **`graft`** | AST Context Graph | **MIT / Permissive CLI** | AST-indexed repository context graph (`map`, `skeleton`, `callers`, `grep`) |
+| **`johnfkoo951/cmds-llm-wiki`** | `https://github.com/johnfkoo951/cmds-llm-wiki` | **MIT License** (Companion to `cmds-share`) | CMDS 3-layer (`raw/`, `wiki/`, `rules/`) Markdown knowledge architecture |
+| **`nateherkai/AIS-OS`** | `https://github.com/nateherkai/AIS-OS` | **MIT License** (`Copyright (c) 2026 Nate Herk`) | Role-separated Prompt-Flow multi-agent routing |
+| **`graft`** | AST Context Graph | **MIT License** | AST-indexed repository context graph (`map`, `skeleton`, `callers`, `grep`) |
 
 All original code in this repository (`src/patchwork_os/`, `tests/`, `docs/`, `knowledge/`) is clean-room authored and licensed under the **MIT License** ([`LICENSE`](LICENSE)).

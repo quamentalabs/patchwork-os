@@ -23,7 +23,7 @@ flowchart TD
 | **1. Workflow Engine** | `morluto/rea`, `trailhq/Trail-Code` | **MIT License** | Append-only event-sourced ledger + background workflow & hook execution | Wave DAG dependency gating prevents unbounded non-deterministic retry loops |
 | **2. Meta-Prompting** | `NousResearch/hermes-agent`, `buildermethods/agent-os`, `mattpocock/skills` | **MIT License** | Self-improving skill loop + Builder Methods' original `buildermethods/agent-os` spec standards + Wayfinder CLI scripts | Pre-execution contract templates (`KK/KU/UK/UU`) prevent spec drift and unverified mutations |
 | **3. Graph-Prompting** | `graft`, `johnfkoo951/cmds-llm-wiki`, `johnfkoo951/cmds-share` | **MIT License** | AST code graph (`skeleton`, `callers`) + CMDS 3-layer wiki (`raw/`, `wiki/`, `rules/`) | Hub-spoke pointer routing and Tier-0 deterministic validation prevent context bloat and unvetted sync |
-| **4. Prompt-Flow** | `nateherkai/AIS-OS` | **Permissive / MIT-compatible** | Role-separated multi-agent pipeline (`Composer != Validator != Synthesizer`) | Dynamic capability/quota-aware routing eliminates hardcoded model lock-in |
+| **4. Prompt-Flow** | `nateherkai/AIS-OS` | **MIT License** | Role-separated multi-agent pipeline (`Composer != Validator != Synthesizer`) | Dynamic capability/quota-aware routing eliminates hardcoded model lock-in |
 | **5. Lazy Hydration** | `Leonxlnx/unlazy` | **MIT License** | Placeholder-first lazy loading and on-demand hydration | Index/skeleton-first traversal expands full source spans only when required |
 
 ## 3. Repository Layout
