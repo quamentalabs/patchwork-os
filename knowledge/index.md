@@ -5,7 +5,9 @@ tags: [patchwork-os, workflow, meta-prompting, graph-prompting, prompt-flow, cmd
 updated: 2026-10-19
 ---
 
-# Patchwork-OS Knowledge Hub (`index.md`)
+# Patchwork-OS (MIT License)
+
+- **License**: **MIT License** ([`../LICENSE`](../LICENSE) · [`../THIRD_PARTY_NOTICES.md`](../THIRD_PARTY_NOTICES.md)) Knowledge Hub (`index.md`)
 
 This hub routes agents across the 3-layer CMDS knowledge architecture using lazy pointer hydration (`Leonxlnx/unlazy` pattern). Read this index first and hydrate individual spokes only on demand.
 

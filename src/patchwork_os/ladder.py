@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 """Near-deterministic 3-tier evaluation ladder for Patchwork-OS."""
 
 from __future__ import annotations
