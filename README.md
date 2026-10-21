@@ -26,7 +26,12 @@ flowchart TD
 
 ## 3. Repository Layout
 
+- `LICENSE` — MIT License with third-party open-source foundation acknowledgements
 - `docs/architecture/patchwork-os-blueprint.md` — Full architectural blueprint
 - `knowledge/` — CMDS 3-layer knowledge hub (`index.md`, `raw/`, `wiki/`, `rules/`)
 - `src/patchwork_os/` — Host/Runtime-Agnostic Hub-Spoke Binder & Near-Deterministic 3-Tier Escalation Ladder (`Tier 0 Deterministic CLI -> Tier 1 Local LLM no-thinking -> Tier 2 Main LLM escalation`)
 - `tests/` — Deterministic unit and contract verification suite
+
+## 4. License
+
+This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
