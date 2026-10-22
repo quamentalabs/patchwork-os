@@ -1,5 +1,6 @@
 ---
-name: fable-mode
+name: pwos-fable-mode
+alias: fable-mode
 description: "Use when a nontrivial workflow, CLI, architecture, or multi-agent leg requires the 6-gate evidence-grounded wrapper with 3xPR, FRR, KK/KU/UK/UU, no-tradeoff invariants, and enforced template Edit."
 category: governance-and-verification
 tier: tier-2-methodology-shim

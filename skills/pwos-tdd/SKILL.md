@@ -1,5 +1,6 @@
 ---
-name: tdd
+name: pwos-tdd
+alias: tdd
 description: "Use when building or extending any repeatable script, compiler, hook, or CLI tool, enforcing the 9-step hand-compose, register-early, scriptify, run-x3 byte-comparison, and mutation meta-evaluation chain."
 category: build-discipline
 tier: tier-2-methodology-shim

@@ -1,5 +1,6 @@
 ---
-name: systematic-debugging
+name: pwos-systematic-debugging
+alias: systematic-debugging
 description: "Use when a test, script, hook, or runtime behaves unexpectedly or fails, enforcing a read-only 5-stage root-cause analysis and weighted matrix before any RED-GREEN-MUTATION fix."
 category: debugging-and-remediation
 tier: tier-2-methodology-shim

@@ -1,5 +1,6 @@
 ---
-name: wfc
+name: pwos-wfc
+alias: wfc
 description: "Use when composing skills, personas, and inter-CLI runners into a 5-Wave Multi-Persona Triage (MPT:N) DAG with Synergetic Assimilation and Counterpart Limit Coverage."
 category: orchestration-and-synthesis
 tier: tier-3-high-order-lifecycle
@@ -36,7 +37,7 @@ Wire inter-wave dependencies so each wave consumes the verified outputs of the p
 
 ### Stage 3: Meta-Prompt Template Provisioning
 
-Render pre-bound [fable-mode](../fable-mode/SKILL.md) `FULL` templates (`task_<seat_id>_<persona>.md`) with session `lease_token` and `preimage_sha256`.
+Render pre-bound [fable-mode](../pwos-fable-mode/SKILL.md) `FULL` templates (`task_<seat_id>_<persona>.md`) with session `lease_token` and `preimage_sha256`.
 
 ### Stage 4: Inter-CLI Seat Dispatch
 

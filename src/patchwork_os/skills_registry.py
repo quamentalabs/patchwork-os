@@ -7,18 +7,35 @@ import re
 from pathlib import Path
 from typing import Any
 
+SKILL_NAMESPACE_PREFIX = "pwos-"
+
 REQUIRED_CORE_SKILLS: tuple[str, ...] = (
-    "grilling",
-    "quarry",
-    "deconstruct",
-    "crucible",
-    "systematic-debugging",
-    "tdd",
-    "stdd",
-    "fable-mode",
-    "wfc",
-    "rea",
+    "pwos-grilling",
+    "pwos-quarry",
+    "pwos-deconstruct",
+    "pwos-crucible",
+    "pwos-systematic-debugging",
+    "pwos-tdd",
+    "pwos-stdd",
+    "pwos-fable-mode",
+    "pwos-wfc",
+    "pwos-rea",
 )
+
+SKILL_SHORT_ALIASES: dict[str, str] = {
+    skill_id.removeprefix(SKILL_NAMESPACE_PREFIX): skill_id
+    for skill_id in REQUIRED_CORE_SKILLS
+}
+
+
+def resolve_skill_id(name: str) -> str:
+    """Resolve a canonical `pwos-*` skill ID or short alias (`grilling` -> `pwos-grilling`)."""
+    cleaned = name.strip().lstrip("/$")
+    if cleaned in REQUIRED_CORE_SKILLS:
+        return cleaned
+    if cleaned in SKILL_SHORT_ALIASES:
+        return SKILL_SHORT_ALIASES[cleaned]
+    raise KeyError(f"Unknown Patchwork-OS skill identifier: {name!r}")
 
 FORBIDDEN_PROPRIETARY_TOKENS: tuple[str, ...] = (
     "proprietary-internal",
@@ -70,8 +87,12 @@ def parse_skill_skeleton(skill_md_path: Path) -> dict[str, Any]:
     has_dollar = "$" in text
     has_crlf = b"\r\n" in raw_bytes
 
+    skill_name = str(meta.get("name", ""))
+    has_pwos_prefix = skill_name.startswith(SKILL_NAMESPACE_PREFIX) and skill_name == skill_md_path.parent.name
+
     valid = (
-        bool(meta.get("name"))
+        bool(skill_name)
+        and has_pwos_prefix
         and bool(meta.get("description"))
         and len(stages) >= 4
         and not missing_sections
@@ -81,7 +102,9 @@ def parse_skill_skeleton(skill_md_path: Path) -> dict[str, Any]:
         and not has_crlf
     )
     return {
-        "name": meta.get("name", skill_md_path.parent.name),
+        "name": skill_name or skill_md_path.parent.name,
+        "alias": str(meta.get("alias", skill_name.removeprefix(SKILL_NAMESPACE_PREFIX))),
+        "has_pwos_prefix": has_pwos_prefix,
         "path": skill_md_path.as_posix(),
         "sha256": hashlib.sha256(raw_bytes).hexdigest(),
         "category": meta.get("category", ""),

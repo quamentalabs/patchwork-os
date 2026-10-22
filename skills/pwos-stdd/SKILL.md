@@ -1,5 +1,6 @@
 ---
-name: stdd
+name: pwos-stdd
+alias: stdd
 description: "Use when orchestrating multi-seat subagent-driven development combined with the 9-step TDD build order, role-disjoint wave allocation, and quota-aware inter-CLI dispatch."
 category: autonomous-lifecycle
 tier: tier-3-high-order-lifecycle
@@ -15,7 +16,7 @@ license: MIT
 
 ## Overview
 
-Three-tier autonomous development lifecycle uniting Wave Function Collapse (`WFC`) DAG planning, role-disjoint persona seat allocation (`Composer != Validator != Synthesizer != Meta-Evaluator`), inter-CLI execution, and the 9-step [tdd](../tdd/SKILL.md) build order.
+Three-tier autonomous development lifecycle uniting Wave Function Collapse (`WFC`) DAG planning, role-disjoint persona seat allocation (`Composer != Validator != Synthesizer != Meta-Evaluator`), inter-CLI execution, and the 9-step [tdd](../pwos-tdd/SKILL.md) build order.
 
 ## Invariants
 
@@ -33,7 +34,7 @@ Load the active plan frontier, query the knowledge hub, and claim the session le
 
 ### Stage 2: Allocate Role-Disjoint SDD Wave Legs
 
-Compile the task DAG into parallelizable waves via [wfc](../wfc/SKILL.md), assigning distinct personas and skills to Planning, Implementation, Adversarial Review, Synthesis, and Meta-Evaluation.
+Compile the task DAG into parallelizable waves via [wfc](../pwos-wfc/SKILL.md), assigning distinct personas and skills to Planning, Implementation, Adversarial Review, Synthesis, and Meta-Evaluation.
 
 ### Stage 3: Execute Inter-CLI Dispatch
 
@@ -45,7 +46,7 @@ If a contract or adapter refuses, diagnose the exact boundary, hand-compose one 
 
 ### Stage 5: Enforce 9-Step TDD and Mutation Gates
 
-Verify every implementation leg through [tdd](../tdd/SKILL.md) (hand-compose, run-x3 byte parity, regression suite, and mutation kill check).
+Verify every implementation leg through [tdd](../pwos-tdd/SKILL.md) (hand-compose, run-x3 byte parity, regression suite, and mutation kill check).
 
 ### Stage 6: Consumer Loop Closure and Plan Sync
 

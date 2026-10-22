@@ -1,5 +1,6 @@
 ---
-name: grilling
+name: pwos-grilling
+alias: grilling
 description: "Use when a plan, decision, or architecture needs relentless one-question-at-a-time stress-testing down every branch of the decision tree before any execution begins."
 category: discovery-and-alignment
 tier: tier-1-epistemic-gate

@@ -1,5 +1,6 @@
 ---
-name: deconstruct
+name: pwos-deconstruct
+alias: deconstruct
 description: "Use when an ambiguous target needs one bounded pre-execution pass that scopes, explores, deconstructs into elements and mechanisms, classifies KK/KU/UK/UU, attacks hypotheses, verifies via FRR, and returns a scored option set with explicit tradeoff placement."
 category: epistemic-analysis
 tier: tier-1-epistemic-gate
@@ -61,4 +62,4 @@ Evaluate at least three independent candidate approaches (plus genuine hybrids w
 ## Hard Boundaries
 
 - Never claim a universal no-tradeoff outcome that hides operational friction.
-- Escalate to [fable-mode](../fable-mode/SKILL.md) when transitioning from recommendation to artifact mutation.
+- Escalate to [fable-mode](../pwos-fable-mode/SKILL.md) when transitioning from recommendation to artifact mutation.

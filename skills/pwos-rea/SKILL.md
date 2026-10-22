@@ -1,5 +1,6 @@
 ---
-name: rea
+name: pwos-rea
+alias: rea
 description: "Use when reverse engineering binaries, CLI runtimes, bundles, protocols, or multi-store distributions and verifying end-to-end Forward-Reverse-Roundtrip (FRR) byte parity."
 category: reverse-engineering-and-roundtrip
 tier: tier-2-methodology-shim

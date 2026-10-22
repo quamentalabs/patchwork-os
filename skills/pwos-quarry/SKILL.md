@@ -1,5 +1,6 @@
 ---
-name: quarry
+name: pwos-quarry
+alias: quarry
 description: "Use when a plan, design, or requirement exists only in the operator's head and must be extracted to disk one question at a time before adversarial hardening in crucible."
 category: requirement-extraction
 tier: tier-1-epistemic-gate
@@ -43,12 +44,12 @@ Append the operator's exact answer and updated frontier to the capture file on d
 
 ### Stage 5: Charge Handoff to Crucible
 
-Once all load-bearing requirements are extracted on disk, hash the capture and hand it off as the initial charge for [crucible](../crucible/SKILL.md).
+Once all load-bearing requirements are extracted on disk, hash the capture and hand it off as the initial charge for [crucible](../pwos-crucible/SKILL.md).
 
 ## Artifacts and Verification Gates
 
 - Durable capture markdown file at `.scratch/quarry/<YYYY-MM-DD>-<slug>.md`.
-- SHA-256 digest of the completed capture ready for [crucible](../crucible/SKILL.md) Stage 1.
+- SHA-256 digest of the completed capture ready for [crucible](../pwos-crucible/SKILL.md) Stage 1.
 
 ## Hard Boundaries
 

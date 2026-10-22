@@ -41,17 +41,17 @@ flowchart TD
 
 **Patchwork-OS** is licensed under the **MIT License**. See [`LICENSE`](LICENSE) for the full license text and [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) for upstream MIT-licensed open-source acknowledgements.
 
-## Generalized Skill Skeleton Procedures (`skills/`)
+## Generalized Skill Skeleton Procedures (`skills/pwos-*`)
 
-Patchwork-OS bundles 10 clean-room, vendor-neutral Markdown skeleton procedures ([`skills/INDEX.md`](skills/INDEX.md)) validated at Tier 0 by `patchwork_os.skills_registry`:
+Patchwork-OS bundles 10 clean-room, vendor-neutral Markdown skeleton procedures ([`skills/INDEX.md`](skills/INDEX.md)) under the `pwos-*` namespace (with short aliases supported via `patchwork_os.skills_registry.resolve_skill_id`), validated at Tier 0 by `patchwork_os.skills_registry`:
 
-- [`skills/grilling/SKILL.md`](skills/grilling/SKILL.md) - Relentless one-question-at-a-time decision-tree interview
-- [`skills/quarry/SKILL.md`](skills/quarry/SKILL.md) - Durable write-before-next-question requirement extraction
-- [`skills/deconstruct/SKILL.md`](skills/deconstruct/SKILL.md) - 7-stage `KK/KU/UK/UU` + `FRR` epistemic deconstruction and option scoring
-- [`skills/crucible/SKILL.md`](skills/crucible/SKILL.md) - Multi-round construction-blind design smelting with seeded-flaw dryness assay
-- [`skills/systematic-debugging/SKILL.md`](skills/systematic-debugging/SKILL.md) - 7-phase ledger-first read-only root-cause analysis and mutation debugging
-- [`skills/tdd/SKILL.md`](skills/tdd/SKILL.md) - 9-step hand-compose, register-early, scriptify, and run-x3 byte-parity build order
-- [`skills/stdd/SKILL.md`](skills/stdd/SKILL.md) - 3-tier role-disjoint subagent-driven development + TDD lifecycle
-- [`skills/fable-mode/SKILL.md`](skills/fable-mode/SKILL.md) - 6-gate `3xPR + FRR + KK/KU/UK/UU + no-tradeoff` execution wrapper
-- [`skills/wfc/SKILL.md`](skills/wfc/SKILL.md) - 5-wave `MPT:N` Multi-Persona Triage DAG orchestration
-- [`skills/rea/SKILL.md`](skills/rea/SKILL.md) - 4-stage Forward-Reverse-Roundtrip (`FRR`) reverse-engineering verification
+- [`skills/pwos-grilling/SKILL.md`](skills/pwos-grilling/SKILL.md) - Relentless one-question-at-a-time decision-tree interview
+- [`skills/pwos-quarry/SKILL.md`](skills/pwos-quarry/SKILL.md) - Durable write-before-next-question requirement extraction
+- [`skills/pwos-deconstruct/SKILL.md`](skills/pwos-deconstruct/SKILL.md) - 7-stage `KK/KU/UK/UU` + `FRR` epistemic deconstruction and option scoring
+- [`skills/pwos-crucible/SKILL.md`](skills/pwos-crucible/SKILL.md) - Multi-round construction-blind design smelting with seeded-flaw dryness assay
+- [`skills/pwos-systematic-debugging/SKILL.md`](skills/pwos-systematic-debugging/SKILL.md) - 7-phase ledger-first read-only root-cause analysis and mutation debugging
+- [`skills/pwos-tdd/SKILL.md`](skills/pwos-tdd/SKILL.md) - 9-step hand-compose, register-early, scriptify, and run-x3 byte-parity build order
+- [`skills/pwos-stdd/SKILL.md`](skills/pwos-stdd/SKILL.md) - 3-tier role-disjoint subagent-driven development + TDD lifecycle
+- [`skills/pwos-fable-mode/SKILL.md`](skills/pwos-fable-mode/SKILL.md) - 6-gate `3xPR + FRR + KK/KU/UK/UU + no-tradeoff` execution wrapper
+- [`skills/pwos-wfc/SKILL.md`](skills/pwos-wfc/SKILL.md) - 5-wave `MPT:N` Multi-Persona Triage DAG orchestration
+- [`skills/pwos-rea/SKILL.md`](skills/pwos-rea/SKILL.md) - 4-stage Forward-Reverse-Roundtrip (`FRR`) reverse-engineering verification

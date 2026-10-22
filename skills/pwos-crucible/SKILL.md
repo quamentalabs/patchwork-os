@@ -1,5 +1,6 @@
 ---
-name: crucible
+name: pwos-crucible
+alias: crucible
 description: "Use when a design, architecture, or plan must be hardened by repeated adversarial melting across construction-blind lenses with seeded-flaw dryness verification until it fuses."
 category: adversarial-hardening
 tier: tier-2-methodology-shim
@@ -44,7 +45,7 @@ Deduplicate surviving findings, check whether any finding falsifies the root pre
 
 ### Stage 5: Terminal Disposition
 
-Classify the round as `fused` (ready for [fable-mode](../fable-mode/SKILL.md)), `molten` (continue melting), `stalled` (budget exhausted with named molten regions), or `cracked` (re-cast from root).
+Classify the round as `fused` (ready for [fable-mode](../pwos-fable-mode/SKILL.md)), `molten` (continue melting), `stalled` (budget exhausted with named molten regions), or `cracked` (re-cast from root).
 
 ## Artifacts and Verification Gates
 
