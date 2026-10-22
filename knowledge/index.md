@@ -23,3 +23,4 @@ flowchart TD
 - **Raw Layer (Immutable Source Manifest)**: [raw/source-manifest.md](raw/source-manifest.md)
 - **Wiki Layer (5-Pillar Hybrid Synthesis)**: [wiki/patchwork-os-architecture.md](wiki/patchwork-os-architecture.md)
 - **Rules Layer (Deterministic Contracts & Hygiene Gates)**: [rules/patchwork-os-contract.md](rules/patchwork-os-contract.md)
+- [skills/INDEX.md](../skills/INDEX.md) — 10 Generalized Cognitive & Execution Skill Skeleton Procedures (`grilling`, `quarry`, `deconstruct`, `crucible`, `systematic-debugging`, `tdd`, `stdd`, `fable-mode`, `wfc`, `rea`)

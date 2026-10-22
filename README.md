@@ -40,3 +40,18 @@ flowchart TD
 ## 4. License
 
 **Patchwork-OS** is licensed under the **MIT License**. See [`LICENSE`](LICENSE) for the full license text and [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) for upstream MIT-licensed open-source acknowledgements.
+
+## Generalized Skill Skeleton Procedures (`skills/`)
+
+Patchwork-OS bundles 10 clean-room, vendor-neutral Markdown skeleton procedures ([`skills/INDEX.md`](skills/INDEX.md)) validated at Tier 0 by `patchwork_os.skills_registry`:
+
+- [`skills/grilling/SKILL.md`](skills/grilling/SKILL.md) - Relentless one-question-at-a-time decision-tree interview
+- [`skills/quarry/SKILL.md`](skills/quarry/SKILL.md) - Durable write-before-next-question requirement extraction
+- [`skills/deconstruct/SKILL.md`](skills/deconstruct/SKILL.md) - 7-stage `KK/KU/UK/UU` + `FRR` epistemic deconstruction and option scoring
+- [`skills/crucible/SKILL.md`](skills/crucible/SKILL.md) - Multi-round construction-blind design smelting with seeded-flaw dryness assay
+- [`skills/systematic-debugging/SKILL.md`](skills/systematic-debugging/SKILL.md) - 7-phase ledger-first read-only root-cause analysis and mutation debugging
+- [`skills/tdd/SKILL.md`](skills/tdd/SKILL.md) - 9-step hand-compose, register-early, scriptify, and run-x3 byte-parity build order
+- [`skills/stdd/SKILL.md`](skills/stdd/SKILL.md) - 3-tier role-disjoint subagent-driven development + TDD lifecycle
+- [`skills/fable-mode/SKILL.md`](skills/fable-mode/SKILL.md) - 6-gate `3xPR + FRR + KK/KU/UK/UU + no-tradeoff` execution wrapper
+- [`skills/wfc/SKILL.md`](skills/wfc/SKILL.md) - 5-wave `MPT:N` Multi-Persona Triage DAG orchestration
+- [`skills/rea/SKILL.md`](skills/rea/SKILL.md) - 4-stage Forward-Reverse-Roundtrip (`FRR`) reverse-engineering verification
