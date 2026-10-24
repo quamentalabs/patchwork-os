@@ -10,15 +10,23 @@ from typing import Any
 SKILL_NAMESPACE_PREFIX = "pwos-"
 
 REQUIRED_CORE_SKILLS: tuple[str, ...] = (
+    "pwos-setup",
     "pwos-grilling",
     "pwos-quarry",
     "pwos-deconstruct",
+    "pwos-persona-agent",
     "pwos-crucible",
     "pwos-systematic-debugging",
     "pwos-tdd",
     "pwos-stdd",
     "pwos-fable-mode",
     "pwos-wfc",
+    "pwos-runtime-dispatch",
+    "pwos-deploy-cli",
+    "pwos-session-lifecycle",
+    "pwos-mcp-bridge",
+    "pwos-browser-vla",
+    "pwos-harness-audit",
     "pwos-rea",
 )
 

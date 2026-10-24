@@ -12,7 +12,7 @@ from patchwork_os.skills_registry import (
 )
 
 
-def test_all_ten_generalized_skill_skeletons_present_and_valid() -> None:
+def test_all_eighteen_generalized_skill_skeletons_present_and_valid() -> None:
     repo_root = Path(__file__).resolve().parents[1]
     skills_root = repo_root / "skills"
     report = validate_skills_directory(skills_root)
@@ -21,7 +21,7 @@ def test_all_ten_generalized_skill_skeletons_present_and_valid() -> None:
     assert report["index_present"] is True
     assert report["missing_core_skills"] == []
     assert report["invalid_skills"] == []
-    assert report["skill_count"] == len(REQUIRED_CORE_SKILLS) == 10
+    assert report["skill_count"] == len(REQUIRED_CORE_SKILLS) == 18
 
     for skill_name in REQUIRED_CORE_SKILLS:
         assert skill_name.startswith(SKILL_NAMESPACE_PREFIX)

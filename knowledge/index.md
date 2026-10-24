@@ -2,7 +2,7 @@
 title: Patchwork-OS 3-Layer Knowledge Hub
 category: architecture
 tags: [patchwork-os, workflow, meta-prompting, graph-prompting, prompt-flow, cmds-llm-wiki]
-updated: 2026-10-19
+updated: 2026-10-24
 ---
 
 # Patchwork-OS (MIT License)
@@ -23,4 +23,4 @@ flowchart TD
 - **Raw Layer (Immutable Source Manifest)**: [raw/source-manifest.md](raw/source-manifest.md)
 - **Wiki Layer (5-Pillar Hybrid Synthesis)**: [wiki/patchwork-os-architecture.md](wiki/patchwork-os-architecture.md)
 - **Rules Layer (Deterministic Contracts & Hygiene Gates)**: [rules/patchwork-os-contract.md](rules/patchwork-os-contract.md)
-- [skills/INDEX.md](../skills/INDEX.md) — 10 Generalized Cognitive & Execution Skill Skeleton Procedures (`grilling`, `quarry`, `deconstruct`, `crucible`, `systematic-debugging`, `tdd`, `stdd`, `fable-mode`, `wfc`, `rea`)
+- [skills/INDEX.md](../skills/INDEX.md) — 12 Generalized Cognitive & Execution Skill Skeleton Procedures (`grilling`, `quarry`, `deconstruct`, `persona-agent`, `crucible`, `systematic-debugging`, `tdd`, `stdd`, `fable-mode`, `wfc`, `deploy-cli`, `rea`)

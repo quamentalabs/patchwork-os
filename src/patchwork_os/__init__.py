@@ -1,10 +1,158 @@
 # SPDX-License-Identifier: MIT
-"""Patchwork-OS: Host/Runtime-Agnostic Hub-Spoke Binder & Near-Deterministic Ladder."""
+"""Patchwork-OS: Host/Runtime-Agnostic Starter Kit, 3-Layer Config Loader, Compliance-Aware Inter-Runtime Dispatcher, Persona Setup, EARS Spec Gate & Near-Deterministic Ladder."""
 
-from .llm_wiki import (
-    audit_itar_and_obsidian_hygiene,
-    build_llm_wiki_graph,
-    normalize_wikilinks_to_markdown,
-    query_llm_wiki,
+from .browser_vla import (
+    validate_mermaid_visual_width,
+    verify_vla_capture_receipt,
 )
-from .skills_registry import REQUIRED_CORE_SKILLS, parse_skill_skeleton, validate_skills_directory
+from .config_loader import (
+    add_three_layer_cli_arguments,
+    apply_dotted_override,
+    load_layered_config,
+    parse_manual_kv_pairs,
+    parse_scalar_or_json_value,
+)
+from .deploy_cli import (
+    SUPPORTED_DEPLOY_RUNTIMES,
+    SUPPORTED_DEPLOY_SURFACES,
+    SUPPORTED_EFFORT_LEVELS,
+    plan_inter_cli_dispatch,
+    verify_inter_cli_completion_contract,
+    verify_parent_child_lease_isolation,
+)
+from .harness_audit import (
+    audit_hop0_instruction_budget,
+    compile_adversarial_harness_contract,
+    should_deduplicate_hook_event,
+)
+from .hub_spoke_gate import (
+    CANONICAL_COGNITIVE_PHASES,
+    CANONICAL_FIVE_ROLES,
+    CANONICAL_THREE_TIER_POLICIES,
+    SESSION_TIER_VALUES,
+    TASK_CATEGORY_VALUES,
+    GateVerdictResult,
+    bootstrap_agnostic_hub,
+    build_deterministic_payload,
+    build_orchestrator_session_routing_table,
+    build_tessellation_plan,
+    build_vla_wfc_mpt_hub_spoke_map,
+    evaluate_zero_thinking_gate,
+    extract_python_ast_summary,
+    generate_lease_token,
+    resolve_canonical_three_tier_models,
+    resolve_orchestrator_session_routing,
+    safe_bind_spoke,
+    validate_ears_spec_bundle,
+    verify_five_role_orthogonality,
+    verify_lease_token,
+    verify_task_contract_template,
+)
+from .mcp_printing_press import (
+    describe_mcp_tool_tier1,
+    gate_mcp_tool_call_tier2,
+    project_mcp_tools_tier0,
+)
+from .persona_setup import (
+    BRAINSTORMING_ELICITATION_SKILLS,
+    STARTER_ARCHETYPE_SLOTS,
+    PersonaAlignmentProfile,
+    bootstrap_persona_starter_kit,
+    elicit_persona_alignment_from_brainstorming,
+    synthesize_persona_agent,
+)
+from .rea_gap_analyzer import (
+    UPSTREAM_TO_PATCHWORK_12_PILLARS,
+    audit_upstream_to_patchwork_parity,
+)
+from .runtime_dispatch import (
+    COMPLIANCE_REGIME_CATALOG,
+    RUNTIME_HARNESS_CAPABILITIES,
+    plan_inter_runtime_synthesis,
+    resolve_extensible_compliance_routing,
+)
+from .session_lifecycle import (
+    build_session_checkpoint_and_handover,
+    create_session_messenger_envelope,
+    register_backlog_obligation,
+    verify_session_messenger_ack,
+)
+from .setup_init import (
+    COMPLIANCE_REGIMES,
+    DEFAULT_SETUP_CONFIG,
+    apply_project_setup_and_rebrand,
+    build_agnostic_setup_questionnaire,
+)
+from .skills_registry import (
+    REQUIRED_CORE_SKILLS,
+    parse_skill_skeleton,
+    resolve_skill_id,
+    validate_skills_directory,
+)
+
+__all__ = [
+    "UPSTREAM_TO_PATCHWORK_12_PILLARS",
+    "BRAINSTORMING_ELICITATION_SKILLS",
+    "CANONICAL_COGNITIVE_PHASES",
+    "CANONICAL_FIVE_ROLES",
+    "CANONICAL_THREE_TIER_POLICIES",
+    "COMPLIANCE_REGIMES",
+    "COMPLIANCE_REGIME_CATALOG",
+    "DEFAULT_SETUP_CONFIG",
+    "GateVerdictResult",
+    "PersonaAlignmentProfile",
+    "REQUIRED_CORE_SKILLS",
+    "RUNTIME_HARNESS_CAPABILITIES",
+    "SESSION_TIER_VALUES",
+    "STARTER_ARCHETYPE_SLOTS",
+    "SUPPORTED_DEPLOY_RUNTIMES",
+    "SUPPORTED_DEPLOY_SURFACES",
+    "SUPPORTED_EFFORT_LEVELS",
+    "TASK_CATEGORY_VALUES",
+    "add_three_layer_cli_arguments",
+    "apply_dotted_override",
+    "apply_project_setup_and_rebrand",
+    "audit_upstream_to_patchwork_parity",
+    "audit_hop0_instruction_budget",
+    "bootstrap_agnostic_hub",
+    "bootstrap_persona_starter_kit",
+    "build_agnostic_setup_questionnaire",
+    "build_deterministic_payload",
+    "build_orchestrator_session_routing_table",
+    "build_session_checkpoint_and_handover",
+    "build_tessellation_plan",
+    "build_vla_wfc_mpt_hub_spoke_map",
+    "compile_adversarial_harness_contract",
+    "create_session_messenger_envelope",
+    "describe_mcp_tool_tier1",
+    "elicit_persona_alignment_from_brainstorming",
+    "evaluate_zero_thinking_gate",
+    "extract_python_ast_summary",
+    "gate_mcp_tool_call_tier2",
+    "generate_lease_token",
+    "load_layered_config",
+    "parse_manual_kv_pairs",
+    "parse_scalar_or_json_value",
+    "parse_skill_skeleton",
+    "plan_inter_cli_dispatch",
+    "plan_inter_runtime_synthesis",
+    "project_mcp_tools_tier0",
+    "register_backlog_obligation",
+    "resolve_canonical_three_tier_models",
+    "resolve_extensible_compliance_routing",
+    "resolve_orchestrator_session_routing",
+    "resolve_skill_id",
+    "safe_bind_spoke",
+    "should_deduplicate_hook_event",
+    "synthesize_persona_agent",
+    "validate_ears_spec_bundle",
+    "validate_mermaid_visual_width",
+    "validate_skills_directory",
+    "verify_five_role_orthogonality",
+    "verify_inter_cli_completion_contract",
+    "verify_lease_token",
+    "verify_parent_child_lease_isolation",
+    "verify_session_messenger_ack",
+    "verify_task_contract_template",
+    "verify_vla_capture_receipt",
+]
