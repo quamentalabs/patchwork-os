@@ -269,27 +269,73 @@ def test_resolve_canonical_three_tier_models_deduplicates_codex_slots_and_projec
     ]
 
 
+
+def test_cc_model_ids_preserved_from_registry_and_live(tmp_path: Path) -> None:
+    import json
+    from patchwork_os.hub_spoke_gate import resolve_canonical_three_tier_models
+
+    # 5-2 is a synthetic fixture, distinct from the 5-1 fallback.
+    cases = [
+        (["claude-fable-5-2", "claude-opus-5-5", "claude-sonnet-5-1"],
+         ["claude-fable-5-2", "claude-opus-5-5", "claude-sonnet-5-1"]),
+        (["claude-fable-5-1", "opus", "sonnet"], ["claude-fable-5-1", "opus", "sonnet"]),
+        (["fable", "opus", "sonnet"], ["fable", "opus", "sonnet"]),
+        (["fable-5-1", "opus-5-5", "sonnet-5-1"], ["fable-5-1", "opus-5-5", "sonnet-5-1"]),
+        (["haiku", "opus", "sonnet"], ["claude-fable-5-1", "opus", "sonnet"]),
+    ]
+    registry = tmp_path / "models.json"
+    for source in ("registry", "live"):
+        for catalog, expected in cases:
+            registered = catalog if source == "registry" else [
+                "claude-fable-4-1", "claude-opus-4-1", "claude-sonnet-4-1"]
+            registry.write_text(json.dumps({"runtimes": {"cc": {"canonical_3tier": registered}}}),
+                                encoding="utf-8")
+            live = {"cc": catalog} if source == "live" else None
+            resolved = resolve_canonical_three_tier_models(live, registry_path=registry)["cc"]
+            execution = [expected[1], expected[0], expected[2]]
+            assert resolved["selected_models"] == expected
+            assert resolved["selected_models_by_axis"] == {
+                "planning_reasoning_synthesis": expected, "execution_validation_coding": execution}
+            for stage in ("execution", "validation", "coding", "adversarial_triage", "meta_evaluating"):
+                routed = resolve_canonical_three_tier_models(
+                    live, cognitive_stage=stage, registry_path=registry)["cc"]
+                assert routed["selected_models"] == execution
+                assert routed["tier_slots"] == ["opus", "fable", "sonnet"]
+
+
+def test_cc_model_versions_compare_numerically_and_preserve_ids(tmp_path: Path) -> None:
+    from patchwork_os.hub_spoke_gate import resolve_canonical_three_tier_models
+
+    catalog = ["claude-fable-5-9", "fable-5-10", "claude-opus-5-10", "opus-5-9",
+               "sonnet-5-10", "claude-sonnet-5-9"]
+    resolved = resolve_canonical_three_tier_models(
+        {"cc": catalog}, registry_path=tmp_path / "absent-registry.json")["cc"]
+    assert resolved["selected_models"] == ["fable-5-10", "claude-opus-5-10", "sonnet-5-10"]
+    assert resolved["selected_models_by_axis"]["execution_validation_coding"] == [
+        "claude-opus-5-10", "fable-5-10", "sonnet-5-10"]
+
+
 def test_build_vla_wfc_mpt_hub_spoke_map_links_vla_personas_skills_and_memory() -> None:
     from patchwork_os.hub_spoke_gate import build_vla_wfc_mpt_hub_spoke_map
 
     hub_map = build_vla_wfc_mpt_hub_spoke_map()
     assert hub_map["schema_version"] == "patchwork-vla-wfc-mpt-hub-spoke-v1"
-    assert hub_map["canonical_three_tier_models"]["cc"] == ["fable-5-1", "opus", "sonnet"]
+    assert hub_map["canonical_three_tier_models"]["cc"] == ["claude-fable-5-1", "opus", "sonnet"]
     assert hub_map["cognitive_axis_routing"]["planning_reasoning_synthesis"]["cc"] == [
-        "fable-5-1",
+        "claude-fable-5-1",
         "opus",
         "sonnet",
     ]
     assert hub_map["cognitive_axis_routing"]["execution_validation_coding"]["cc"] == [
         "opus",
-        "fable-5-1",
+        "claude-fable-5-1",
         "sonnet",
     ]
     matrix = {row["persona"]: row for row in hub_map["wfc_mpt_persona_skill_matrix"]}
     assert len(matrix) == 15
-    assert matrix["ptah-planner"]["recommended_models_by_runtime"]["cc"] == "fable-5-1"
-    assert matrix["thoth-synthesizer"]["recommended_models_by_runtime"]["cc"] == "fable-5-1"
-    assert matrix["sejong-scholar"]["recommended_models_by_runtime"]["cc"] == "fable-5-1"
+    assert matrix["ptah-planner"]["recommended_models_by_runtime"]["cc"] == "claude-fable-5-1"
+    assert matrix["thoth-synthesizer"]["recommended_models_by_runtime"]["cc"] == "claude-fable-5-1"
+    assert matrix["sejong-scholar"]["recommended_models_by_runtime"]["cc"] == "claude-fable-5-1"
     assert matrix["loki-flyter"]["recommended_models_by_runtime"]["cc"] == "opus"
     assert matrix["jaya-vijaya-evidence-validator"]["recommended_models_by_runtime"]["cc"] == "opus"
     assert matrix["seshat-evidence-curator"]["recommended_models_by_runtime"]["cc"] == "sonnet"
@@ -331,7 +377,7 @@ def test_starter_boost_kit_persona_setup_and_custom_facets(tmp_path: Path) -> No
     agent = synthesize_persona_agent(profile)
     assert agent["persona_slug"] == "robotics-controls-architect"
     assert agent["slot_id"] == "domain-architect"
-    assert agent["recommended_models_by_runtime"]["cc"] == "fable-5-1"
+    assert agent["recommended_models_by_runtime"]["cc"] == "claude-fable-5-1"
     assert agent["alignment_profile"]["custom_facets"]["hardware_in_the_loop_required"] is True
     assert "DO-178C" in agent["markdown"]
 
@@ -382,7 +428,7 @@ def test_generalized_deploy_cli_plan_and_lease_isolation(tmp_path: Path) -> None
         dry_run=True,
     )
     assert plan["kind"] == "deploy2-cli-plan"
-    assert plan["model"] == "fable-5-1"
+    assert plan["model"] == "claude-fable-5-1"
     assert "SKILL_BY_POINTER:pwos-wfc" in plan["notes"]
 
     res_dir = Path(plan["result_dir"])
@@ -410,7 +456,7 @@ def test_resolve_orchestrator_session_routing_covers_hub_and_spoke_axes() -> Non
         importance="critical",
     )
     assert hub_plan["rank_1_primary"]["runtime"] == "cc"
-    assert hub_plan["rank_1_primary"]["model"] == "fable-5-1"
+    assert hub_plan["rank_1_primary"]["model"] == "claude-fable-5-1"
     assert hub_plan["rank_2_counterpart"]["runtime"] == "muse"
 
     hub_exec = resolve_orchestrator_session_routing(

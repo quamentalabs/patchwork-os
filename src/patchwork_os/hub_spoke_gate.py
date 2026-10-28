@@ -694,10 +694,10 @@ def resolve_canonical_three_tier_models(
 
     Policies:
     - cc (`3_TIER_DIRECT`): 3 distinct lineage slots (`fable`, `opus`, `sonnet`).
-      Default and planning/reasoning/synthesizing stages order `["fable-5-1", "opus", "sonnet"]`
+      Default and planning/reasoning/synthesizing stages order `["claude-fable-5-1", "opus", "sonnet"]`
       (VLA Artificial Analysis v4.3.2: Fable 5.1 leads Humanity's Last Exam at xhigh 59% > 58%
       and AA-Omniscience Accuracy 67% [#1] > 66%); execution/validation/coding stages order
-      `["opus", "fable-5-1", "sonnet"]` (Opus 5.5 leads Intelligence Index 58/56, AA-Briefcase
+      `["opus", "claude-fable-5-1", "sonnet"]` (Opus 5.5 leads Intelligence Index 58/56, AA-Briefcase
       1801/1761, GDPval-AA 1866/1829, and Terminal-Bench 4.0 67%/60%).
     - codex (`3_TIER_SLOT_DEDUP`): 3 canonical tier slots (`astra`, `sol`, `luna`), deduplicating
       intra-slot version bumps by selecting the highest `(major, minor)` version per slot
@@ -739,20 +739,21 @@ def resolve_canonical_three_tier_models(
     cc_slots: Dict[str, tuple[tuple[int, int], str]] = {}
     for slug in cc_raw:
         s = slug.strip()
-        if s == "opus" or s.startswith("opus-"):
-            ver = _parse_version_tuple(s.split("-", 1)[1].replace("-", ".")) if "-" in s else (99, 0)
+        family_slug = s.removeprefix("claude-")
+        if family_slug == "opus" or family_slug.startswith("opus-"):
+            ver = _parse_version_tuple(family_slug.split("-", 1)[1].replace("-", ".")) if "-" in family_slug else (99, 0)
             if "opus" not in cc_slots or ver > cc_slots["opus"][0]:
                 cc_slots["opus"] = (ver, s)
-        elif s.startswith("fable"):
-            ver = _parse_version_tuple(s.split("-", 1)[1].replace("-", ".")) if "-" in s else (1, 0)
+        elif family_slug.startswith("fable"):
+            ver = _parse_version_tuple(family_slug.split("-", 1)[1].replace("-", ".")) if "-" in family_slug else (1, 0)
             if "fable" not in cc_slots or ver > cc_slots["fable"][0]:
                 cc_slots["fable"] = (ver, s)
-        elif s == "sonnet" or s.startswith("sonnet-"):
-            ver = _parse_version_tuple(s.split("-", 1)[1].replace("-", ".")) if "-" in s else (99, 0)
+        elif family_slug == "sonnet" or family_slug.startswith("sonnet-"):
+            ver = _parse_version_tuple(family_slug.split("-", 1)[1].replace("-", ".")) if "-" in family_slug else (99, 0)
             if "sonnet" not in cc_slots or ver > cc_slots["sonnet"][0]:
                 cc_slots["sonnet"] = (ver, s)
 
-    fable_winner = cc_slots.get("fable", ((0, 0), "fable-5-1"))[1]
+    fable_winner = cc_slots.get("fable", ((0, 0), "claude-fable-5-1"))[1]
     opus_winner = cc_slots.get("opus", ((0, 0), "opus"))[1]
     sonnet_winner = cc_slots.get("sonnet", ((0, 0), "sonnet"))[1]
 
