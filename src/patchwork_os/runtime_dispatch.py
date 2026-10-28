@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: MIT
-"""Generalized Multi-Runtime, Multi-Cloud & Compliance-Aware Inter-Runtime Dispatcher.
+"""Local routing examples and inter-runtime planning; not a compliance service.
 
 Generalizes ``deploy-cli`` into ``runtime-dispatch`` (``pwos-runtime-dispatch``
 with backward-compatible ``pwos-deploy-cli`` alias) while decoupling:
-1. **Compliance & Export-Control Regime** (``commercial_cloud``, ``github_enterprise``,
+1. **Requested Example Regime Label** (``commercial_cloud``, ``github_enterprise``,
    ``itar_ear_aws_govcloud``, ``itar_ear_gcp_vertex``, ``itar_ear_dual_govcloud``,
    ``airgapped_local``)
 2. **Cloud Hosting Backend** (``anthropic_direct``, ``openai_direct``,
@@ -12,16 +12,14 @@ with backward-compatible ``pwos-deploy-cli`` alias) while decoupling:
    ``local_airgap_vllm``)
 3. **Runtime Harness** (``cc``, ``codex``, ``agy``, ``muse``, ``aws_kiro``,
    ``github_copilot``, ``cursor``, ``custom_cli``)
-4. **Foundation Model & Effort** (grounded in the VLA-extracted 272-model
-   Artificial Analysis v4.3.2 leaderboard & comparison catalog)
+4. **Foundation Model & Effort** (unverified illustrative identifiers, benchmark
+   figures and cost data; not a current availability or pricing source)
 
-Even when ITAR/EAR export controls restrict the available model pool (for example,
-when ``fable-5-1``, ``gpt-6-astra``, ``gpt-6.1-sol``, ``muse-wonder-*``, or
-``gemini-*`` are unavailable on AWS Bedrock GovCloud), this engine achieves
-**Inter-Runtime Synthesis** by pairing distinct runtime harnesses (such as
-``cc`` + ``aws_kiro`` on Bedrock GovCloud, or ``agy`` + ``cc`` on Vertex AI
-Assured Workloads) so ``Composer Runtime != Validator Runtime`` brings
-complementary harness capabilities over compliant model endpoints.
+Regime, backend, runtime, model, benchmark and cost records are
+``unverified_example`` data. Requested labels and ``itar_ear_restricted``
+select example filters, not verified legal restrictions or suitable services.
+No provider availability, credentials, company authorization, network isolation
+or regulatory compliance is assessed. Plans do not launch or authenticate seats.
 """
 
 from __future__ import annotations
@@ -81,7 +79,7 @@ RUNTIME_HARNESS_CAPABILITIES: Dict[str, Dict[str, Any]] = {
         ],
         "unique_runtime_strengths": [
             "Native EARS 3-stage specification engine (requirements.md -> design.md -> tasks.md)",
-            "Native AWS IAM / Bedrock GovCloud (ITAR/EAR/FedRAMP High) credential boundary",
+            "AWS integration example; credential boundaries and regulatory suitability unverified",
             "Repository steering files (.kiro/steering/) and event-driven file hooks",
         ],
     },
@@ -95,7 +93,7 @@ RUNTIME_HARNESS_CAPABILITIES: Dict[str, Dict[str, Any]] = {
         "unique_runtime_strengths": [
             "Native GitHub Pull Request, Issue, Actions workflow & security-advisory graph",
             "Multi-model switching (Claude Opus/Sonnet, GPT-6.1 Sol/Astra, Gemini 4 Argon) under one enterprise seat",
-            "Organization-wide audit logs and IP indemnity controls (non-ITAR commercial/enterprise)",
+            "Organization audit and IP-control examples; availability and legal scope unverified",
         ],
     },
     "codex": {
@@ -124,7 +122,7 @@ RUNTIME_HARNESS_CAPABILITIES: Dict[str, Dict[str, Any]] = {
         "unique_runtime_strengths": [
             "Native Hybrid Browser Control + VLA (Vision-Language-Action) DOM/Screenshot loop",
             "Interactive MCP sidecar viewers and native multimodal audio/video/image ingestion",
-            "Vertex AI Assured Workloads (ITAR/EAR) compatibility for Gemini 4 Argon & Vertex Claude",
+            "Vertex model-selector example; provider availability and compliance unverified",
         ],
     },
     "muse": {
@@ -139,7 +137,7 @@ RUNTIME_HARNESS_CAPABILITIES: Dict[str, Dict[str, Any]] = {
         "unique_runtime_strengths": [
             "1.05M token context window (#1) and 145 tok/s output speed (#1)",
             "Top-1 GDP.pdf document reasoning (33%) and CritPt physics/science reasoning (33%)",
-            "Open-weight Muse Spark Open (xhigh, Index 39) deployable on ITAR/air-gapped clusters",
+            "Muse Spark Open selector (xhigh, illustrative Index 39); deployment suitability unverified",
         ],
     },
     "custom_cli": {
@@ -151,8 +149,8 @@ RUNTIME_HARNESS_CAPABILITIES: Dict[str, Dict[str, Any]] = {
             "gcp_vertex_assured_itar",
         ],
         "unique_runtime_strengths": [
-            "100% air-gapped on-premises execution over vLLM / Ollama / TGI / NIM",
-            "Zero external network egress for strict ITAR / EAR / classified workloads",
+            "On-premises local-model configuration example; isolation not assessed",
+            "Local backend selector; no network-egress or export-control assessment",
         ],
     },
 }
@@ -161,7 +159,7 @@ RUNTIME_HARNESS_CAPABILITIES: Dict[str, Dict[str, Any]] = {
 # VLA-Grounded 272-Model Leaderboard & Compliance Availability Catalog
 COMPLIANCE_REGIME_CATALOG: Dict[str, Dict[str, Any]] = {
     "commercial_cloud": {
-        "description": "Full commercial multi-cloud access across Anthropic, OpenAI, Google, Meta Muse, AWS Bedrock, and GCP Vertex AI.",
+        "description": "Requested commercial-cloud example filter; access and model availability unverified.",
         "itar_ear_restricted": False,
         "available_backends": [
             "anthropic_direct",
@@ -196,7 +194,7 @@ COMPLIANCE_REGIME_CATALOG: Dict[str, Dict[str, Any]] = {
         },
     },
     "github_enterprise": {
-        "description": "Non-ITAR commercial enterprise standardized on GitHub Copilot Enterprise + GitHub Models / Azure / Direct APIs.",
+        "description": "Requested enterprise example filter; legal scope, access and availability unverified.",
         "itar_ear_restricted": False,
         "available_backends": [
             "github_models_enterprise",
@@ -227,7 +225,7 @@ COMPLIANCE_REGIME_CATALOG: Dict[str, Dict[str, Any]] = {
         },
     },
     "itar_ear_aws_govcloud": {
-        "description": "ITAR / EAR / FedRAMP High sovereign boundary on AWS GovCloud (US) & Amazon Bedrock. Fable, GPT-6 Astra/Sol, Muse Wonder, and Gemini are unavailable on Bedrock; achieves cross-runtime diversity by pairing Claude Code (cc) + AWS Kiro (aws_kiro) over Bedrock Claude Opus/Sonnet, Amazon Nova 2.0, and Bedrock Open-Weights.",
+        "description": "Requested AWS-named example filter; no ITAR, EAR, FedRAMP, service or model availability determination.",
         "itar_ear_restricted": True,
         "available_backends": ["aws_bedrock_govcloud_itar"],
         "available_runtimes": ["cc", "aws_kiro", "custom_cli"],
@@ -252,7 +250,7 @@ COMPLIANCE_REGIME_CATALOG: Dict[str, Dict[str, Any]] = {
         },
     },
     "itar_ear_gcp_vertex": {
-        "description": "ITAR / EAR / Assured Workloads boundary on Google Cloud Vertex AI. Gemini 4 Argon & 3.8 Flash are natively available alongside Vertex Partner Anthropic Claude Opus 5.5 & Sonnet 5.5; pairs AGY (agy) + Claude Code (cc) for cross-runtime and cross-model synthesis.",
+        "description": "Requested GCP-named example filter; service, model availability and regulatory suitability unverified.",
         "itar_ear_restricted": True,
         "available_backends": ["gcp_vertex_assured_itar"],
         "available_runtimes": ["agy", "cc", "custom_cli"],
@@ -277,7 +275,7 @@ COMPLIANCE_REGIME_CATALOG: Dict[str, Dict[str, Any]] = {
         },
     },
     "itar_ear_dual_govcloud": {
-        "description": "Dual Sovereign ITAR / EAR environment combining AWS Bedrock GovCloud (cc + aws_kiro) and GCP Vertex AI Assured Workloads (agy).",
+        "description": "Requested dual-backend example filter; no sovereignty, compliance or availability assessment.",
         "itar_ear_restricted": True,
         "available_backends": ["aws_bedrock_govcloud_itar", "gcp_vertex_assured_itar"],
         "available_runtimes": ["cc", "aws_kiro", "agy", "custom_cli"],
@@ -303,7 +301,7 @@ COMPLIANCE_REGIME_CATALOG: Dict[str, Dict[str, Any]] = {
         },
     },
     "airgapped_local": {
-        "description": "100% Air-Gapped On-Premises ITAR/Classified cluster running VLA-benchmarked open-weight models over local vLLM/NIM.",
+        "description": "Requested local-model example filter; air gap, benchmark provenance and deployment suitability unverified.",
         "itar_ear_restricted": True,
         "available_backends": ["local_airgap_vllm"],
         "available_runtimes": ["cc", "codex", "custom_cli"],
@@ -328,6 +326,26 @@ COMPLIANCE_REGIME_CATALOG: Dict[str, Dict[str, Any]] = {
         },
     },
 }
+
+
+# Labels apply to all nested provider/model/benchmark/cost example fields.
+# Keep selector keys, numeric examples and filtering order for compatibility.
+for _capability in RUNTIME_HARNESS_CAPABILITIES.values():
+    _capability["verification"] = "unverified_example"
+    _capability["unique_runtime_strengths"] = [
+        f"Unverified example: {item}"
+        for item in _capability["unique_runtime_strengths"]
+    ]
+for _regime in COMPLIANCE_REGIME_CATALOG.values():
+    _regime["verification"] = "unverified_example"
+    _regime["compliance_assessed"] = False
+    _regime["unavailable_models_note"] = (
+        "Unverified example; no provider availability assessment: "
+        + _regime["unavailable_models_note"]
+    )
+    for _models in _regime["tier_models"].values():
+        for _model in _models:
+            _model["verification"] = "unverified_example"
 
 
 DEFAULT_DISPATCH_CONFIG: Dict[str, Any] = {
@@ -367,7 +385,11 @@ def resolve_extensible_compliance_routing(
     manual_set_pairs: Optional[Sequence[str]] = None,
     manual_kwargs: Optional[Mapping[str, Any]] = None,
 ) -> Dict[str, Any]:
-    """Resolve Rank-1 & Rank-2 `{backend, runtime, model, effort}` plus Inter-Runtime Synthesis under the 3-Layer Config Contract."""
+    """Select unverified example tuples; do not assess compliance or availability.
+
+    compliance_regime and itar_ear_restricted retain requested-filter meanings.
+    Nested benchmark/cost fields and runtime strengths are example data only.
+    """
     resolved = load_layered_config(
         defaults=DEFAULT_DISPATCH_CONFIG,
         config_json=config_json,
@@ -417,6 +439,8 @@ def resolve_extensible_compliance_routing(
 
     return {
         "schema_version": "patchwork-extensible-compliance-routing-v1",
+        "verification": "unverified_example",
+        "compliance_assessed": False,
         "compliance_regime": regime,
         "itar_ear_restricted": regime_info["itar_ear_restricted"],
         "unavailable_models_note": regime_info["unavailable_models_note"],
@@ -438,6 +462,7 @@ def resolve_extensible_compliance_routing(
             "runtime_strengths": r2_caps.get("unique_runtime_strengths", []),
         },
         "inter_runtime_synthesis": {
+            "verification": "unverified_example",
             "cross_runtime_diverse": rank_1["runtime"] != rank_2["runtime"],
             "cross_model_diverse": rank_1["model"] != rank_2["model"],
             "composer_runtime": rank_1["runtime"],
@@ -445,7 +470,7 @@ def resolve_extensible_compliance_routing(
             "synthesis_mechanism": (
                 f"Pairs {rank_1['runtime']} ({rank_1['model']} on {rank_1['backend']}) as Composer "
                 f"with {rank_2['runtime']} ({rank_2['model']} on {rank_2['backend']}) as Counterpart Validator, "
-                "combining distinct runtime harness capabilities even under restricted model pools."
+                "as an unverified example pairing; no seats are launched or compliance assessed."
             ),
         },
         "config_provenance": resolved.get("_config_provenance", {}),
@@ -462,7 +487,7 @@ def plan_inter_runtime_synthesis(
     manual_set_pairs: Optional[Sequence[str]] = None,
     manual_kwargs: Optional[Mapping[str, Any]] = None,
 ) -> Dict[str, Any]:
-    """Build a dual-seat Inter-Runtime Synthesis dispatch plan (`Composer != Validator`) under any compliance regime."""
+    """Describe an unverified example pair; no launch or compliance assessment."""
     routing = resolve_extensible_compliance_routing(
         config_json=config_json,
         input_json=input_json,
@@ -475,6 +500,10 @@ def plan_inter_runtime_synthesis(
     prompt_digest = hashlib.sha256(f"{task_id}:{goal}".encode("utf-8")).hexdigest()[:16]
     return {
         "schema_version": "patchwork-inter-runtime-synthesis-plan-v1",
+        "verification": "unverified_example",
+        "compliance_assessed": False,
+        "execution_supported": False,
+        "runtime_acceptance": "not_run",
         "task_id": task_id,
         "goal": goal,
         "parent_session_id": parent_session_id,
@@ -483,6 +512,7 @@ def plan_inter_runtime_synthesis(
         "legs": [
             {
                 "leg_id": f"{task_id}-L1-COMPOSE",
+                "verification": "unverified_example",
                 "role": "COMPOSER",
                 "cloud_backend": r1["backend"],
                 "runtime_harness": r1["runtime"],
@@ -493,6 +523,7 @@ def plan_inter_runtime_synthesis(
             },
             {
                 "leg_id": f"{task_id}-L2-VALIDATE",
+                "verification": "unverified_example",
                 "role": "VALIDATOR",
                 "cloud_backend": r2["backend"],
                 "runtime_harness": r2["runtime"],

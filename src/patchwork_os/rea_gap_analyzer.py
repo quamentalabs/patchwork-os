@@ -71,7 +71,7 @@ UPSTREAM_TO_PATCHWORK_12_PILLARS: tuple[Dict[str, str], ...] = (
     },
     {
         "pillar_id": "P10_OBSIDIAN_FREE_CMDS_LLM_WIKI",
-        "patchwork_source": "memory-vault + cmds-llm-wiki + ITAR/air-gap plain markdown hygiene",
+        "patchwork_source": "memory-vault + cmds-llm-wiki + bounded local Obsidian trace scan; no ITAR or air-gap assessment",
         "patchwork_module": "src/patchwork_os/llm_wiki.py",
         "patchwork_skill": "skills/pwos-quarry/SKILL.md",
     },

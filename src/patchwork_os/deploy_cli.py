@@ -216,7 +216,11 @@ def verify_inter_cli_completion_contract(
     result_dir: Path,
     preimage_sha256: Optional[str] = None,
 ) -> Dict[str, Any]:
-    """Verify `done.json` and `task_result.md` cryptographic hashes for an `--inter-cli` seat."""
+    """Check recorded SHA-256 consistency, status and optional preimage change.
+
+    A valid result is not a signature, sender authentication, native execution
+    observation, authority grant or independent approval.
+    """
     r_dir = Path(result_dir).resolve()
     done_path = r_dir / "done.json"
     answer_path = r_dir / "task_result.md"

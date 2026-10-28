@@ -19,6 +19,9 @@ this module provides a 100% runtime-agnostic initialization flow (``pwos-setup``
    - ``compliance_regime`` (``commercial_cloud``, ``github_enterprise``,
      ``itar_ear_aws_govcloud``, ``itar_ear_gcp_vertex``, ``itar_ear_dual_govcloud``,
      ``airgapped_local``)
+
+Regime/backend/runtime selections are unverified examples, not provider
+availability, regulatory suitability, key management or company approval.
 """
 
 from __future__ import annotations
@@ -75,6 +78,8 @@ def build_agnostic_setup_questionnaire() -> Dict[str, Any]:
     """Return a runtime-agnostic interactive setup questionnaire compatible with any UI/CLI."""
     return {
         "schema_version": "patchwork-agnostic-setup-questionnaire-v1",
+        "verification": "unverified_example",
+        "compliance_assessed": False,
         "runtime_agnostic": True,
         "supported_adapters": [
             "agy:ask_question",
@@ -98,16 +103,18 @@ def build_agnostic_setup_questionnaire() -> Dict[str, Any]:
             },
             {
                 "id": "compliance_regime",
-                "question": "Which regulatory, export-control (ITAR/EAR), or enterprise cloud boundary governs this environment?",
+                "question": "Which unverified example profile label should be stored? This does not determine compliance, isolation or provider availability.",
+                "verification": "unverified_example",
+                "compliance_assessed": False,
                 "is_multi_select": False,
                 "maps_to": ["compliance_regime", "enabled_cloud_backends"],
                 "options": [
-                    "(Recommended) Commercial Multi-Cloud Frontier (Anthropic, OpenAI, Google, Meta Muse, Bedrock, Vertex)",
-                    "GitHub Enterprise & Commercial Cloud (GitHub Copilot + Claude/GPT/Gemini)",
-                    "ITAR / EAR — AWS GovCloud & Amazon Bedrock Only (Claude Opus/Sonnet + Nova + Llama + Kiro/CC cross-runtime)",
-                    "ITAR / EAR — Google Cloud Vertex AI Assured Workloads Only (Gemini 4 Argon/Flash + Vertex Claude + AGY/CC)",
-                    "ITAR / EAR — Dual Sovereign GovCloud (AWS Bedrock GovCloud + GCP Vertex AI Assured Workloads)",
-                    "Air-Gapped / On-Premises Open-Weights Only (Muse Spark Open, Mistral Large 4, Nemotron, Llama 4, Gemma 4)",
+                    "Unverified example: commercial_cloud",
+                    "Unverified example: github_enterprise",
+                    "Unverified example: itar_ear_aws_govcloud (requested label only)",
+                    "Unverified example: itar_ear_gcp_vertex (requested label only)",
+                    "Unverified example: itar_ear_dual_govcloud (requested label only)",
+                    "Unverified example: airgapped_local (isolation not assessed)",
                 ],
             },
             {
@@ -228,6 +235,8 @@ def apply_project_setup_and_rebrand(
     profile_out.parent.mkdir(parents=True, exist_ok=True)
     workspace_profile = {
         "schema_version": "patchwork-workspace-profile-v1",
+        "verification": "unverified_example",
+        "compliance_assessed": False,
         "os_name": os_name,
         "skill_prefix": skill_prefix,
         "dispatcher_skill_name": (

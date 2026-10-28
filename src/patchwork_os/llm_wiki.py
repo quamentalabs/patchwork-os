@@ -1,14 +1,13 @@
 # SPDX-License-Identifier: MIT
-"""Obsidian-Free Pure Markdown & AST LLM-Wiki Engine with ITAR/Air-Gap Hygiene Gate.
+"""Local Markdown graph helpers and a bounded Obsidian trace scan.
 
-Proves and implements a 100% Obsidian-independent 3-layer CMDS LLM-Wiki
+Provides a 3-layer CMDS LLM-Wiki
 (``raw/``, ``wiki/``, ``rules/``, ``index.md``) using only standard UTF-8
 Markdown, POSIX relative links, and Python's standard library:
 
 1. ``audit_itar_and_obsidian_hygiene``:
-   Rejects any ``.obsidian/`` directory, ``.canvas`` file, ``obsidian://`` URI,
-   unvetted community plugin artifact, or external telemetry endpoint so the
-   knowledge repository remains 100% plain-text, air-gapped, and ITAR/EAR-safe.
+   Reports listed local directory, file and text markers. Its legacy name does
+   not indicate an ITAR, export-control, dependency or network-isolation audit.
 2. ``normalize_wikilinks_to_markdown``:
    Converts ``[[Page]]`` / ``[[Page|Label]]`` wikilinks into standard CommonMark
    relative links ``[Label](path.md)`` that work in GitHub, VS Code, Neovim,
@@ -52,7 +51,12 @@ def parse_frontmatter(markdown_text: str) -> Tuple[Dict[str, str], str]:
 
 
 def audit_itar_and_obsidian_hygiene(repo_or_hub_root: Path) -> Dict[str, Any]:
-    """Verify zero Obsidian dependencies, zero proprietary plugin blobs, and air-gap readiness."""
+    """Scan local Obsidian markers; the legacy ITAR API name is deprecated.
+
+    obsidian_traces_absent describes only the listed scan results. The legacy
+    zero_obsidian_dependency key is a deprecated alias with the same limited
+    meaning. Neither key assesses installed dependencies, ITAR or air gaps.
+    """
     root = repo_or_hub_root.resolve()
     obsidian_dirs: List[str] = []
     canvas_files: List[str] = []
@@ -85,8 +89,12 @@ def audit_itar_and_obsidian_hygiene(repo_or_hub_root: Path) -> Dict[str, Any]:
     )
     return {
         "root": str(root),
+        "obsidian_traces_absent": passed,
         "zero_obsidian_dependency": passed,
-        "itar_airgap_plain_markdown_ready": passed,
+        "deprecated_aliases": {"zero_obsidian_dependency": "obsidian_traces_absent"},
+        "assessment_scope": "Listed local artifact and text markers only",
+        "itar_assessment": "not_run",
+        "airgap_assessment": "not_run",
         "obsidian_dirs": obsidian_dirs,
         "canvas_files": canvas_files,
         "obsidian_uri_hits": obsidian_uri_hits,
@@ -228,9 +236,9 @@ def query_llm_wiki(
 
 
 def main(argv: Optional[List[str]] = None) -> int:
-    parser = argparse.ArgumentParser(description="Obsidian-Free Pure Markdown LLM-Wiki Engine & ITAR Hygiene Gate.")
+    parser = argparse.ArgumentParser(description="Local Markdown graph and bounded Obsidian trace scan.")
     parser.add_argument("--hub-root", type=Path, required=True, help="Path to 3-layer knowledge hub directory")
-    parser.add_argument("--audit-root", type=Path, help="Optional repo root to audit for zero Obsidian/ITAR issues")
+    parser.add_argument("--audit-root", type=Path, help="Optional root to scan for listed local Obsidian markers")
     parser.add_argument("--query", default="", help="Optional search query across the LLM-Wiki")
     args = parser.parse_args(argv)
 
@@ -251,7 +259,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         "query_hits": hits,
     }
     print(json.dumps(out, indent=2, ensure_ascii=False))
-    return 0 if (hygiene["zero_obsidian_dependency"] and graph["valid"]) else 1
+    return 0 if (hygiene["obsidian_traces_absent"] and graph["valid"]) else 1
 
 
 if __name__ == "__main__":

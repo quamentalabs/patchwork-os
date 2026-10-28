@@ -4,7 +4,7 @@
 Synthesizes the atomic mechanisms from the Spec-Driven IDE vs Agentic CLI comparative architecture
 via Synergetic Assimilation + Counterpart Limit Coverage:
 1. Five-Role Orthogonal Separation (`Composer != Criticizer != Validator != Synthesizer != Meta-Evaluator`)
-2. HMAC-SHA256 Lease Token & In-Place Task Contract Enforcer (`KK/KU/UK/UU` + `3xPR` + `FRR`)
+2. HMAC-SHA256 token helper with caller-managed secret & task-template checks (`KK/KU/UK/UU` + `3xPR` + `FRR`)
 3. Three-Tier OS-Agnostic Hub-Spoke Projection (`SYMLINK -> NTFS_JUNCTION/HARDLINK -> ATOMIC_COPY_FALLBACK`)
 4. Four-Stage EARS Spec-Driven Workflow (`requirements.md -> design.md -> tasks.md -> bidirectional sync`)
 5. Two-Stage Deterministic AST/Lint + Zero-Thinking Local LLM Gate & Pinpoint Escalation Router
@@ -80,7 +80,13 @@ UNFILLED_TEMPLATE_RE = re.compile(
     r"\[Fill\s+[^\]]+\]|<TODO[^>]*>|\bTBD_PLACEHOLDER\b|\bPENDING\b"
 )
 
+# Deprecated public sentinel retained for compatibility; never a usable secret.
 DEFAULT_LEASE_KEY = b"patchwork-os-clean-room-hmac-key-v2"
+
+
+def _require_lease_secret(secret: bytes) -> None:
+    if not isinstance(secret, bytes) or not secret or secret == DEFAULT_LEASE_KEY:
+        raise ValueError("explicit non-empty non-public bytes secret required")
 
 
 @dataclass(frozen=True)
@@ -143,9 +149,15 @@ def generate_lease_token(
     role: RoleType,
     agent_id: str,
     diff_hash: str,
-    secret: bytes = DEFAULT_LEASE_KEY,
+    secret: bytes,
 ) -> str:
-    """Generate a deterministic HMAC-SHA256 lease token bound to task, role, agent, and diff hash."""
+    """Bind fields with HMAC-SHA256 using an explicit caller-managed secret.
+
+    The consumer must manage an appropriate private high-entropy key. The
+    legacy 16-hex tag format is retained. This helper implements neither key
+    management, replay prevention, authorization nor company approval.
+    """
+    _require_lease_secret(secret)
     if role not in CANONICAL_FIVE_ROLES:
         raise ValueError(f"Unsupported role: {role!r}")
     if not task_id.strip() or not agent_id.strip() or not diff_hash.strip():
@@ -162,9 +174,14 @@ def verify_lease_token(
     role: RoleType,
     agent_id: str,
     diff_hash: str,
-    secret: bytes = DEFAULT_LEASE_KEY,
+    secret: bytes,
 ) -> bool:
-    """Constant-time verification of an HMAC-SHA256 lease token."""
+    """Compare a MAC-bound token using an explicit secret, not an authority grant.
+
+    Missing secret raises TypeError; empty/public/non-bytes keys raise
+    ValueError before comparison. Other invalid field bindings return False.
+    """
+    _require_lease_secret(secret)
     try:
         expected = generate_lease_token(task_id, role, agent_id, diff_hash, secret=secret)
     except ValueError:

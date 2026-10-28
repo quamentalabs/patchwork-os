@@ -48,12 +48,12 @@ Extract reusable success patterns and failure modes into the knowledge hub witho
 
 ### Gate 6: Closed-Loop Return Receipt
 
-Emit the signed JSON evaluation receipt and verify template postimage hashes.
+Emit a JSON evaluation receipt with SHA-256 descriptors and check template postimage hash consistency. These hashes are not signatures, authentication or approval.
 
 ## Artifacts and Verification Gates
 
 - Edited `task_<seat>.md` containing a valid `fable-full` JSON frame and human-readable audit.
-- Cryptographic evaluation receipt (`mpt-evaluation-receipt.json`).
+- Evaluation receipt with hash-consistency descriptors (`mpt-evaluation-receipt.json`).
 
 ## Hard Boundaries
 

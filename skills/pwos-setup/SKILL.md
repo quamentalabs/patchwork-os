@@ -1,7 +1,7 @@
 ---
 name: pwos-setup
 alias: setup
-description: "Use when initializing a repository from the starter kit (where Patchwork-OS and pwos-* are working titles), customizing OS name and skill prefix, selecting regulatory/export-control regimes (ITAR/EAR, AWS Bedrock GovCloud, GCP Vertex AI, GitHub Enterprise, Air-Gapped), or loading the 3-layer CLI config contract."
+description: "Use for starter-kit naming, prefix customization and three-layer configuration. Stored provider/regime labels are unverified examples and do not determine compliance, isolation or service availability."
 category: initialization-and-rebranding
 tier: tier-0-bootstrap-gate
 paradigms:
@@ -16,7 +16,7 @@ license: MIT
 
 ## Overview
 
-Runtime-agnostic initialization, rebranding, skill-prefix customization, and compliance-boundary setup procedure for the starter kit. Because `Patchwork-OS` and `pwos-*` are working titles, this skill enables any organization, team, or individual to rename the OS, customize or strip the skill prefix (`<prefix>-*`), rename `deploy-cli` to `runtime-dispatch`, and bind ITAR/EAR/GovCloud/Vertex/Bedrock/Copilot/Kiro profiles without assuming Claude Code.
+Starter-kit initialization, rebranding and prefix customization can store example regime/backend/runtime labels. The questionnaire and emitted profile carry `verification=unverified_example` and `compliance_assessed=False`. Names such as ITAR/EAR, GovCloud, Vertex or air-gapped are requested configuration labels, not verified provider support, isolation or company approval. Setup writes files and is outside the README plan-only evaluation sample.
 
 ## Invariants
 
@@ -33,7 +33,7 @@ Run `python -m patchwork_os.setup_init --emit-questionnaire` for interactive eli
 
 ### Stage 2: Resolve Compliance Regime and Cloud/Runtime Boundaries
 
-Select `commercial_cloud`, `github_enterprise`, `itar_ear_aws_govcloud`, `itar_ear_gcp_vertex`, `itar_ear_dual_govcloud`, or `airgapped_local` and filter active cloud backends and runtime harnesses (`cc`, `codex`, `agy`, `muse`, `aws_kiro`, `github_copilot`, `custom_cli`).
+Store one of the existing example regime selectors and the requested backend/runtime labels. All six choices are unverified examples; selection does not configure or validate a regulatory/credential boundary or prove model access.
 
 ### Stage 3: Apply OS Rebranding and Skill-Prefix Transformation
 

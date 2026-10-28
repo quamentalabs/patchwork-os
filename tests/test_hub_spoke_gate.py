@@ -44,13 +44,15 @@ def test_five_role_orthogonality_enforces_disjoint_agents() -> None:
 
 
 def test_hmac_lease_token_and_task_contract_enforcer() -> None:
-    token = generate_lease_token("TASK-001", "COMPOSER", "cc-agent", "a1b2c3d4e5f6")
+    secret = b"fixture-only-explicit-key-not-for-production"
+    token = generate_lease_token("TASK-001", "COMPOSER", "cc-agent", "a1b2c3d4e5f6", secret=secret)
     assert verify_lease_token(
         token,
         task_id="TASK-001",
         role="COMPOSER",
         agent_id="cc-agent",
         diff_hash="a1b2c3d4e5f6",
+        secret=secret,
     )
     assert not verify_lease_token(
         token,
@@ -58,6 +60,7 @@ def test_hmac_lease_token_and_task_contract_enforcer() -> None:
         role="VALIDATOR",
         agent_id="cc-agent",
         diff_hash="a1b2c3d4e5f6",
+        secret=secret,
     )
 
     completed_md = f"""---
@@ -492,6 +495,8 @@ def test_three_layer_cli_config_precedence_and_agnostic_setup_rebrand(tmp_path: 
 
     q = build_agnostic_setup_questionnaire()
     assert q["runtime_agnostic"] is True
+    assert q["verification"] == "unverified_example"
+    assert q["compliance_assessed"] is False
     assert len(q["questions"]) >= 4
 
     repo_root = Path(__file__).resolve().parents[1]
@@ -508,6 +513,8 @@ def test_three_layer_cli_config_precedence_and_agnostic_setup_rebrand(tmp_path: 
     assert profile["skill_prefix"] == "aegis"
     assert profile["dispatcher_skill_name"] == "aegis-runtime-dispatch"
     assert profile["compliance_regime"] == "itar_ear_aws_govcloud"
+    assert profile["verification"] == "unverified_example"
+    assert profile["compliance_assessed"] is False
     assert (tmp_path / "skills" / "aegis-setup" / "SKILL.md").is_file()
     assert (tmp_path / "skills" / "aegis-runtime-dispatch" / "SKILL.md").is_file()
     assert (tmp_path / "config" / "workspace-profile.json").is_file()
@@ -519,7 +526,7 @@ def test_extensible_compliance_routing_and_inter_runtime_synthesis() -> None:
         resolve_extensible_compliance_routing,
     )
 
-    # 1. ITAR / EAR on AWS GovCloud Bedrock: Fable/Astra/Sol/Muse/Gemini unavailable; pairs cc + aws_kiro
+    # Requested AWS-named example filter; no actual compliance or availability verdict.
     aws_itar = plan_inter_runtime_synthesis(
         task_id="ITAR-AWS-01",
         goal="Implement ITAR flight control law verification",
@@ -530,11 +537,15 @@ def test_extensible_compliance_routing_and_inter_runtime_synthesis() -> None:
         ],
     )
     assert aws_itar["itar_ear_restricted"] is True
+    assert aws_itar["verification"] == "unverified_example"
+    assert aws_itar["compliance_assessed"] is False
+    assert aws_itar["execution_supported"] is False
+    assert all(leg["verification"] == "unverified_example" for leg in aws_itar["legs"])
     assert aws_itar["inter_runtime_synthesis"]["cross_runtime_diverse"] is True
     assert {leg["runtime_harness"] for leg in aws_itar["legs"]} == {"cc", "aws_kiro"}
     assert all(leg["cloud_backend"] == "aws_bedrock_govcloud_itar" for leg in aws_itar["legs"])
 
-    # 2. ITAR / EAR on GCP Vertex AI Assured Workloads: pairs cc + agy (Gemini 4 Argon + Vertex Claude)
+    # Requested GCP-named example filter; the pair is configuration data only.
     gcp_itar = resolve_extensible_compliance_routing(
         manual_set_pairs=[
             "compliance_regime=itar_ear_gcp_vertex",
@@ -557,7 +568,7 @@ def test_extensible_compliance_routing_and_inter_runtime_synthesis() -> None:
     assert gh_ent["rank_2_counterpart"]["runtime"] == "codex"
     assert gh_ent["inter_runtime_synthesis"]["cross_runtime_diverse"] is True
 
-    # 4. Air-Gapped Local Open-Weights: uses VLA-benchmarked open-weight models
+    # Local example selector; it does not measure or enforce an air gap.
     airgap = resolve_extensible_compliance_routing(
         manual_set_pairs=[
             "compliance_regime=airgapped_local",

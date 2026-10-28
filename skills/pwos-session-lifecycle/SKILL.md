@@ -33,7 +33,7 @@ Inventory completed items, open continuation items, and active leased paths for 
 
 ### Stage 2: Cross-Session Messenger Envelope Creation
 
-When coordinating with a peer or child session, build a signed envelope via `create_session_messenger_envelope` (`sender_session != recipient_session`).
+When coordinating with a peer or child session, describe an envelope with a body SHA-256 digest via `create_session_messenger_envelope` (`sender_session != recipient_session`). This is not a signature or sender authentication; creating the envelope does not deliver a message or observe an ACK.
 
 ### Stage 3: Transcript-Observed ACK Verification
 

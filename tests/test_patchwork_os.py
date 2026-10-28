@@ -76,7 +76,7 @@ def test_claude_code_custom_statusline_hybrid_renders_two_rows() -> None:
     assert "120k left" in lines[1]
 
 
-def test_obsidian_free_llm_wiki_hygiene_and_graph() -> None:
+def test_obsidian_free_llm_wiki_hygiene_and_graph(tmp_path: Path) -> None:
     from pathlib import Path
     from patchwork_os.llm_wiki import (
         audit_itar_and_obsidian_hygiene,
@@ -86,9 +86,13 @@ def test_obsidian_free_llm_wiki_hygiene_and_graph() -> None:
     )
 
     repo_root = Path(__file__).resolve().parents[1]
-    hygiene = audit_itar_and_obsidian_hygiene(repo_root)
+    hygiene = audit_itar_and_obsidian_hygiene(tmp_path)
+    assert hygiene["obsidian_traces_absent"] is True
     assert hygiene["zero_obsidian_dependency"] is True
-    assert hygiene["itar_airgap_plain_markdown_ready"] is True
+    assert hygiene["deprecated_aliases"]["zero_obsidian_dependency"] == "obsidian_traces_absent"
+    assert "itar_airgap_plain_markdown_ready" not in hygiene
+    assert hygiene["itar_assessment"] == "not_run"
+    assert hygiene["airgap_assessment"] == "not_run"
 
     graph = build_llm_wiki_graph(repo_root / "knowledge")
     assert graph["valid"] is True

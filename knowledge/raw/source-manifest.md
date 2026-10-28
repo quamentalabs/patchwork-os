@@ -5,15 +5,17 @@ license: MIT
 updated: 2026-10-21
 ---
 
-# Raw Layer: Open-Source Foundation Manifest (MIT-Licensed)
+# Raw Layer: Declared Open-Source Design References
 
 **Repository License**: **MIT License** (`SPDX-License-Identifier: MIT`, see [`../../LICENSE`](../../LICENSE) and [`../../THIRD_PARTY_NOTICES.md`](../../THIRD_PARTY_NOTICES.md)).
 
-## Nine Open-Source Foundations & Verified Licenses
+## Ten Named Sources in Nine Entries (Declared, Unverified)
+
+All upstream license labels below are reported declarations, not independently verified licenses or clearance. Every version/commit is unknown in this manifest; the graft URL is unknown. Existing names, URLs and attribution are preserved. See [the notices](../../THIRD_PARTY_NOTICES.md) for the matching ten-source table. No clean-room provenance guarantee is made.
 
 1. **`morluto/rea`** (`https://github.com/morluto/rea`, **MIT License**) — Event-sourced agent execution and append-only state replay.
 2. **`johnfkoo951/cmds-llm-wiki`** (`https://github.com/johnfkoo951/cmds-llm-wiki`, **MIT License**) — CMDS 3-layer (`raw/`, `wiki/`, `rules/`) Markdown knowledge architecture.
-3. **`graft`** (**MIT License**) — AST-indexed repository context graph (`map`, `skeleton`, `callers`, `grep`).
+3. **`graft`** (URL: unknown, version: unknown, declared **MIT License**, unverified) — AST-indexed repository context graph (`map`, `skeleton`, `callers`, `grep`).
 4. **`trailhq/Trail-Code`** (`https://github.com/trailhq/Trail-Code`, **MIT License**) — CLI-first workflow hooks and isolated git worktree execution.
 5. **`NousResearch/hermes-agent`** (`https://github.com/NousResearch/hermes-agent`, **MIT License**) — Self-evolving skill synthesis and closed-loop agent memory.
 6. **`buildermethods/agent-os`** (`https://github.com/buildermethods/agent-os`, **MIT License**) — Builder Methods' original open-source Agent OS for spec-driven development and structured product standards.

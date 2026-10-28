@@ -1,7 +1,7 @@
 ---
 name: pwos-deploy-cli
 alias: deploy-cli
-description: "Use when dispatching, supervising, or collecting external CLI, IDE, or Desktop-App agent seats across runtime families (cc, codex, agy, muse) with isolated result leases, sequential dispatch locks, and cryptographic task/prompt/answer verification."
+description: "Use for dispatch-plan and hash-consistency procedures across runtime labels (cc, codex, agy, muse). Live launch, supervision, lease acquisition and locking require a separate implementation."
 category: cross-runtime-dispatch
 tier: tier-3-high-order-lifecycle
 paradigms:
@@ -16,14 +16,14 @@ license: MIT
 
 ## Overview
 
-Generalized cross-runtime `--inter-cli` seat launcher, supervisor, and collector for Patchwork-OS. Dispatches isolated worker seats across heterogeneous CLI/IDE/Desktop-App runtimes (`cc`, `codex`, `agy`, `muse`) using canonical 3-tier deduplicated model vectors, dual-axis cognitive stage routing, contention-free child result leases, and cryptographic receipt verification.
+Patchwork-OS provides a plan-only `plan_inter_cli_dispatch` API and hash-consistency/path-contract checks. Runtime labels (`cc`, `codex`, `agy`, `muse`), argv and child result paths are descriptors. `dry_run=False` is unsupported. This module does not launch seats, acquire leases or locks, authenticate results, supervise processes or provide a runnable dispatcher CLI. The live stages below are design requirements for a separate integration.
 
 ## Invariants
 
-1. Dry-Run Preflight Before Live Launch: Always verify target runtime, model tier, effort level, task SHA-256, first-prompt SHA-256, persona path, and governing skill pointer in `--dry-run` or `--preflight` before live pane creation.
-2. Parent-Child Result Lease Non-Contention: The parent `owner_session` claims only `.scratch/deploy2/<owner_session>/runs` and task scratch paths; each child seat claims its own `.scratch/session-state/<owner_session>/tasks/<run_id>/task_result.md` and `done.json` under a distinct `child_session` UUID.
-3. Sequential Dispatch Lock with Parallel Wave Execution: Acquire `mpt-dispatch.lock` sequentially during pane creation and prompt delivery, then monitor parallel seat execution within each WFC/MPT wave before unlocking dependent waves.
-4. Cryptographic Answer Contract Verification: Never equate process exit 0 or dry-run plans with runtime acceptance; verify `done.json`, `answer_sha256`, and `postimage != preimage` before marking a seat complete.
+1. Plan Only: Inspect target/model/effort/task and prompt SHA-256 descriptors with `dry_run=True`; a plan is not a live invocation.
+2. Intended Lease Isolation: Result paths and `child_session` describe intended ownership only. A separate integration must acquire and enforce leases.
+3. Intended Dispatch Lock: Sequential lock acquisition, pane creation and parallel monitoring are not implemented by this package's planner.
+4. Answer Hash Consistency: Compare `done.json` and answer bytes and optional preimage changes. Matching hashes, exit zero and completed metadata do not establish native execution, signatures or acceptance.
 
 ## Skeleton Procedure (Ordered Stages)
 
@@ -37,17 +37,19 @@ Build the deterministic `--inter-cli` launch plan (`plan_inter_cli_dispatch`), v
 
 ### Stage 3: Sequential Lock Acquisition and Seat Launch
 
-Acquire the dispatch lock, spawn the isolated tmux/worktree or subprocess seat, deliver the bound meta-prompt (`SKILL_BY_POINTER` + persona + leased template), and record `initial_run_json_sha256`.
+Not implemented in this package: a separate authorized integration would acquire a dispatch lock, launch a seat, deliver its prompt and record native observations. Do not execute `launch_argv` as a supported package CLI.
 
 ### Stage 4: Readiness Sensing and Non-Invasive Supervision
 
-Monitor child progress via transcript and pane sensors (`seat-readiness`), handling runtime-specific startup dialogs cleanly without disrupting peer sessions.
+Not implemented in this package: a separate integration would observe child progress and dialogs through its native transcript/pane surfaces.
 
 ### Stage 5: Artifact Collection, Hash Verification, and Clean Reap
 
-Verify `done.json`, `task_result.md` SHA-256, and distinct non-boilerplate deltas (`verify_inter_cli_completion_contract`), then close the child pane and release its result lease.
+Use `verify_inter_cli_completion_contract` for its bounded hash/status/preimage checks. Distinct-delta review, pane closure and lease release require separate observation and implementation; a valid return is not an authenticity or approval verdict.
 
 ## Artifacts and Verification Gates
+
+The following are intended integration artifacts, not files emitted by the plan-only API:
 
 - `run.json`, `deliver.jsonl`, `pane-after-deliver.txt`, and `native-result-lease-handoff.json`.
 - `done.json`, `task_result.md`, and `mpt-deploy-cli-dispatch-receipt.json`.

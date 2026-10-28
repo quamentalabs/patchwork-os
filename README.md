@@ -6,7 +6,7 @@
 
 ## Local evaluation: install, use, remove
 
-Python 3.11 or newer is required. The wheel is a Python library: the observed 0.1.0 wheel had no console scripts, skill files, knowledge files, or runtime dependencies. This 0.1.1 proposal does not add those resources, dependencies, or a CLI. Repository resources must be obtained and reviewed separately. The wheel must be rebuilt and inspected after applying the change; its filename below is an installation example, not evidence of a published release.
+Python 3.11 or newer is required. The pre-fix review snapshot recorded at 2026-10-28T04:02:20.304Z reports a 0.1.1 wheel with 21 entries and no console scripts, skill files, knowledge files or runtime dependencies. That observation belongs to the artifact inspected before these source corrections; it does not verify a rebuilt candidate. The distributor must rebuild, inspect and consume a new wheel after applying source changes. No new artifact hash or published release is asserted here. Repository resources remain separately reviewed materials; no new CLI or runtime dependency is added by this correction.
 
 Create an isolated virtual environment outside the checkout using `python -m venv .venv`. Using that environment's Python, install a locally reviewed wheel without an index or dependency resolution:
 
@@ -45,7 +45,9 @@ with TemporaryDirectory() as directory:
 
 The API returns a plan dictionary. It does not launch an agent or create run/result directories. `launch_argv` is a descriptive compatibility template, not a supported command. `dry_run=False` raises `NotImplementedError`; a missing task raises `FileNotFoundError`, and a directory or other non-regular task raises `ValueError`. A real empty file is valid. `python -m patchwork_os.deploy_cli --help` is not a supported CLI; the observed baseline exited zero with no help output.
 
-Remove the package with the same environment's `python -m pip uninstall patchwork-os`. Deactivate and delete the dedicated virtual environment if desired, and remove only sample files you created. Uninstallation, network egress, and full isolation have not been measured for this candidate.
+Only the `plan_inter_cli_dispatch` sample above is in this local evaluation. Other APIs are outside that sample: `bootstrap_agnostic_hub` writes project resources and can reach a Windows junction fallback; `safe_bind_spoke(..., allow_junction=True)` can invoke `cmd.exe /c mklink /J` when the directory symlink path fails on Windows; `build_deterministic_payload` can invoke `git diff` and `git status` when overrides are absent. `allow_junction=False` disables that junction branch, not every possible side effect, and does not bring these APIs into the evaluation scope. The existing default is unchanged. Runtime routing and setup/profile APIs also remain outside the sample and expose unverified example data, not assessed provider/compliance/model/cost guarantees.
+
+Remove the package with the same environment's `python -m pip uninstall patchwork-os`. A pre-fix dedicated outside-repository venv observation recorded at 2026-10-28T04:02:20.302Z found both module and distribution metadata absent after uninstall. This does not verify removal of a wheel rebuilt after the current source changes. Deactivate and delete the dedicated venv if desired, and remove only sample files you created. Network egress and full isolation remain unmeasured.
 
 The repository's `.claude/settings.json` is intentionally empty. Existing statusline commands and permission allow entries are preserved in the inactive `.claude/settings.example.json`. Reading that example does not enable it. Any later manual configuration requires separate review of the commands, helpers, permissions, and local policy; it is not part of this evaluation. Do not overwrite user/global settings or enable external AI, hooks, or permission bypass for the sample.
 
