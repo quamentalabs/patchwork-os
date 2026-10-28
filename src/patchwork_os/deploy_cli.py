@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: MIT
-"""Generalized Cross-Runtime Inter-CLI Dispatcher (`pwos-deploy-cli`) for Patchwork-OS.
+"""Dispatch-plan and completion-contract utilities for Patchwork-OS.
 
-Provides host-agnostic and runtime-agnostic `--inter-cli` seat dispatch planning,
-parent-child result lease isolation, sequential dispatch locking, and cryptographic
-completion contract verification across `cc`, `codex`, `agy`, and `muse`.
+Plans describe runtime and child-result lease paths; they do not launch seats,
+acquire leases or locks, or authenticate results. There is no runnable dispatcher
+CLI in this module. Hashes describe bytes rather than signatures or approval.
 """
 from __future__ import annotations
 
@@ -73,7 +73,16 @@ def plan_inter_cli_dispatch(
     dry_run: bool = True,
     registry_path: Optional[Path] = None,
 ) -> Dict[str, Any]:
-    """Build a deterministic `--inter-cli` dispatch plan and child result lease contract."""
+    """Describe a dispatch plan; only dry_run=True is supported.
+
+    launch_argv is a descriptive compatibility template, not an executable CLI.
+    No process, lease, lock, run directory or result directory is created.
+    """
+    if dry_run is not True:
+        raise NotImplementedError(
+            "plan_inter_cli_dispatch supports dry_run=True only; "
+            "live execution is not implemented"
+        )
     runtime = target_runtime.strip().lower()
     if runtime not in SUPPORTED_DEPLOY_RUNTIMES:
         raise ValueError(f"Unsupported target_runtime: {target_runtime!r}")
@@ -86,7 +95,11 @@ def plan_inter_cli_dispatch(
 
     ws_root = Path(workspace_root).resolve()
     t_path = Path(task_path).resolve()
-    task_bytes = t_path.read_bytes() if t_path.is_file() else b""
+    if not t_path.exists():
+        raise FileNotFoundError(f"task_path does not exist: {t_path}")
+    if not t_path.is_file():
+        raise ValueError(f"task_path must be a regular file: {t_path}")
+    task_bytes = t_path.read_bytes()
     task_sha256 = hashlib.sha256(task_bytes).hexdigest()
 
     models_3tier = resolve_canonical_three_tier_models(
@@ -160,7 +173,8 @@ def plan_inter_cli_dispatch(
         argv.append("--dry-run")
 
     return {
-        "kind": "deploy2-cli-plan" if dry_run else "deploy2-cli-result",
+        "kind": "deploy2-cli-plan",
+        "execution_supported": False,
         "command": "run",
         "dry_run": dry_run,
         "host": host,

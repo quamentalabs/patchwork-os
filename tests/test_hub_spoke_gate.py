@@ -100,7 +100,7 @@ def test_safe_bind_spoke_and_bootstrap_preserve_source_on_rebind(tmp_path: Path)
 
     # Re-binding must never delete the target contents (`GDOC-BUG-01` regression guard)
     second = safe_bind_spoke(src_dir, dst_dir, is_dir=True)
-    assert second["tier"] in ("SYMLINK", "NTFS_JUNCTION", "ATOMIC_COPY_FALLBACK")
+    assert second["tier"] in ("SYMLINK", "NTFS_JUNCTION", "PRESERVED_EXISTING")
     assert sentinel.is_file()
     assert sentinel.read_text(encoding="utf-8") == "important-data\n"
 

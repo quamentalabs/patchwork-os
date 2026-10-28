@@ -272,12 +272,47 @@ def safe_bind_spoke(
     *,
     is_dir: bool = False,
     allow_junction: bool = True,
+    overwrite_existing: bool = False,
 ) -> Dict[str, str]:
-    """Bind `src` to `dst` using the 3-Tier OS-Agnostic Fallback (`SYMLINK -> JUNCTION/HARDLINK -> ATOMIC_COPY`)."""
-    src_resolved = src.resolve()
-    dst.parent.mkdir(parents=True, exist_ok=True)
-    if _is_reparse_or_junction(dst) or dst.exists():
+    """Bind through the existing fallback ladder, preserving existing destinations by default.
+
+    Replacement is opt-in. Existing copies are preserved rather than implicitly
+    synchronized. The legacy ATOMIC_COPY_FALLBACK label is not an atomicity claim.
+    Callers must serialize destination writers; this is not a race-safe publish.
+    """
+    src_resolved = src.resolve(strict=True)
+    if src_resolved.is_dir() != is_dir:
+        raise ValueError("BIND_SOURCE_KIND_MISMATCH")
+    if dst.name == "..":
+        raise ValueError("BIND_DESTINATION_PARENT_COMPONENT")
+    # Resolve parent aliases, but retain the destination entry itself for links.
+    dst_entry = dst.parent.resolve() / dst.name
+    if (
+        src_resolved == dst_entry
+        or dst_entry in src_resolved.parents
+        or (is_dir and src_resolved in dst_entry.parents)
+    ):
+        raise ValueError("BIND_SOURCE_DESTINATION_OVERLAP")
+    binding = {"source": src_resolved.as_posix(), "destination": dst.as_posix()}
+    if _is_reparse_or_junction(dst):
+        if dst.resolve() == src_resolved:
+            if dst.is_symlink():
+                tier = "SYMLINK"
+            elif getattr(dst, "is_junction", lambda: False)():
+                tier = "NTFS_JUNCTION"
+            else:
+                tier = "PRESERVED_EXISTING"
+            return {"tier": tier, **binding}
+        if not overwrite_existing:
+            return {"tier": "PRESERVED_EXISTING", **binding}
         _safe_remove_destination(dst)
+    elif dst.exists():
+        if not is_dir and dst.samefile(src_resolved):
+            return {"tier": "HARDLINK", **binding}
+        if not overwrite_existing:
+            return {"tier": "PRESERVED_EXISTING", **binding}
+        _safe_remove_destination(dst)
+    dst.parent.mkdir(parents=True, exist_ok=True)
 
     # Tier 1: Native relative symlink
     try:
@@ -302,8 +337,10 @@ def safe_bind_spoke(
             os.link(src_resolved, dst)
             return {"tier": "HARDLINK", "source": src_resolved.as_posix(), "destination": dst.as_posix()}
         except Exception:
-            if _is_reparse_or_junction(dst) or dst.exists():
+            if _is_reparse_or_junction(dst):
                 _safe_remove_destination(dst)
+            elif dst.exists():
+                return {"tier": "PRESERVED_EXISTING", **binding}
 
     # Tier 3: Deterministic atomic copy fallback
     if is_dir:
@@ -373,7 +410,12 @@ def bootstrap_agnostic_hub(
                 "destination": target_doc.as_posix(),
             }
         else:
-            spokes[doc_name] = safe_bind_spoke(rules_path, target_doc, is_dir=False)
+            spokes[doc_name] = safe_bind_spoke(
+                rules_path,
+                target_doc,
+                is_dir=False,
+                overwrite_existing=overwrite_existing_root_docs,
+            )
 
     manifest = {
         "schema_version": "patchwork-hub-spoke-manifest-v2",

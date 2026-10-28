@@ -2,14 +2,16 @@
 title: Patchwork-OS 3-Layer Knowledge Hub
 category: architecture
 tags: [patchwork-os, workflow, meta-prompting, graph-prompting, prompt-flow, cmds-llm-wiki]
-updated: 2026-10-24
+updated: 2026-10-27
 ---
 
-# Patchwork-OS (MIT License)
+# Patchwork-OS Repository Knowledge Hub
 
-- **License**: **MIT License** ([`../LICENSE`](../LICENSE) · [`../THIRD_PARTY_NOTICES.md`](../THIRD_PARTY_NOTICES.md)) Knowledge Hub (`index.md`)
+- **Project license declaration**: MIT ([`../LICENSE`](../LICENSE)); [`../THIRD_PARTY_NOTICES.md`](../THIRD_PARTY_NOTICES.md) records attribution, not verified upstream clearance or company approval.
 
 This hub routes agents across the 3-layer CMDS knowledge architecture using lazy pointer hydration (`Leonxlnx/unlazy` pattern). Read this index first and hydrate individual spokes only on demand.
+
+This is a repository document, not a wheel resource or an enabled runtime hook. The local Python evaluation, installation and removal procedure is in [../README.md](../README.md). Architecture and skill documents describe intended workflows; they do not prove that external agents, model calls, enforcement or signed authentication have run.
 
 ```mermaid
 flowchart TD
@@ -23,4 +25,4 @@ flowchart TD
 - **Raw Layer (Immutable Source Manifest)**: [raw/source-manifest.md](raw/source-manifest.md)
 - **Wiki Layer (5-Pillar Hybrid Synthesis)**: [wiki/patchwork-os-architecture.md](wiki/patchwork-os-architecture.md)
 - **Rules Layer (Deterministic Contracts & Hygiene Gates)**: [rules/patchwork-os-contract.md](rules/patchwork-os-contract.md)
-- [skills/INDEX.md](../skills/INDEX.md) — 12 Generalized Cognitive & Execution Skill Skeleton Procedures (`grilling`, `quarry`, `deconstruct`, `persona-agent`, `crucible`, `systematic-debugging`, `tdd`, `stdd`, `fable-mode`, `wfc`, `deploy-cli`, `rea`)
+- [skills/INDEX.md](../skills/INDEX.md) — Canonical inventory of the 18 procedure skeletons present in this repository; Markdown resources are not included in the observed wheel.

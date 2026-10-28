@@ -25,6 +25,7 @@ def test_claude_code_custom_statusline_hybrid_renders_two_rows() -> None:
 
     repo_root = Path(__file__).resolve().parents[1]
     settings_path = repo_root / ".claude" / "settings.json"
+    example_path = repo_root / ".claude" / "settings.example.json"
     hybrid_script = repo_root / ".claude" / "helpers" / "patchwork-statusline-hybrid.cjs"
     primary_script = repo_root / ".claude" / "helpers" / "statusline.js"
     graft_script = repo_root / ".claude" / "helpers" / "graft-statusline.cjs"
@@ -35,6 +36,8 @@ def test_claude_code_custom_statusline_hybrid_renders_two_rows() -> None:
     assert graft_script.is_file()
 
     settings = json.loads(settings_path.read_text(encoding="utf-8"))
+    assert settings == {}
+    settings = json.loads(example_path.read_text(encoding="utf-8"))
     assert "patchwork-statusline-hybrid.cjs" in settings["statusLine"]["command"]
     assert "graft-statusline.cjs" in settings["subagentStatusLine"]["command"]
 

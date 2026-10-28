@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "patchwork-os"
-version = "0.1.0"
-description = "MIT-licensed portable, host-agnostic and runtime-agnostic agentic workflow and knowledge operating system"
+version = "0.1.1"
+description = "Local Python workflow and contract evaluation library with repository procedure references"
 readme = "README.md"
 license = { file = "LICENSE" }
 requires-python = ">=3.11"
