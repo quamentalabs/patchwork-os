@@ -9,6 +9,7 @@ description = "Local Python workflow and contract evaluation library with reposi
 readme = "README.md"
 license = { file = "LICENSE" }
 requires-python = ">=3.11"
+dependencies = ["pywinpty>=3.1.2; sys_platform == 'win32'"]
 authors = [
   { name = "quamentalabs" }
 ]

@@ -26,6 +26,8 @@ def main(argv=None):
     status.add_argument('run_id', nargs='?')
     for name in ('collect','close'):
         commands.add_parser(name).add_argument('run_id')
+    terminal_input = commands.add_parser('input')
+    terminal_input.add_argument('run_id')
     hook = commands.add_parser('hook')
     hook.add_argument('action', choices=['run'])
     hook.add_argument('--input', type=Path, required=True)
@@ -46,6 +48,8 @@ def main(argv=None):
                 result = backend.launch(args.runtime, prompt, model=args.model, effort=args.effort, mode=args.mode, submission_id=args.submission_id)
             elif args.command == 'status':
                 result = backend.observe(args.run_id) if args.run_id else backend.list_runs()
+            elif args.command == 'input':
+                result = backend.terminal_input(args.run_id, sys.stdin.buffer.read().decode('utf-8'))
             elif args.command == 'collect':
                 result = backend.collect(args.run_id)
             elif args.command == 'close':

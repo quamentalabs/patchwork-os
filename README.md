@@ -14,7 +14,7 @@ Create an isolated virtual environment outside the checkout using `python -m ven
 python -m pip install --no-index --no-deps /path/to/patchwork_os-0.2.0-py3-none-any.whl
 ```
 
-Initialize a nonsensitive directory with `pwos --root /path/to/workspace init`. Edit that workspace’s `.patchwork/config.json` to set the executable absolute path, argument array, delivery mode (`stdin` or `task_file`), and optional model and effort. Argument placeholders are `{model}`, `{effort}`, `{home}` and `{task_file}`. Use `doctor`, `run`, `status`, `collect`, and `close`; `serve` starts a loopback-only web cockpit. Interactive terminal mode is unavailable and is refused. Exit status and transcript do not establish native Edit, model observation, or review acceptance.
+Initialize a nonsensitive directory with `pwos --root /path/to/workspace init`. Edit that workspace’s `.patchwork/config.json` to set the executable absolute path, argument array, delivery mode (`stdin` or `task_file`), and optional model and effort. Argument placeholders are `{model}`, `{effort}`, `{home}` and `{task_file}`. Use `doctor`, `run`, `status`, `collect`, and `close`; `serve` starts a loopback-only web cockpit. Terminal mode uses a persistent PTY; use `pwos input RUN_ID` to send stdin and `collect` to read the transcript. The web display preserves terminal text and ANSI sequences without emulating a full terminal. Exit status and transcript do not establish native Edit, model observation, or review acceptance.
 
 The distributor needs a separately prepared build environment with setuptools>=68 to build the wheel. No build or installation command here represents company approval. Evaluate this Python example from a nonsensitive directory outside the repository:
 

@@ -11,6 +11,8 @@ from .runtime_backend import LocalRuntimeBackend, RUNTIMES
 def serve(root, port=8765):
     backend = LocalRuntimeBackend(Path(root))
     class Handler(BaseHTTPRequestHandler):
+        def log_message(self, format, *args):
+            pass
         def send_json(self, value, status=200):
             raw = json.dumps(value, ensure_ascii=False).encode()
             self.send_response(status); self.send_header('Content-Type','application/json; charset=utf-8')
@@ -46,6 +48,9 @@ def serve(root, port=8765):
                     allowed = {'runtime','prompt','model','effort','mode','submission_id'}
                     if set(body) - allowed: raise ValueError('UNKNOWN_FIELD')
                     result = backend.launch(**body)
+                elif self.path == '/api/input':
+                    if set(body) != {'run_id', 'text'}: raise ValueError('INVALID_FIELDS')
+                    result = backend.terminal_input(body['run_id'], body['text'])
                 elif self.path == '/api/close':
                     if set(body) != {'run_id'}: raise ValueError('INVALID_FIELDS')
                     result = backend.close(body['run_id'])

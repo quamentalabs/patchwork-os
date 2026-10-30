@@ -77,8 +77,6 @@ def test_failed_process_terminal_mode_and_pid_reuse(tmp_path):
     cfg = json.loads(backend.config_path.read_text())
     cfg["runtimes"]["muse"]["args"] = ["-c", "import sys; print(sys.stdin.read()); sys.exit(7)", "{model}"]
     backend.config_path.write_text(json.dumps(cfg))
-    with pytest.raises(RuntimeErrorDetail, match="INTERACTIVE_TERMINAL_UNAVAILABLE"):
-        backend.launch("muse", "plain input", mode="terminal")
     job = backend.launch("muse", "plain input")
     row = finished(backend, job["run_id"])
     assert row["status"] == "failed"

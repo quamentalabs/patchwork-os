@@ -39,7 +39,14 @@ def read_json(path: Path) -> dict[str, Any]:
 def atomic_json(path: Path, data: dict[str, Any]) -> None:
     temporary = path.with_name(path.name + "." + uuid.uuid4().hex + ".tmp")
     temporary.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    os.replace(temporary, path)
+    for attempt in range(25):
+        try:
+            os.replace(temporary, path)
+            return
+        except PermissionError:
+            if attempt == 24:
+                raise
+            time.sleep(.02)
 
 
 def process_birth(pid: int) -> str | None:
@@ -147,7 +154,7 @@ class LocalRuntimeBackend(RuntimeBackend):
     def probe(self, runtime: str) -> dict[str, Any]:
         try:
             config = self._runtime(runtime)
-            return {"terminal_capability": "blocked", "terminal_reason": "INTERACTIVE_TERMINAL_UNAVAILABLE", "runtime": runtime, "status": "configured", "executable": config["executable"], "model": config.get("model"), "effort": config.get("effort"), "native_acceptance": "not_run", "execution_measured": False}
+            return {"terminal_capability": terminal_capability()[0], "terminal_reason": terminal_capability()[1], "runtime": runtime, "status": "configured", "executable": config["executable"], "model": config.get("model"), "effort": config.get("effort"), "native_acceptance": "not_run", "execution_measured": False}
         except (RuntimeErrorDetail, OSError) as exc:
             return {"terminal_capability": "blocked", "terminal_reason": "INTERACTIVE_TERMINAL_UNAVAILABLE", "runtime": runtime, "status": "blocked", "reason": str(exc), "native_acceptance": "not_run"}
 
@@ -171,7 +178,7 @@ class LocalRuntimeBackend(RuntimeBackend):
 
     def launch(self, runtime: str, prompt: str, *, model: str | None = None, effort: str | None = None, mode: str = "task", submission_id: str | None = None) -> dict[str, Any]:
         config = self._runtime(runtime)
-        if mode == "terminal":
+        if mode == "terminal" and terminal_capability()[0] != "available":
             raise RuntimeErrorDetail("INTERACTIVE_TERMINAL_UNAVAILABLE")
         if mode not in {"task", "terminal"} or not isinstance(prompt, str) or not prompt or len(prompt.encode("utf-8")) > 1024 * 1024:
             raise RuntimeErrorDetail("INVALID_SUBMISSION")
@@ -267,13 +274,45 @@ class LocalRuntimeBackend(RuntimeBackend):
         atomic_json(self.run_path(run_id) / "run.json", row)
         return row
 
+    def terminal_input(self, run_id: str, text: str) -> dict[str, Any]:
+        row = self.observe(run_id)
+        if row["mode"] != "terminal" or row["status"] != "running":
+            raise RuntimeErrorDetail("TERMINAL_NOT_RUNNING")
+        identity = row["process"]
+        if not identity.get("birth") or process_birth(identity["pid"]) != identity["birth"]:
+            raise RuntimeErrorDetail("PROCESS_IDENTITY_MISMATCH")
+        if not isinstance(text, str) or not text or len(text.encode("utf-8")) > 65536:
+            raise RuntimeErrorDetail("INVALID_TERMINAL_INPUT")
+        queue = self.run_path(run_id) / "input-queue"
+        queue.mkdir(exist_ok=True)
+        name = f"{time.time_ns():020d}-{uuid.uuid4().hex}"
+        temporary = queue / (name + ".tmp")
+        temporary.write_bytes(text.encode("utf-8"))
+        os.replace(temporary, queue / (name + ".input"))
+        return {"run_id": run_id, "status": "queued", "input_id": name}
+
     def list_runs(self) -> list[dict[str, Any]]:
         return [self.observe(path.name) for path in sorted((self.state_root / "runs").iterdir()) if path.is_dir() and not path.is_symlink()]
+
+
+def terminal_capability() -> tuple[str, str | None]:
+    if os.name == "nt":
+        try:
+            import winpty
+            return "available", None
+        except ImportError:
+            return "blocked", "PYWINPTY_NOT_INSTALLED"
+    if os.name == "posix":
+        return "available", None
+    return "blocked", "PLATFORM_UNSUPPORTED"
 
 
 def supervise(root: Path, run_id: str) -> int:
     backend = LocalRuntimeBackend(root)
     row = backend._read_run(run_id)
+    if row["mode"] == "terminal":
+        from .terminal import supervise_terminal
+        return supervise_terminal(backend, row)
     directory = backend.run_path(run_id)
     row["supervisor"] = {"pid": os.getpid(), "birth": process_birth(os.getpid())}
     env = os.environ.copy()
