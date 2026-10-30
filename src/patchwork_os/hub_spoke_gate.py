@@ -1271,15 +1271,13 @@ def build_vla_wfc_mpt_hub_spoke_map(
     seat_tier_path: Optional[Path] = None,
     wfc_policy_path: Optional[Path] = None,
 ) -> Dict[str, Any]:
-    """Build the cross-linked VLA + WFC + MPT (/deploy-cli) + Persona/Skill/Knowledge-Vault Hub-Spoke map.
+    """Build example model/role metadata with repository-contained procedure links.
 
-    Synthesizes:
-    1. VLA benchmark matrix from Artificial Analysis v4.3.2 (`aa_vla_benchmark_matrix` in `models.json`).
-    2. Dual-axis cognitive tier routing (`planning_reasoning_synthesis` vs `execution_validation_coding`).
-    3. Cross-linkage between `seat-model-tier.json` (`fable_roles`, `opus_roles`, `sonnet_roles`),
-       WFC `task_kinds` (`orchestration-policy.json`), and MPT:N 5-Wave (`planning`, `reasoning`,
-       `adversarial_triage`, `synthesizing_and_orchestrating`, `meta_evaluating`) seats.
-    4. Bidirectional Knowledge-Vault Hub/Spoke and Skill pointers.
+    Optional registry, seat-tier and workflow inputs supply caller-owned data.
+    Model labels and procedure pointers do not establish native integration or
+    measured provider capabilities. Links name related public skeleton procedures,
+    not feature-equivalent replacements for external tooling. Legacy memory_vault_* keys refer to the
+    local knowledge documents included in this repository.
     """
     registry_data: Dict[str, Any] = {}
     if registry_path is not None and registry_path.is_file():
@@ -1335,21 +1333,21 @@ def build_vla_wfc_mpt_hub_spoke_map(
     muse_list = planning_3tier["muse"]["selected_models"]
 
     persona_specs = [
-        ("ptah-planner", "planner", "planning", 0, "planning", "composer", ["augi-planning", "wfc"]),
-        ("mago-architect", "architect", "planning", 0, "planning", "composer", ["augi-system-design", "domain-modeling"]),
-        ("nala-traverser", "traverser", "boundary", 0, "planning", "composer", ["augi-using-git-worktrees", "deploy-cli", "session-messenger"]),
-        ("sejong-scholar", "scholar", "experiment", 1, "reasoning", "composer", ["augi-deconstruct", "codify-harness", "memory-vault"]),
-        ("seshat-evidence-curator", "curator", "evidence-curation", 1, "reasoning", "composer", ["memory-vault", "exec-pw-cli", "hybrid-browser-control"]),
-        ("chilseong-instrumenter", "instrumenter", "telemetry", 1, "reasoning", "composer", ["augi-codemap", "augi-artifact", "augi-smart-sensor"]),
-        ("loki-flyter", "critic", "design-review", 2, "adversarial_triage", "validator", ["crucible", "grilling", "quarry"]),
-        ("haechi-compliance-auditor", "auditor", "authority", 2, "adversarial_triage", "validator", ["augi-audit", "domain-modeling"]),
-        ("heimdall-adversarial-reconciler", "reconciler", "state-reconciliation", 2, "adversarial_triage", "validator", ["converging-voyage", "augi-codemap", "augi-merge-protocol"]),
-        ("sindri-crafttester", "tester", "implementation", 2, "adversarial_triage", "validator", ["augi-test-driven-development", "augi-deconstruct", "augi-feature", "augi-tdd"]),
-        ("thoth-synthesizer", "synthesizer", "synthesis", 3, "synthesizing_and_orchestrating", "synthesizer", ["wfc", "converging-voyage", "domain-modeling"]),
-        ("mimir-synthesizer", "synthesizer", "synthesis", 3, "synthesizing_and_orchestrating", "synthesizer", ["augi-workflow-authoring", "wfc"]),
-        ("jaya-vijaya-evidence-validator", "validator", "final-validation", 4, "meta_evaluating", "meta_evaluator", ["augi-verification-before-completion", "augi-tdd", "codify-harness"]),
-        ("hanuman-delivery-witness", "witness", "delivery-witness", 4, "meta_evaluating", "meta_evaluator", ["augi-finishing-a-development-branch", "session-carry", "session-close"]),
-        ("sovereign-orchestrator", "main", "authority", 4, "meta_evaluating", "meta_evaluator", ["augi-receiving-code-review", "fable-mode", "wfc"]),
+        ("ptah-planner", "planner", "planning", 0, "planning", "composer", ["pwos-quarry","pwos-wfc"]),
+        ("mago-architect", "architect", "planning", 0, "planning", "composer", ["pwos-deconstruct","pwos-crucible"]),
+        ("nala-traverser", "traverser", "boundary", 0, "planning", "composer", ["pwos-deploy-cli","pwos-session-lifecycle"]),
+        ("sejong-scholar", "scholar", "experiment", 1, "reasoning", "composer", ["pwos-deconstruct","pwos-harness-audit","pwos-quarry"]),
+        ("seshat-evidence-curator", "curator", "evidence-curation", 1, "reasoning", "composer", ["pwos-quarry","pwos-browser-vla"]),
+        ("chilseong-instrumenter", "instrumenter", "telemetry", 1, "reasoning", "composer", ["pwos-mcp-bridge","pwos-harness-audit"]),
+        ("loki-flyter", "critic", "design-review", 2, "adversarial_triage", "validator", ["pwos-crucible","pwos-grilling","pwos-quarry"]),
+        ("haechi-compliance-auditor", "auditor", "authority", 2, "adversarial_triage", "validator", ["pwos-harness-audit","pwos-deconstruct"]),
+        ("heimdall-adversarial-reconciler", "reconciler", "state-reconciliation", 2, "adversarial_triage", "validator", ["pwos-systematic-debugging","pwos-session-lifecycle"]),
+        ("sindri-crafttester", "tester", "implementation", 2, "adversarial_triage", "validator", ["pwos-tdd","pwos-deconstruct","pwos-stdd"]),
+        ("thoth-synthesizer", "synthesizer", "synthesis", 3, "synthesizing_and_orchestrating", "synthesizer", ["pwos-wfc","pwos-deconstruct"]),
+        ("mimir-synthesizer", "synthesizer", "synthesis", 3, "synthesizing_and_orchestrating", "synthesizer", ["pwos-wfc","pwos-stdd"]),
+        ("jaya-vijaya-evidence-validator", "validator", "final-validation", 4, "meta_evaluating", "meta_evaluator", ["pwos-harness-audit","pwos-tdd"]),
+        ("hanuman-delivery-witness", "witness", "delivery-witness", 4, "meta_evaluating", "meta_evaluator", ["pwos-session-lifecycle","pwos-deploy-cli"]),
+        ("sovereign-orchestrator", "main", "authority", 4, "meta_evaluating", "meta_evaluator", ["pwos-crucible","pwos-fable-mode","pwos-wfc"]),
     ]
 
     wfc_task_kinds = wfc_policy.get("task_kinds", {})
@@ -1385,7 +1383,7 @@ def build_vla_wfc_mpt_hub_spoke_map(
                 "mpt_wave": wave_idx,
                 "mpt_cognitive_stage": stage,
                 "mpt_role_tier": mpt_role,
-                "governing_skills": skills,
+                "governing_skills": [f"skills/{skill}/SKILL.md" for skill in skills],
                 "recommended_models_by_runtime": {
                     "cc": cc_model,
                     "codex": codex_model,
@@ -1415,41 +1413,47 @@ def build_vla_wfc_mpt_hub_spoke_map(
         "wfc_mpt_persona_skill_matrix": persona_matrix,
         "hub_spoke_interlinks": {
             "memory_vault_hub": [
-                "C:/Knowledge-Vault/index.md",
-                "C:/Knowledge-Vault/hot.md",
+                "knowledge/index.md",
+                "knowledge/raw/source-manifest.md",
             ],
             "memory_vault_spokes": [
-                "C:/Knowledge-Vault/projects/upstream-agentic-os/aa-vla-model-matrix-and-wfc-mpt-hub-spoke-2026-10-24.md",
-                "C:/Knowledge-Vault/projects/upstream-agentic-os/opensource-patchwork-os-synthesis-2026-10-19.md",
+                "knowledge/wiki/patchwork-os-architecture.md",
+                "knowledge/rules/patchwork-os-contract.md",
             ],
             "patchwork_os_generalized_skills": [
-                "skills/pwos-grilling/SKILL.md",
-                "skills/pwos-quarry/SKILL.md",
-                "skills/pwos-deconstruct/SKILL.md",
-                "skills/pwos-persona-agent/SKILL.md",
+                "skills/pwos-browser-vla/SKILL.md",
                 "skills/pwos-crucible/SKILL.md",
+                "skills/pwos-deconstruct/SKILL.md",
+                "skills/pwos-deploy-cli/SKILL.md",
+                "skills/pwos-fable-mode/SKILL.md",
+                "skills/pwos-grilling/SKILL.md",
+                "skills/pwos-harness-audit/SKILL.md",
+                "skills/pwos-mcp-bridge/SKILL.md",
+                "skills/pwos-persona-agent/SKILL.md",
+                "skills/pwos-quarry/SKILL.md",
+                "skills/pwos-rea/SKILL.md",
+                "skills/pwos-runtime-dispatch/SKILL.md",
+                "skills/pwos-session-lifecycle/SKILL.md",
+                "skills/pwos-setup/SKILL.md",
+                "skills/pwos-stdd/SKILL.md",
                 "skills/pwos-systematic-debugging/SKILL.md",
                 "skills/pwos-tdd/SKILL.md",
-                "skills/pwos-stdd/SKILL.md",
-                "skills/pwos-fable-mode/SKILL.md",
                 "skills/pwos-wfc/SKILL.md",
-                "skills/pwos-deploy-cli/SKILL.md",
-                "skills/pwos-rea/SKILL.md",
             ],
             "governing_skills": [
-                ".agents/skills/hybrid-browser-control/SKILL.md",
-                ".agents/skills/exec-pw-cli/SKILL.md",
-                ".agents/skills/wfc/SKILL.md",
-                ".agents/skills/deploy-cli/SKILL.md",
-                ".agents/skills/persona-agents/SKILL.md",
-                ".agents/skills/memory-vault/SKILL.md",
+                "skills/pwos-browser-vla/SKILL.md",
+                "skills/pwos-wfc/SKILL.md",
+                "skills/pwos-deploy-cli/SKILL.md",
+                "skills/pwos-persona-agent/SKILL.md",
+                "skills/pwos-quarry/SKILL.md",
+                "skills/pwos-harness-audit/SKILL.md",
             ],
             "orchestrators": [
-                "scripts/control/mptN_meta_prompt_orchestrator.py",
-                ".agents/skills/wfc/scripts/wfc_cli.py",
-                "knowledge/satellites/patchwork-os/src/patchwork_os/hub_spoke_gate.py",
-                "knowledge/satellites/patchwork-os/src/patchwork_os/persona_setup.py",
-                "knowledge/satellites/patchwork-os/src/patchwork_os/deploy_cli.py",
+                "src/patchwork_os/hub_spoke_gate.py",
+                "src/patchwork_os/persona_setup.py",
+                "src/patchwork_os/deploy_cli.py",
+                "src/patchwork_os/runtime_dispatch.py",
+                "src/patchwork_os/session_lifecycle.py",
             ],
         },
     }

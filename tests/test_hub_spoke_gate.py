@@ -340,7 +340,7 @@ def test_build_vla_wfc_mpt_hub_spoke_map_links_vla_personas_skills_and_memory() 
     assert matrix["jaya-vijaya-evidence-validator"]["recommended_models_by_runtime"]["cc"] == "opus"
     assert matrix["seshat-evidence-curator"]["recommended_models_by_runtime"]["cc"] == "sonnet"
     assert matrix["hanuman-delivery-witness"]["recommended_models_by_runtime"]["cc"] == "sonnet"
-    assert "C:/Knowledge-Vault/projects/upstream-agentic-os/aa-vla-model-matrix-and-wfc-mpt-hub-spoke-2026-10-24.md" in (
+    assert "knowledge/wiki/patchwork-os-architecture.md" in (
         hub_map["hub_spoke_interlinks"]["memory_vault_spokes"]
     )
     assert "skills/pwos-persona-agent/SKILL.md" in (
@@ -351,6 +351,38 @@ def test_build_vla_wfc_mpt_hub_spoke_map_links_vla_personas_skills_and_memory() 
     )
     assert len(hub_map["orchestrator_session_routing_table"]) == 10
 
+
+
+def test_public_map_references_only_repository_contained_files() -> None:
+    from pathlib import PurePosixPath, PureWindowsPath
+    from patchwork_os.hub_spoke_gate import build_vla_wfc_mpt_hub_spoke_map
+
+    hub_map = build_vla_wfc_mpt_hub_spoke_map()
+    interlinks = hub_map["hub_spoke_interlinks"]
+    references = [
+        (group, path)
+        for group, paths in interlinks.items()
+        for path in paths
+    ]
+    for row in hub_map["wfc_mpt_persona_skill_matrix"]:
+        assert row["governing_skills"], row["persona"]
+        references.extend((row["persona"], path) for path in row["governing_skills"])
+    assert references
+    for group, raw in references:
+        assert isinstance(raw, str) and raw, group
+        posix = PurePosixPath(raw)
+        windows = PureWindowsPath(raw)
+        assert not posix.is_absolute() and not windows.drive, (group, raw)
+        assert "\\" not in raw and ".." not in posix.parts, (group, raw)
+        resolved = (ROOT / raw).resolve()
+        assert resolved.is_relative_to(ROOT.resolve()), (group, raw)
+        assert resolved.is_file(), (group, raw)
+
+    available_skills = {
+        path.relative_to(ROOT).as_posix()
+        for path in (ROOT / "skills").glob("pwos-*/SKILL.md")
+    }
+    assert set(interlinks["patchwork_os_generalized_skills"]) == available_skills
 
 def test_starter_boost_kit_persona_setup_and_custom_facets(tmp_path: Path) -> None:
     from patchwork_os.persona_setup import (
@@ -682,8 +714,8 @@ def test_rea_twelve_pillars_and_generalized_subsystems() -> None:
 
     ob = register_backlog_obligation(
         obligation_id="BL-01",
-        summary="Run host-b live matrix",
-        deferred_reason="Host scoped to ql-msi first",
+        summary="Run secondary-host live matrix",
+        deferred_reason="Host scoped to primary-host first",
         target_scope="scripts/deploy2",
     )
     assert ob["status"] == "deferred"

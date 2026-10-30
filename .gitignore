@@ -1,3 +1,19 @@
 __pycache__/
 *.py[cod]
 .pytest_cache/
+
+# Private workspace state: API tokens, tasks and transcripts.
+.patchwork/
+.scratch/
+.env
+.env.*
+!.env.example
+
+# Local environments and generated distributions.
+.venv/
+venv/
+build/
+dist/
+*.egg-info/
+.coverage
+htmlcov/

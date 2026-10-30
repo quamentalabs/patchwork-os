@@ -1,0 +1,27 @@
+name: Quickstart smoke
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  installed-package:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install package
+        run: python -m pip install .
+      - name: Run outside-checkout local echo
+        shell: bash
+        run: python examples/local_echo.py --workspace "${{ runner.temp }}/patchwork-demo"

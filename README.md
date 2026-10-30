@@ -1,22 +1,60 @@
-# Patchwork-OS: Local Python Workflow Evaluation Library
+# Patchwork-OS (preview)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-**Patchwork-OS** provides Python workflow and contract APIs, plus repository-only architecture references and procedure skeletons. The initial evaluation scope is a local, nonsensitive sample. Workflow, Meta-Prompting, Graph-Prompting and Prompt-Flow describe the design vocabulary; they do not establish installed integrations or runtime enforcement.
+**Patchwork-OS** is a local Python workflow library and CLI. The `pwos` command initializes a workspace, launches an explicitly configured process, collects its transcript, and closes the run. An optional loopback web cockpit displays local runs. The package also contains workflow contracts and reference procedures.
 
-## Local evaluation: install, use, remove
+## Quickstart: install and run a local process
 
-Python 3.11 or newer is required. Version 0.2.0 includes the local pwos command, loopback cockpit, public resources and an explicitly configured process backend. The earlier 0.1.1 review snapshot does not establish acceptance of this version.
+Python 3.11 or newer and Git are required. After receiving repository access, clone and install into a virtual environment outside the checkout. Installation resolves the declared dependencies, including `pywinpty` on Windows. No vendor AI CLI or account is needed for this example.
 
-Create an isolated virtual environment outside the checkout using `python -m venv .venv`. Using that environment's Python, install a locally reviewed wheel without an index or dependency resolution:
+Windows (PowerShell):
 
-```text
-python -m pip install --no-index --no-deps /path/to/patchwork_os-0.2.0-py3-none-any.whl
-```
+~~~powershell
+git clone https://github.com/quamentalabs/patchwork-os.git
+cd patchwork-os
+python -m venv ../patchwork-venv
+../patchwork-venv/Scripts/python.exe -m pip install .
+../patchwork-venv/Scripts/python.exe examples/local_echo.py --workspace ../patchwork-demo
+~~~
 
-Initialize a nonsensitive directory with `pwos --root /path/to/workspace init`. Edit that workspace’s `.patchwork/config.json` to set the executable absolute path, argument array, delivery mode (`stdin` or `task_file`), and optional model and effort. Argument placeholders are `{model}`, `{effort}`, `{home}` and `{task_file}`. Use `doctor`, `run`, `status`, `collect`, and `close`; `serve` starts a loopback-only web cockpit. Terminal mode uses a persistent PTY; use `pwos input RUN_ID` to send stdin and `collect` to read the transcript. The web display preserves terminal text and ANSI sequences without emulating a full terminal. Exit status and transcript do not establish native Edit, model observation, or review acceptance.
+Linux / macOS:
 
-The distributor needs a separately prepared build environment with setuptools>=68 to build the wheel. No build or installation command here represents company approval. Evaluate this Python example from a nonsensitive directory outside the repository:
+~~~sh
+git clone https://github.com/quamentalabs/patchwork-os.git
+cd patchwork-os
+python3 -m venv ../patchwork-venv
+../patchwork-venv/bin/python -m pip install .
+../patchwork-venv/bin/python examples/local_echo.py --workspace ../patchwork-demo
+~~~
+
+Use a new `patchwork-demo` directory for each run. The [example](examples/local_echo.py) refuses an existing workspace or one inside the checkout. It initializes the workspace, configures a plain Python echo process, and calls the installed `pwos` entry point through `init → doctor → run → status → collect → close`. It checks the exact echoed text, successful process exit, transcript hash, packaged procedure index, and released run lease. Success prints a JSON object with `"status": "passed"` and the run ID. Its `muse` configuration slot selects the local echo process; it does not launch a vendor agent.
+
+The workspace retains the task, process configuration, transcript and run records under `.patchwork/`. Keep that directory private: its owner record contains a local API token. It is excluded by this repository's `.gitignore`. The optional [CI template](ci/quickstart.yml) defines this same installed-package example on Windows and Linux with Python 3.11. To enable GitHub Actions, copy it to `.github/workflows/quickstart.yml` using an account with workflow-management permission. The template is inactive in this repository; local results do not establish a GitHub Actions pass.
+
+## Configure your own executable
+
+`pwos --root /path/to/workspace init` creates `.patchwork/config.json` without overwriting existing configuration. Each `runtimes` entry uses an absolute `executable` path, an `args` array, `delivery` (`stdin` or `task_file`), and optional `model` and `effort`. Argument placeholders are `{model}`, `{effort}`, `{home}` and `{task_file}`. [examples/echo_backend.py](examples/echo_backend.py) is the executable payload used by the quickstart.
+
+Using your environment's `pwos` executable:
+
+~~~text
+pwos --help
+pwos --root /path/to/workspace doctor
+pwos --root /path/to/workspace run muse --task-file /path/to/task.txt
+pwos --root /path/to/workspace status RUN_ID
+pwos --root /path/to/workspace collect RUN_ID
+pwos --root /path/to/workspace close RUN_ID
+pwos --root /path/to/workspace serve
+~~~
+
+`serve` starts the loopback-only web cockpit. Terminal mode uses a persistent PTY; `pwos input RUN_ID` reads input from stdin, and `collect` returns the transcript. The web display preserves terminal text and ANSI sequences without emulating a full terminal. The quickstart exercises task mode, not the browser or interactive terminal.
+
+Vendor CLIs must be installed, authenticated and configured separately. The `cc`, `codex`, `agy` and `muse` labels do not establish successful native integration. A process exit or transcript does not prove native Edit, observed model/effort or independent review; the local echo run keeps native and review acceptance at `not_run`. [External native result attachment](docs/external-native.md) documents the optional, explicitly configured collector boundary. The package does not supply that external collector or establish its evidence by itself.
+
+## Python planning API
+
+This separate example returns a nonexecuting plan dictionary:
 
 ```python
 from hashlib import sha256
@@ -47,9 +85,9 @@ with TemporaryDirectory() as directory:
 
 The API returns a plan dictionary. It does not launch an agent or create run/result directories. `launch_argv` is a descriptive compatibility template, not a supported command. `dry_run=False` raises `NotImplementedError`; a missing task raises `FileNotFoundError`, and a directory or other non-regular task raises `ValueError`. A real empty file is valid. `python -m patchwork_os.deploy_cli --help` is not a supported CLI; the observed baseline exited zero with no help output.
 
-Only the `plan_inter_cli_dispatch` sample above is in this local evaluation. Other APIs are outside that sample: `bootstrap_agnostic_hub` writes project resources and can reach a Windows junction fallback; `safe_bind_spoke(..., allow_junction=True)` can invoke `cmd.exe /c mklink /J` when the directory symlink path fails on Windows; `build_deterministic_payload` can invoke `git diff` and `git status` when overrides are absent. `allow_junction=False` disables that junction branch, not every possible side effect, and does not bring these APIs into the evaluation scope. The existing default is unchanged. Runtime routing and setup/profile APIs also remain outside the sample and expose unverified example data, not assessed provider/compliance/model/cost guarantees.
+The quickstart covers the local process lifecycle, and the planning sample above covers only plan construction. Other APIs remain outside these examples: `bootstrap_agnostic_hub` writes project resources and can reach a Windows junction fallback; `safe_bind_spoke(..., allow_junction=True)` can invoke `cmd.exe /c mklink /J` when the directory symlink path fails on Windows; `build_deterministic_payload` can invoke `git diff` and `git status` when overrides are absent. `allow_junction=False` disables that junction branch, not every possible side effect, and does not bring these APIs into the evaluation scope. The existing default is unchanged. Runtime routing and setup/profile APIs also remain outside the sample and expose unverified example data, not assessed provider/compliance/model/cost guarantees.
 
-Remove the package with the same environment's `python -m pip uninstall patchwork-os`. A pre-fix dedicated outside-repository venv observation recorded at 2026-10-28T04:02:20.302Z found both module and distribution metadata absent after uninstall. This does not verify removal of a wheel rebuilt after the current source changes. Deactivate and delete the dedicated venv if desired, and remove only sample files you created. Network egress and full isolation remain unmeasured.
+Remove the package with the same environment's `python -m pip uninstall patchwork-os`. Delete only the dedicated environment and sample workspace you created when no longer needed. Uninstalling the package does not remove workspace data.
 
 The repository's `.claude/settings.json` is intentionally empty. Existing statusline commands and permission allow entries are preserved in the inactive `.claude/settings.example.json`. Reading that example does not enable it. Any later manual configuration requires separate review of the commands, helpers, permissions, and local policy; it is not part of this evaluation. Do not overwrite user/global settings or enable external AI, hooks, or permission bypass for the sample.
 
@@ -96,7 +134,7 @@ The project declares the MIT License in [`LICENSE`](LICENSE) and its package met
 
 ## Generalized Skill Skeleton Procedures (`skills/pwos-*`)
 
-The repository contains 18 Markdown procedure skeletons under the `pwos-*` namespace. [`skills/INDEX.md`](skills/INDEX.md) is the canonical complete inventory; `patchwork_os.skills_registry.resolve_skill_id` resolves aliases. The observed wheel contains none of these Markdown files. Procedure descriptions are design/runbook instructions, not proof that a launcher, hook or integration is implemented. Selected existing pointers are retained below; use the index for all 18:
+The repository contains 18 Markdown procedure skeletons under the `pwos-*` namespace. [`skills/INDEX.md`](skills/INDEX.md) is the canonical complete inventory; `patchwork_os.skills_registry.resolve_skill_id` resolves aliases. The package declares copies under `patchwork_os/resources/skills/`; the quickstart reads their packaged index. These resources are not registered automatically as vendor-native skills. Procedure descriptions are design/runbook instructions, not proof that a launcher, hook or integration is implemented. Selected existing pointers are retained below; use the index for all 18:
 
 - [`skills/pwos-grilling/SKILL.md`](skills/pwos-grilling/SKILL.md) - Relentless one-question-at-a-time decision-tree interview
 - [`skills/pwos-quarry/SKILL.md`](skills/pwos-quarry/SKILL.md) - Durable write-before-next-question requirement extraction

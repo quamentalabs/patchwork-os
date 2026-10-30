@@ -1,7 +1,7 @@
 ---
 name: pwos-harness-audit
 alias: harness-audit
-description: "Use when auditing Hop-0 startup instruction budgets (preventing open-write-path-closed-exit), deduplicating hook event storms within a 1.5s window, or compiling prose rules into SHA-256-pinned adversarial harness contracts (codify-harness)."
+description: "Use when auditing Hop-0 startup instruction budgets (preventing open-write-path-closed-exit), deduplicating hook event storms within a 1.5s window, or compiling prose rules into SHA-256-pinned adversarial harness contracts."
 category: governance-and-harness-verification
 tier: tier-0-deterministic-gate
 paradigms:
@@ -16,7 +16,7 @@ license: MIT
 
 ## Overview
 
-Generalizes Upstream-Agentic-OS's `augi-audit`, `codify-harness`, and `portable_hook_bootstrap.py` protections into `harness_audit.py`. Guards against monotonic Hop-0 instruction bloat (`open-write-path-closed-exit`), suppresses duplicate hook execution storms, and compiles governance rules into cryptographically pinned adversarial test harnesses.
+Uses the local helpers in `src/patchwork_os/harness_audit.py` to measure startup instruction budgets, detect repeated hook events, and compile governance rules into hash-pinned adversarial test contracts. This skeleton procedure does not install hooks or establish runtime enforcement.
 
 ## Invariants
 

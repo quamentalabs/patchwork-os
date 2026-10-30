@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: MIT
 """Generalized Instruction-Budget Guard, Hook Storm Deduplicator & Harness Contract Compiler.
 
-Assimilates and generalizes Upstream-Agentic-OS's ``augi-audit``, ``codify-harness``,
-and ``portable_hook_bootstrap.py`` lessons discovered via ``/augi-rea``:
+Provides deterministic helpers for instruction budgets, hook-event deduplication
+and pinned verification contracts. Callers supply actual hook integration:
 1. ``audit_hop0_instruction_budget``:
    Prevents the ``open-write-path-closed-exit`` antipattern by checking total
    Hop-0 startup characters against a strict budget (default 150,000 chars) and
