@@ -201,7 +201,7 @@ def verify_task_contract_template(
         "## 1. Epistemic Matrix (KK / KU / UK / UU)",
         "## 2. Synergetic Assimilation & Counterpart Limit Coverage",
         "## 3. 3xPR Gate",
-        "## 4. FRR (Failure & Regression Record)",
+        "## 4. FRR (Forward / Reverse / Roundtrip)",
     )
     for marker in required_markers:
         if marker not in template_text:
@@ -632,41 +632,16 @@ def evaluate_zero_thinking_gate(
             token_budget_tier="NANO_LOCAL",
         )
 
-    excerpt = str(payload.get("raw_diff_excerpt", "")).strip()
-    if not excerpt and payload.get("changed_files_count", 0) == 0:
-        return GateVerdictResult(verdict="PASS", confidence=1.0)
-
+    if payload.get("truncated"):
+        return GateVerdictResult(verdict="AMBIGUOUS", confidence=0.0, escalate_to="PLANNER_VALIDATOR", escalation_reason="TRUNCATED_INPUT")
     if local_classifier_fn is not None:
-        return local_classifier_fn(payload)
-
-    changed_files = [str(f) for f in payload.get("changed_files", [])]
-    changed_count = int(payload.get("changed_files_count", len(changed_files)))
-
-    if any("schema" in f or "spec" in f or "contract" in f for f in changed_files):
-        return GateVerdictResult(
-            verdict="AMBIGUOUS",
-            confidence=0.70,
-            escalate_to="PLANNER_VALIDATOR",
-            escalation_reason="Schema or formal specification contract delta requires EARS/STDD validator check.",
-            token_budget_tier="FLASH_SYNTH",
-        )
-    if changed_count >= 6:
-        return GateVerdictResult(
-            verdict="AMBIGUOUS",
-            confidence=0.65,
-            escalate_to="SYNTHESIZER_HARVESTER",
-            escalation_reason=f"Multi-file cross-module change ({changed_count} files) requires parallel context harvest.",
-            token_budget_tier="FLASH_SYNTH",
-        )
-    if changed_count >= 4 or len(excerpt) > 2500:
-        return GateVerdictResult(
-            verdict="AMBIGUOUS",
-            confidence=0.68,
-            escalate_to="CRITIC_COUNTERPART",
-            escalation_reason=f"High-complexity diff ({changed_count} files, {len(excerpt)} chars) requires counterpart critique.",
-            token_budget_tier="HEAVY_DUAL_CORE",
-        )
-    return GateVerdictResult(verdict="PASS", confidence=0.92)
+        try:
+            result = local_classifier_fn(payload)
+            if isinstance(result, GateVerdictResult) and result.verdict in {"PASS", "FAIL", "AMBIGUOUS"}:
+                return result
+        except Exception:
+            pass
+    return GateVerdictResult(verdict="AMBIGUOUS", confidence=0.0, escalate_to="PLANNER_VALIDATOR", escalation_reason="LOCAL_CLASSIFIER_UNAVAILABLE_OR_INVALID")
 
 
 CANONICAL_THREE_TIER_POLICIES: Dict[str, str] = {
@@ -707,13 +682,6 @@ def resolve_canonical_three_tier_models(
     - muse (`3_TIER_DIRECT`): 3 distinct lineage slots (`wonder-full`, `wonder`, `spark`) with
       highest version per slot and `contributor` aliases excluded.
     """
-    if registry_path is None:
-        for anc in Path(__file__).resolve().parents:
-            candidate_reg = anc / "config" / "orchestration" / "models.json"
-            if candidate_reg.is_file():
-                registry_path = candidate_reg
-                break
-
     registry_runtimes: Dict[str, Any] = {}
     if registry_path is not None and registry_path.is_file():
         try:
@@ -1313,24 +1281,6 @@ def build_vla_wfc_mpt_hub_spoke_map(
        `adversarial_triage`, `synthesizing_and_orchestrating`, `meta_evaluating`) seats.
     4. Bidirectional Knowledge-Vault Hub/Spoke and Skill pointers.
     """
-    repo_root = Path(__file__).resolve().parents[2]
-    for anc in Path(__file__).resolve().parents:
-        if (anc / "config" / "orchestration" / "models.json").is_file():
-            repo_root = anc
-            break
-    if registry_path is None:
-        cand = repo_root / "config" / "orchestration" / "models.json"
-        if cand.is_file():
-            registry_path = cand
-    if seat_tier_path is None:
-        cand = repo_root / "config" / "runtime-hooks" / "seat-model-tier.json"
-        if cand.is_file():
-            seat_tier_path = cand
-    if wfc_policy_path is None:
-        cand = repo_root / ".agents" / "skills" / "wfc" / "references" / "orchestration-policy.json"
-        if cand.is_file():
-            wfc_policy_path = cand
-
     registry_data: Dict[str, Any] = {}
     if registry_path is not None and registry_path.is_file():
         try:

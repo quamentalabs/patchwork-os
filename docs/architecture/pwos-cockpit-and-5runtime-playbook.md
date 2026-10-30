@@ -63,8 +63,8 @@ pytest -q
 ```bash
 python -X utf8 -B -c "
 from pathlib import Path
-from patchwork_os.setup_init import initialize_patchwork_workspace
-res = initialize_patchwork_workspace(Path('.'), compliance_regime='commercial_general')
+from patchwork_os.setup_init import apply_project_setup_and_rebrand
+res = apply_project_setup_and_rebrand(Path('.'), manual_kwargs={'compliance_regime': 'commercial_cloud'})
 print(res)
 "
 ```

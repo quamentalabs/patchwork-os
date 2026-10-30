@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "patchwork-os"
-version = "0.1.1"
+version = "0.2.0"
 description = "Local Python workflow and contract evaluation library with repository procedure references"
 readme = "README.md"
 license = { file = "LICENSE" }
@@ -19,6 +19,15 @@ classifiers = [
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
 ]
+
+[project.scripts]
+pwos = "patchwork_os.cli:main"
+
+[tool.setuptools]
+license-files = ["LICENSE", "THIRD_PARTY_NOTICES.md"]
+
+[tool.setuptools.package-data]
+patchwork_os = ["assets/*", "resources/**/*"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

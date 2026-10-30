@@ -78,8 +78,8 @@ meta_evaluator_agent: "muse-agent"
 - Synthesized hybrid design.
 ## 3. 3xPR Gate
 - [x] PR-1, PR-2, PR-3 verified.
-## 4. FRR (Failure & Regression Record)
-- Zero regressions recorded.
+## 4. FRR (Forward / Reverse / Roundtrip)
+- Forward: contract validation. Reverse: reject self-approval. Roundtrip: read back the result.
 """
     report = verify_task_contract_template(completed_md, require_completed=True)
     assert report["valid"] is True, report["reasons"]

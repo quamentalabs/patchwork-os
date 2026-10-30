@@ -6,13 +6,15 @@
 
 ## Local evaluation: install, use, remove
 
-Python 3.11 or newer is required. The pre-fix review snapshot recorded at 2026-10-28T04:02:20.304Z reports a 0.1.1 wheel with 21 entries and no console scripts, skill files, knowledge files or runtime dependencies. That observation belongs to the artifact inspected before these source corrections; it does not verify a rebuilt candidate. The distributor must rebuild, inspect and consume a new wheel after applying source changes. No new artifact hash or published release is asserted here. Repository resources remain separately reviewed materials; no new CLI or runtime dependency is added by this correction.
+Python 3.11 or newer is required. Version 0.2.0 includes the local pwos command, loopback cockpit, public resources and an explicitly configured process backend. The earlier 0.1.1 review snapshot does not establish acceptance of this version.
 
 Create an isolated virtual environment outside the checkout using `python -m venv .venv`. Using that environment's Python, install a locally reviewed wheel without an index or dependency resolution:
 
 ```text
-python -m pip install --no-index --no-deps /path/to/patchwork_os-0.1.1-py3-none-any.whl
+python -m pip install --no-index --no-deps /path/to/patchwork_os-0.2.0-py3-none-any.whl
 ```
+
+Initialize a nonsensitive directory with `pwos --root /path/to/workspace init`. Edit that workspace’s `.patchwork/config.json` to set the executable absolute path, argument array, delivery mode (`stdin` or `task_file`), and optional model and effort. Argument placeholders are `{model}`, `{effort}`, `{home}` and `{task_file}`. Use `doctor`, `run`, `status`, `collect`, and `close`; `serve` starts a loopback-only web cockpit. Interactive terminal mode is unavailable and is refused. Exit status and transcript do not establish native Edit, model observation, or review acceptance.
 
 The distributor needs a separately prepared build environment with setuptools>=68 to build the wheel. No build or installation command here represents company approval. Evaluate this Python example from a nonsensitive directory outside the repository:
 
