@@ -13,6 +13,7 @@ def main(argv=None):
     commands = parser.add_subparsers(dest='command', required=True)
     commands.add_parser('init')
     commands.add_parser('doctor')
+    commands.add_parser('attach-external')
     server = commands.add_parser('serve')
     server.add_argument('--port', type=int, default=8765)
     run = commands.add_parser('run')
@@ -43,6 +44,8 @@ def main(argv=None):
             backend = LocalRuntimeBackend(args.root)
             if args.command == 'doctor':
                 result = {name: backend.probe(name) for name in RUNTIMES}
+            elif args.command == 'attach-external':
+                result = backend.attach_external()
             elif args.command == 'run':
                 prompt = args.task_file.read_text(encoding='utf-8') if args.task_file else sys.stdin.read()
                 result = backend.launch(args.runtime, prompt, model=args.model, effort=args.effort, mode=args.mode, submission_id=args.submission_id)

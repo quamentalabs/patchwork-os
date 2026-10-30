@@ -44,7 +44,10 @@ def serve(root, port=8765):
                 if length < 1 or length > 1048576: raise ValueError('INVALID_BODY_SIZE')
                 body = json.loads(self.rfile.read(length))
                 if not isinstance(body,dict): raise ValueError('JSON_OBJECT_REQUIRED')
-                if self.path == '/api/run':
+                if self.path == '/api/attach-external':
+                    if body: raise ValueError('INVALID_FIELDS')
+                    result = backend.attach_external()
+                elif self.path == '/api/run':
                     allowed = {'runtime','prompt','model','effort','mode','submission_id'}
                     if set(body) - allowed: raise ValueError('UNKNOWN_FIELD')
                     result = backend.launch(**body)

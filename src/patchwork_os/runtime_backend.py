@@ -138,6 +138,10 @@ class LocalRuntimeBackend(RuntimeBackend):
             raise RuntimeErrorDetail("CONFIG_VERSION_UNSUPPORTED")
         return config
 
+    def attach_external(self) -> dict[str, Any]:
+        from .external_native import attach
+        return attach(self._config().get('external_collector'))
+
     def _runtime(self, runtime: str) -> dict[str, Any]:
         if runtime not in RUNTIMES:
             raise RuntimeErrorDetail("RUNTIME_UNSUPPORTED")
