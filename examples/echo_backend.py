@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: MIT
+# SPDX-License-Identifier: Apache-2.0
 """A local byte-preserving echo process; no network or vendor CLI is used."""
 import sys
 

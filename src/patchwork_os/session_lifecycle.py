@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: MIT
+# SPDX-License-Identifier: Apache-2.0
 """Generalized Session Lifecycle, Carry/Close Handover, Inter-Session Messenger & Backlog Ledger.
 
 Assimilates and generalizes Upstream-Agentic-OS's session continuity subsystems:

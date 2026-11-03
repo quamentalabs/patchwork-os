@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: MIT
+# SPDX-License-Identifier: Apache-2.0
 """Generalized Starter-Boost-Kit Persona-Agent Elicitation and Setup System for Patchwork-OS.
 
 Uses brainstorming skills (`pwos-grilling`, `pwos-quarry`, `pwos-deconstruct`, `pwos-crucible`)

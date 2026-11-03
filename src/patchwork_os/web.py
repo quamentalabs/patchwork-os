@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: MIT
+# SPDX-License-Identifier: Apache-2.0
 """Loopback-only cockpit, with origin and per-workspace token checks."""
 import json
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer

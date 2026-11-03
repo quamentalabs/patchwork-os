@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: MIT
+# SPDX-License-Identifier: Apache-2.0
 """Near-deterministic 3-tier evaluation ladder for Patchwork-OS."""
 
 from __future__ import annotations

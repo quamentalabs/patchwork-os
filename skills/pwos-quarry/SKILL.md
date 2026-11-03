@@ -7,7 +7,7 @@ tier: tier-1-epistemic-gate
 paradigms:
   - workflow
   - prompt-flow
-license: MIT
+license: Apache-2.0
 ---
 
 # Quarry Skeleton Procedure

@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: MIT
+# SPDX-License-Identifier: Apache-2.0
 """Bounded local review; no verdict grants native task completion."""
 import hashlib
 import json

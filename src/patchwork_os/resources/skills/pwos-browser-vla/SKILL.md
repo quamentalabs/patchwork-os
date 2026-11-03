@@ -9,7 +9,7 @@ paradigms:
   - graph-prompting
   - prompt-flow
   - meta-prompting
-license: MIT
+license: Apache-2.0
 ---
 
 # Hybrid Browser VLA and Visual Gate Skeleton Procedure

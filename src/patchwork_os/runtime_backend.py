@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: MIT
+# SPDX-License-Identifier: Apache-2.0
 """Explicitly configured, owned local processes. Process success is not agent approval."""
 from __future__ import annotations
 

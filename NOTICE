@@ -1,0 +1,10 @@
+Patchwork-OS
+Copyright 2026 quamentalabs
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+The files in .claude/helpers/ are licensed under the MIT License.
+.claude/helpers/graft-statusline.cjs contains portions derived from
+@nanonets/graft (https://github.com/trailhq/Trail-Code):
+  Copyright (c) 2026 Context Graph Engine contributors
+The MIT License text is reproduced in THIRD_PARTY_NOTICES.md.

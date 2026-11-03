@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: MIT
+# SPDX-License-Identifier: Apache-2.0
 """Runtime-Agnostic Starter-Kit Initialization, Rebranding & Skill-Prefix Engine.
 
 Because ``Patchwork-OS`` is a working title (codename) for the starter kit,

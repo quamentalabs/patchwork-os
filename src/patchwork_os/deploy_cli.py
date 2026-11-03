@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: MIT
+# SPDX-License-Identifier: Apache-2.0
 """Dispatch-plan and completion-contract utilities for Patchwork-OS.
 
 Plans describe runtime and child-result lease paths; they do not launch seats,

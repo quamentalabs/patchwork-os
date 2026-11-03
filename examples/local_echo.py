@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: MIT
+# SPDX-License-Identifier: Apache-2.0
 """Run the installed pwos CLI against a local Python echo process."""
 
 from __future__ import annotations

@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: MIT
+# SPDX-License-Identifier: Apache-2.0
 """Local command line entry point for explicitly configured processes."""
 import argparse
 import json

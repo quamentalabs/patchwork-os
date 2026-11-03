@@ -9,7 +9,7 @@ paradigms:
   - workflow
   - prompt-flow
   - meta-prompting
-license: MIT
+license: Apache-2.0
 ---
 
 # Progressive MCP-to-CLI Printing-Press Bridge Skeleton Procedure
