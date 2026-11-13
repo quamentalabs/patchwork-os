@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: Apache-2.0
+# SPDX-License-Identifier: MIT
 """Explicit external deploy2 collector attachment; authority remains with the collector."""
 import hashlib
 import json

@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: Apache-2.0
+# SPDX-License-Identifier: MIT
 """Generalized Instruction-Budget Guard, Hook Storm Deduplicator & Harness Contract Compiler.
 
 Provides deterministic helpers for instruction budgets, hook-event deduplication

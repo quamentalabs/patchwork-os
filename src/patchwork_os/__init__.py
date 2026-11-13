@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: Apache-2.0
+# SPDX-License-Identifier: MIT
 """Patchwork-OS: Host/Runtime-Agnostic Starter Kit, 3-Layer Config Loader, Compliance-Aware Inter-Runtime Dispatcher, Persona Setup, EARS Spec Gate & Near-Deterministic Ladder."""
 
 from .browser_vla import (
@@ -70,6 +70,22 @@ from .runtime_dispatch import (
     RUNTIME_HARNESS_CAPABILITIES,
     plan_inter_runtime_synthesis,
     resolve_extensible_compliance_routing,
+)
+from .runtime_hook_adapter import (
+    CANONICAL_AI_FAMILIES,
+    CANONICAL_DEV_ENV_SURFACES,
+    CANONICAL_RUNTIMES,
+    CANONICAL_TOOL_VOCABULARY_MAP,
+    EIGHT_CORE_HOOK_CONTRACTS,
+    GENERALIZED_REIMPLEMENTATION_BLUEPRINTS,
+    RUNTIME_HOOK_ADAPTER_MATRIX,
+    SKILL_BRIEF_CONFIG_DEFAULT,
+    VOYAGE_MAPS_CONFIG_DEFAULT,
+    evaluate_core_hook_gate,
+    format_hook_verdict,
+    normalize_runtime_id,
+    normalize_tool_category,
+    render_kiro_hook_files,
 )
 from .session_lifecycle import (
     build_session_checkpoint_and_handover,

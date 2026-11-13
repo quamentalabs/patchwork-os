@@ -8,7 +8,7 @@ paradigms:
   - workflow
   - meta-prompting
   - graph-prompting
-license: Apache-2.0
+license: MIT
 ---
 
 # Crucible Skeleton Procedure

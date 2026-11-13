@@ -8,7 +8,7 @@ paradigms:
   - workflow
   - graph-prompting
   - prompt-flow
-license: Apache-2.0
+license: MIT
 ---
 
 # Rea Skeleton Procedure
@@ -41,6 +41,10 @@ Run clean-room hygiene checks, pure-Markdown LLM-Wiki graph builds, hybrid statu
 ### Stage 4: Second-Generation Round-Trip Re-Export
 
 Re-export a second-generation `.bundle` and `.zip` from the reverse clone, clone again, and verify `HEAD`, `HEAD^{tree}`, and per-file SHA-256 invariance.
+
+### Stage 5: Runtime Spawn-Chain and Hook Schema Extraction
+
+Inspect CLI and IDE extension bundles (`acp-server.js`, `extension.js`, ASAR/VSIX archives) to verify `windowsHide:!0` / `CREATE_NO_WINDOW` on all child process spawners and extract native hook schemas (`runtime_hook_adapter.py`).
 
 ## Artifacts and Verification Gates
 

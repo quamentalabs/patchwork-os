@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: Apache-2.0
+# SPDX-License-Identifier: MIT
 """Local routing examples and inter-runtime planning; not a compliance service.
 
 Generalizes ``deploy-cli`` into ``runtime-dispatch`` (``pwos-runtime-dispatch``
@@ -72,7 +72,7 @@ RUNTIME_HARNESS_CAPABILITIES: Dict[str, Dict[str, Any]] = {
     },
     "aws_kiro": {
         "display_name": "AWS Kiro Spec-Driven Agent",
-        "supported_surfaces": ["cli", "ide"],
+        "supported_surfaces": ["cli", "ide", "ide_extension", "crew"],
         "supported_backends": [
             "aws_bedrock_commercial",
             "aws_bedrock_govcloud_itar",

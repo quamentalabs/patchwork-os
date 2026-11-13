@@ -9,7 +9,7 @@ paradigms:
   - workflow
   - graph-prompting
   - prompt-flow
-license: Apache-2.0
+license: MIT
 ---
 
 # Instruction Budget Guard and Adversarial Harness Audit Skeleton Procedure
@@ -42,6 +42,10 @@ Construct positive, negative, and boundary test cases that attempt to falsify th
 ### Stage 4: Canonical Harness Compilation and Verification
 
 Compile the target specification and adversarial cases via `compile_adversarial_harness_contract` and verify `target_id` integrity at Tier 0.
+
+### Stage 5: Eight-Hook Multi-Runtime Adapter and Kiro Exit-2 Gate Audit
+
+Verify the 8 core hooks (`stance-consistency`, `insights-reminder`, `context-route-contract`, `skill-auto-context-gate`, `voyage-map-home-guard`, `model-hardcoding-gate`, `fable-governance-gate`, `windowless-conhost-prevention-gate`) across `cc`, `codex`, `agy`, `muse`, and `kiro` (`exit 2 + stderr` on `PreToolUse` block).
 
 ## Artifacts and Verification Gates
 

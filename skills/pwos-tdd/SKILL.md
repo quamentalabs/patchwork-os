@@ -7,7 +7,7 @@ tier: tier-2-methodology-shim
 paradigms:
   - workflow
   - prompt-flow
-license: Apache-2.0
+license: MIT
 ---
 
 # Tdd Skeleton Procedure

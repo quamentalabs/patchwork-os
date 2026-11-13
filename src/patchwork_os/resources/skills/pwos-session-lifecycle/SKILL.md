@@ -9,7 +9,7 @@ paradigms:
   - prompt-flow
   - graph-prompting
   - meta-prompting
-license: Apache-2.0
+license: MIT
 ---
 
 # Session Lifecycle, Carry/Close, Messenger and Backlog Skeleton Procedure
@@ -46,6 +46,10 @@ Record any parked or deferred non-critical items via `register_backlog_obligatio
 ### Stage 5: Checkpoint and Handover Emission
 
 Generate the combined checkpoint and Markdown handover block via `build_session_checkpoint_and_handover`.
+
+### Stage 6: Converging-Voyage Two-Stage Guarded Landing
+
+Route voyage maps to `docs/voyage/` via `voyage-map-home-guard`, run `--dry-run` preflight before `--execute`, and update destination refs atomically by expected old OID with cryptographic lease self-healing.
 
 ## Artifacts and Verification Gates
 

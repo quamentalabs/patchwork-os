@@ -8,7 +8,7 @@ paradigms:
   - meta-prompting
   - graph-prompting
   - prompt-flow
-license: Apache-2.0
+license: MIT
 ---
 
 # Deconstruct Skeleton Procedure

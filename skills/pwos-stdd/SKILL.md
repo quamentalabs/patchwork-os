@@ -9,7 +9,7 @@ paradigms:
   - meta-prompting
   - graph-prompting
   - prompt-flow
-license: Apache-2.0
+license: MIT
 ---
 
 # Stdd Skeleton Procedure
@@ -51,6 +51,10 @@ Verify every implementation leg through [tdd](../pwos-tdd/SKILL.md) (hand-compos
 ### Stage 6: Consumer Loop Closure and Plan Sync
 
 Fold accepted review findings into the artifact, synchronize the atomic task store, and land verified changes via an isolated Git index.
+
+### Stage 7: Multi-Runtime Software Factory and Crew Parity
+
+Bind the 8 core governance hooks and tool vocabulary mappings (`runtime_hook_adapter.py`) across `cc`, `codex`, `agy`, `muse`, and `kiro` (`cli`, `ide_extension`, `desktop_app`, `crew`) so every Software Factory wave runs under identical guardrails.
 
 ## Artifacts and Verification Gates
 

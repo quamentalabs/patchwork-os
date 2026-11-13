@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: Apache-2.0
+# SPDX-License-Identifier: MIT
 """Check declared module and procedure presence for twelve architecture categories.
 
 The returned evidence concerns file presence only. It does not assess runtime

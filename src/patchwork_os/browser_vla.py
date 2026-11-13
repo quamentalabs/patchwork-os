@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: Apache-2.0
+# SPDX-License-Identifier: MIT
 """Generalized Hybrid Browser Control, VLA Receipt Verifier & Visual Width Gate.
 
 Assimilates and generalizes Upstream-Agentic-OS's ``hybrid-browser-control``,

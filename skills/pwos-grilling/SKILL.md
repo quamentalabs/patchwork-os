@@ -7,7 +7,7 @@ tier: tier-1-epistemic-gate
 paradigms:
   - workflow
   - meta-prompting
-license: Apache-2.0
+license: MIT
 ---
 
 # Grilling Skeleton Procedure

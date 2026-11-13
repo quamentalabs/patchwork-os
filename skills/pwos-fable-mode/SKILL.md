@@ -7,7 +7,7 @@ tier: tier-2-methodology-shim
 paradigms:
   - meta-prompting
   - prompt-flow
-license: Apache-2.0
+license: MIT
 ---
 
 # Fable Mode Skeleton Procedure

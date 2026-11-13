@@ -7,7 +7,7 @@ tier: tier-1-epistemic-gate
 paradigms:
   - workflow
   - prompt-flow
-license: Apache-2.0
+license: MIT
 ---
 
 # Quarry Skeleton Procedure
@@ -45,6 +45,10 @@ Append the operator's exact answer and updated frontier to the capture file on d
 ### Stage 5: Charge Handoff to Crucible
 
 Once all load-bearing requirements are extracted on disk, hash the capture and hand it off as the initial charge for [crucible](../pwos-crucible/SKILL.md).
+
+### Stage 6: Knowledge-Vault CMDS Progressive Disclosure Sync
+
+Persist distilled lessons and architecture decisions into the 3-layer plain-Markdown CMDS vault (`raw/`, `wiki/`, `rules/`) and verify turn-start AST-graph plus vault query-first compliance.
 
 ## Artifacts and Verification Gates
 

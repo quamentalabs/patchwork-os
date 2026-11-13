@@ -9,7 +9,7 @@ paradigms:
   - meta-prompting
   - graph-prompting
   - prompt-flow
-license: Apache-2.0
+license: MIT
 ---
 
 # Generalized Compliance-Aware Inter-Runtime Dispatch Skeleton Procedure

@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: Apache-2.0
+# SPDX-License-Identifier: MIT
 """Supervisor-owned PTY. No shell is inserted into the configured argv."""
 import os
 import subprocess

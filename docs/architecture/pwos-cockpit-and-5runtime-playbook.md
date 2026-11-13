@@ -39,7 +39,7 @@ flowchart TD
   DCLI --> HSG["hub_spoke_gate.py: Lease & 3-Tier"]
   INIT --> RDSP["runtime_dispatch.py: 5-Runtime"]
   RDSP --> CFG["config_loader.py: 4-Tier Config"]
-  INIT --> WIKI["llm_wiki.py: Obsidian-Free Wiki"]
+  INIT --> WIKI["llm_wiki.py: Pure-Markdown Wiki"]
   INIT --> BVLA["browser_vla.py: Headed VLA Gate"]
   INIT --> MCPP["mcp_printing_press.py: 3-Tier MCP"]
   INIT --> HARN["harness_audit.py: 4-Axis Audit"]
@@ -87,5 +87,13 @@ from patchwork_os.binder import validate_patchwork_satellite
 from patchwork_os.llm_wiki import audit_itar_and_obsidian_hygiene
 print('Satellite:', validate_patchwork_satellite(Path('.')))
 print('Hygiene:', audit_itar_and_obsidian_hygiene(Path('.')))
+"
+```
+
+### Step 5: Verify 5-Runtime 8-Hook Adapter & Software Factory Blueprints
+```bash
+python -X utf8 -B -c "
+from patchwork_os.runtime_hook_adapter import render_kiro_hook_files, GENERALIZED_REIMPLEMENTATION_BLUEPRINTS
+print('Kiro hooks:', len(render_kiro_hook_files()), 'Blueprints:', list(GENERALIZED_REIMPLEMENTATION_BLUEPRINTS))
 "
 ```
