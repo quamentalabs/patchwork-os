@@ -9,7 +9,7 @@ paradigms:
   - meta-prompting
   - graph-prompting
   - prompt-flow
-license: MIT
+license: Apache-2.0
 ---
 
 # Stdd Skeleton Procedure

@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: MIT
+# SPDX-License-Identifier: Apache-2.0
 """Local routing examples and inter-runtime planning; not a compliance service.
 
 Generalizes ``deploy-cli`` into ``runtime-dispatch`` (``pwos-runtime-dispatch``

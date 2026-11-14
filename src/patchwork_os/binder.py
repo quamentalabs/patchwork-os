@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: MIT
+# SPDX-License-Identifier: Apache-2.0
 """Host- and runtime-agnostic 3-layer CMDS knowledge validator and hub-spoke binder."""
 
 from __future__ import annotations

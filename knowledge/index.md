@@ -7,7 +7,7 @@ updated: 2026-10-27
 
 # Patchwork-OS Repository Knowledge Hub
 
-- **Project license declaration**: MIT ([`../LICENSE`](../LICENSE)); [`../THIRD_PARTY_NOTICES.md`](../THIRD_PARTY_NOTICES.md) records attribution, not verified upstream clearance or company approval.
+- **Project license**: Apache-2.0 ([`../LICENSE`](../LICENSE), [`../NOTICE`](../NOTICE)); [`../THIRD_PARTY_NOTICES.md`](../THIRD_PARTY_NOTICES.md) records the design references and their licenses as observed on 2026-11-03. It is not company approval.
 
 This hub routes agents across the 3-layer CMDS knowledge architecture using lazy pointer hydration (`Leonxlnx/unlazy` pattern). Read this index first and hydrate individual spokes only on demand.
 

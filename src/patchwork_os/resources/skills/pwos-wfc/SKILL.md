@@ -9,7 +9,7 @@ paradigms:
   - meta-prompting
   - graph-prompting
   - prompt-flow
-license: MIT
+license: Apache-2.0
 ---
 
 # Wfc Skeleton Procedure
@@ -37,7 +37,7 @@ Wire inter-wave dependencies so each wave consumes the verified outputs of the p
 
 ### Stage 3: Meta-Prompt Template Provisioning
 
-Render pre-bound [fable-mode](../pwos-fable-mode/SKILL.md) `FULL` templates (`task_<seat_id>_<persona>.md`) with session `lease_token` and `preimage_sha256`.
+Render pre-bound [pwos-fable-mode](../pwos-fable-mode/SKILL.md) `FULL` templates (`task_<seat_id>_<persona>.md`) with session `lease_token` and `preimage_sha256`.
 
 ### Stage 4: Inter-CLI Seat Dispatch
 

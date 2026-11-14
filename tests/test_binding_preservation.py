@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: MIT
+# SPDX-License-Identifier: Apache-2.0
 """Regression contracts for PWOS-PRESERVE-001; exercise real fixture bytes."""
 
 from __future__ import annotations

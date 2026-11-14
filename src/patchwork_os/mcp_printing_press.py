@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: MIT
+# SPDX-License-Identifier: Apache-2.0
 """Generalized 3-Tier Progressive MCP-to-CLI Printing-Press Bridge.
 
 Assimilates and generalizes Upstream-Agentic-OS's ``mcp_cli_printing_press.py`` and

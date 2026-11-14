@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: MIT
+# SPDX-License-Identifier: Apache-2.0
 """Tier-0 Validator and Registry for Patchwork-OS Generalized Skill Skeleton Procedures."""
 from __future__ import annotations
 

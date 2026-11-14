@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: MIT
+# SPDX-License-Identifier: Apache-2.0
 """Host/Runtime-Agnostic 5-Role Hub-Spoke Binder, EARS Spec Validator, and Zero-Thinking Gate Router.
 
 Synthesizes the atomic mechanisms from the Spec-Driven IDE vs Agentic CLI comparative architecture

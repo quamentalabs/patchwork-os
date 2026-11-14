@@ -1,4 +1,3 @@
-# SPDX-License-Identifier: MIT
 """Multi-Runtime, Multi-Dev-Env & Multi-AI-Family Agnostic Hook/Lint Adapter and Software Factory Blueprints.
 
 Provides:

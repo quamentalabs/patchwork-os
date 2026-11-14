@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: MIT
+# SPDX-License-Identifier: Apache-2.0
 """Canonical 3-Layer Configuration Precedence Engine for Patchwork-OS CLI Tools.
 
 Enforces the extensible 3-Layer Configuration Contract across every CLI script:

@@ -7,7 +7,7 @@ tier: tier-2-methodology-shim
 paradigms:
   - workflow
   - prompt-flow
-license: MIT
+license: Apache-2.0
 ---
 
 # Systematic Debugging Skeleton Procedure

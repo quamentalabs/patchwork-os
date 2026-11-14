@@ -8,7 +8,7 @@ paradigms:
   - meta-prompting
   - graph-prompting
   - prompt-flow
-license: MIT
+license: Apache-2.0
 ---
 
 # Deconstruct Skeleton Procedure
@@ -62,4 +62,4 @@ Evaluate at least three independent candidate approaches (plus genuine hybrids w
 ## Hard Boundaries
 
 - Never claim a universal no-tradeoff outcome that hides operational friction.
-- Escalate to [fable-mode](../pwos-fable-mode/SKILL.md) when transitioning from recommendation to artifact mutation.
+- Escalate to [pwos-fable-mode](../pwos-fable-mode/SKILL.md) when transitioning from recommendation to artifact mutation.

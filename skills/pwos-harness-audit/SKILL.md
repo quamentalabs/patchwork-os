@@ -9,7 +9,7 @@ paradigms:
   - workflow
   - graph-prompting
   - prompt-flow
-license: MIT
+license: Apache-2.0
 ---
 
 # Instruction Budget Guard and Adversarial Harness Audit Skeleton Procedure

@@ -9,7 +9,7 @@ paradigms:
   - prompt-flow
   - graph-prompting
   - meta-prompting
-license: MIT
+license: Apache-2.0
 ---
 
 # Session Lifecycle, Carry/Close, Messenger and Backlog Skeleton Procedure

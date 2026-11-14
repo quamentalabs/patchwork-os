@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: MIT
+# SPDX-License-Identifier: Apache-2.0
 """Patchwork-OS: Host/Runtime-Agnostic Starter Kit, 3-Layer Config Loader, Compliance-Aware Inter-Runtime Dispatcher, Persona Setup, EARS Spec Gate & Near-Deterministic Ladder."""
 
 from .browser_vla import (

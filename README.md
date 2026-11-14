@@ -1,6 +1,6 @@
 # Patchwork-OS (preview)
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![License: Apache-2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 
 **Patchwork-OS** is a local Python workflow library and CLI. The `pwos` command initializes a workspace, launches an explicitly configured process, collects its transcript, and closes the run. An optional loopback web cockpit displays local runs. The package also contains workflow contracts and reference procedures.
 
@@ -119,8 +119,9 @@ This table preserves design references and intended counterpart coverage. Upstre
 
 ## 3. Repository Layout
 
-- [`LICENSE`](LICENSE) — Standard **MIT License** (`SPDX-License-Identifier: MIT`)
-- [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) — Attribution records requiring separate provenance review
+- [`LICENSE`](LICENSE) — **Apache License 2.0** (`SPDX-License-Identifier: Apache-2.0`)
+- [`NOTICE`](NOTICE) — Apache-2.0 attribution notice
+- [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) — Design references, their observed licenses, and the included MIT helper code
 - [`pyproject.toml`](pyproject.toml) — Package version, Python requirement and license-file reference
 - `docs/architecture/patchwork-os-blueprint.md` — Full architectural blueprint
 - `knowledge/` — CMDS 3-layer knowledge hub (`index.md`, `raw/`, `wiki/`, `rules/`)
@@ -130,7 +131,7 @@ This table preserves design references and intended counterpart coverage. Upstre
 
 ## 4. License
 
-The project declares the MIT License in [`LICENSE`](LICENSE) and its package metadata. [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) preserves attribution records. This declaration does not establish upstream provenance, company approval or export-control clearance.
+The project is licensed under the Apache License 2.0 ([`LICENSE`](LICENSE)), with attribution in [`NOTICE`](NOTICE). Commits made before this change carry the MIT License. The helpers in `.claude/helpers/` stay under the MIT License. [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) lists the design references and the included third-party code. This declaration does not establish upstream provenance, company approval or export-control clearance.
 
 ## Generalized Skill Skeleton Procedures (`skills/pwos-*`)
 

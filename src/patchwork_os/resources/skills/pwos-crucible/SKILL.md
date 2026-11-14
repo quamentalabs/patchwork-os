@@ -8,7 +8,7 @@ paradigms:
   - workflow
   - meta-prompting
   - graph-prompting
-license: MIT
+license: Apache-2.0
 ---
 
 # Crucible Skeleton Procedure
@@ -45,7 +45,7 @@ Deduplicate surviving findings, check whether any finding falsifies the root pre
 
 ### Stage 5: Terminal Disposition
 
-Classify the round as `fused` (ready for [fable-mode](../pwos-fable-mode/SKILL.md)), `molten` (continue melting), `stalled` (budget exhausted with named molten regions), or `cracked` (re-cast from root).
+Classify the round as `fused` (ready for [pwos-fable-mode](../pwos-fable-mode/SKILL.md)), `molten` (continue melting), `stalled` (budget exhausted with named molten regions), or `cracked` (re-cast from root).
 
 ## Artifacts and Verification Gates
 

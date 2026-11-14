@@ -2,7 +2,7 @@
 title: Patchwork-OS Canonical Skill Skeleton Procedures
 layer: skills
 namespace_prefix: pwos-
-license: MIT
+license: Apache-2.0
 ---
 
 # Patchwork-OS Canonical Skill Skeleton Procedures (skills/pwos-*)
