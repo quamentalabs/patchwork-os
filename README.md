@@ -146,7 +146,7 @@ The project is licensed under the Apache License 2.0 ([`LICENSE`](LICENSE)), wit
 
 ## Generalized Skill Skeleton Procedures (`skills/pwos-*`)
 
-The repository contains 19 Markdown procedure skeletons under the `pwos-*` namespace. [`skills/INDEX.md`](skills/INDEX.md) is the canonical complete inventory; `patchwork_os.skills_registry.resolve_skill_id` resolves aliases. The package declares copies under `patchwork_os/resources/skills/`; the quickstart reads their packaged index. These resources are not registered automatically as vendor-native skills. Procedure descriptions are design/runbook instructions, not proof that a launcher, hook or integration is implemented. Selected existing pointers are retained below; use the index for all 19:
+The repository contains 40 Markdown procedure skeletons under the `pwos-*` namespace. [`skills/INDEX.md`](skills/INDEX.md) is the canonical complete inventory; `patchwork_os.skills_registry.resolve_skill_id` resolves aliases. The package declares copies under `patchwork_os/resources/skills/`; the quickstart reads their packaged index. These resources are not registered automatically as vendor-native skills. Procedure descriptions are design/runbook instructions, not proof that a launcher, hook or integration is implemented. Selected existing pointers are retained below; use the index for all 40:
 
 - [`skills/pwos-terminal-messaging/SKILL.md`](skills/pwos-terminal-messaging/SKILL.md) - Route by observed terminal backend, type a pointer line once, accept only the recipient's own acknowledgement
 - [`skills/pwos-grilling/SKILL.md`](skills/pwos-grilling/SKILL.md) - Relentless one-question-at-a-time decision-tree interview
@@ -159,3 +159,27 @@ The repository contains 19 Markdown procedure skeletons under the `pwos-*` names
 - [`skills/pwos-fable-mode/SKILL.md`](skills/pwos-fable-mode/SKILL.md) - 6-gate `3xPR + FRR + KK/KU/UK/UU + no-tradeoff` execution wrapper
 - [`skills/pwos-wfc/SKILL.md`](skills/pwos-wfc/SKILL.md) - 5-wave `MPT:N` Multi-Persona Triage DAG orchestration
 - [`skills/pwos-rea/SKILL.md`](skills/pwos-rea/SKILL.md) - 4-stage Forward-Reverse-Roundtrip (`FRR`) reverse-engineering verification
+
+
+## Portable Knowledge and Agent Procedures
+
+The [portable infrastructure architecture](docs/architecture/portable-agent-infrastructure.md)
+and its [skill catalog](skills/INDEX.md) describe a generic LLM-wiki with
+separate raw sources, curated knowledge, and rules. Deterministic navigation,
+scoped turn-start retrieval, bounded automatic memory injection, and next-use
+learning checks are specified as procedures and schema sketches for independent
+implementation. No external wiki application or MCP server is required by this
+profile; existing optional integration skills remain available.
+
+The [memory hub](skills/pwos-memory-hub/SKILL.md),
+[experience loop](skills/pwos-experience-loop/SKILL.md), and
+[role catalog](skills/pwos-role-catalog/SKILL.md) link evidence, decisions,
+procedures and reusable roles through a common hub and task-specific spokes.
+The new procedures also cover code graphs, artifact inspection, delivery,
+branch convergence, browser observation, local sensors, and development phases.
+These documents do not install a memory service or prove native runtime support.
+
+The three-layer knowledge model takes conceptual inspiration from
+[cmds-llm-wiki](https://github.com/johnfkoo951/cmds-llm-wiki); its code,
+configuration and wiki content are not included here. See
+[design references and their observed license status](THIRD_PARTY_NOTICES.md).

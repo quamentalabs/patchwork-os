@@ -7,7 +7,7 @@ license: Apache-2.0
 
 # Patchwork-OS Canonical Skill Skeleton Procedures (skills/pwos-*)
 
-This directory contains the 19 generalized, host-agnostic, runtime-agnostic Markdown skeleton procedures (SKILL.md) under the default pwos-* namespace (which can be dynamically re-prefixed to `<custom-prefix>-*` or unprefixed during [pwos-setup](pwos-setup/SKILL.md)). Each procedure governs agnostic initialization/rebranding, epistemic inquiry, requirement extraction, starter-boost-kit persona setup, adversarial design smelting, root-cause debugging, empirical TDD/STDD build order, MPT:N orchestration, compliance-aware inter-runtime dispatch, session continuity, progressive MCP-to-CLI bridging, browser VLA verification, instruction-budget harness auditing, and 4-stage FRR reverse engineering.
+This directory contains the 40 generalized, host-agnostic, runtime-agnostic Markdown skeleton procedures (SKILL.md) under the default pwos-* namespace (which can be dynamically re-prefixed to `<custom-prefix>-*` or unprefixed during [pwos-setup](pwos-setup/SKILL.md)). Each procedure governs agnostic initialization/rebranding, epistemic inquiry, requirement extraction, starter-boost-kit persona setup, adversarial design smelting, root-cause debugging, empirical TDD/STDD build order, MPT:N orchestration, compliance-aware inter-runtime dispatch, session continuity, progressive MCP-to-CLI bridging, browser VLA verification, instruction-budget harness auditing, and 4-stage FRR reverse engineering.
 
 | Canonical Skill ID | Short Alias | Tier | Category | Canonical Skeleton Procedure |
 | :--- | :--- | :--- | :--- | :--- |
@@ -30,6 +30,35 @@ This directory contains the 19 generalized, host-agnostic, runtime-agnostic Mark
 | pwos-browser-vla | browser-vla | tier-1-visual-gate | browser-vla-and-visual-verification | [pwos-browser-vla/SKILL.md](pwos-browser-vla/SKILL.md) |
 | pwos-harness-audit | harness-audit | tier-0-deterministic-gate | governance-and-harness-verification | [pwos-harness-audit/SKILL.md](pwos-harness-audit/SKILL.md) |
 | pwos-rea | rea | tier-2-methodology-shim | reverse-engineering-and-roundtrip | [pwos-rea/SKILL.md](pwos-rea/SKILL.md) |
+
+| pwos-artifact-forensics | artifact-forensics | tier-2-methodology-shim | reverse-engineering-and-roundtrip | [pwos-artifact-forensics/SKILL.md](pwos-artifact-forensics/SKILL.md) |
+| pwos-branch-convergence | branch-convergence | tier-2-methodology-shim | branch-convergence | [pwos-branch-convergence/SKILL.md](pwos-branch-convergence/SKILL.md) |
+| pwos-browser-bridge | browser-bridge | tier-2-methodology-shim | browser-driving | [pwos-browser-bridge/SKILL.md](pwos-browser-bridge/SKILL.md) |
+| pwos-change-review | change-review | tier-2-methodology-shim | review-and-verification | [pwos-change-review/SKILL.md](pwos-change-review/SKILL.md) |
+| pwos-code-atlas | code-atlas | tier-2-methodology-shim | code-intelligence | [pwos-code-atlas/SKILL.md](pwos-code-atlas/SKILL.md) |
+| pwos-completion-check | completion-check | tier-2-methodology-shim | review-and-verification | [pwos-completion-check/SKILL.md](pwos-completion-check/SKILL.md) |
+| pwos-delivery-line | delivery-line | tier-2-methodology-shim | delivery-and-gates | [pwos-delivery-line/SKILL.md](pwos-delivery-line/SKILL.md) |
+| pwos-design-dialogue | design-dialogue | tier-2-methodology-shim | planning-and-convergence | [pwos-design-dialogue/SKILL.md](pwos-design-dialogue/SKILL.md) |
+| pwos-evidence-ledger | evidence-ledger | tier-2-methodology-shim | evidence-and-records | [pwos-evidence-ledger/SKILL.md](pwos-evidence-ledger/SKILL.md) |
+| pwos-experience-loop | experience-loop | tier-2-methodology-shim | learning-and-retirement | [pwos-experience-loop/SKILL.md](pwos-experience-loop/SKILL.md) |
+| pwos-local-sensor | local-sensor | tier-2-methodology-shim | sensing-and-steering | [pwos-local-sensor/SKILL.md](pwos-local-sensor/SKILL.md) |
+| pwos-memory-hub | memory-hub | tier-2-methodology-shim | memory-and-records | [pwos-memory-hub/SKILL.md](pwos-memory-hub/SKILL.md) |
+| pwos-parallel-work | parallel-work | tier-2-methodology-shim | routing-and-orchestration | [pwos-parallel-work/SKILL.md](pwos-parallel-work/SKILL.md) |
+| pwos-plan-authoring | plan-authoring | tier-2-methodology-shim | planning-and-convergence | [pwos-plan-authoring/SKILL.md](pwos-plan-authoring/SKILL.md) |
+| pwos-plan-convergence | plan-convergence | tier-2-methodology-shim | planning-and-convergence | [pwos-plan-convergence/SKILL.md](pwos-plan-convergence/SKILL.md) |
+| pwos-plan-execution | plan-execution | tier-2-methodology-shim | planning-and-convergence | [pwos-plan-execution/SKILL.md](pwos-plan-execution/SKILL.md) |
+| pwos-role-catalog | role-catalog | tier-2-methodology-shim | roles-and-identity | [pwos-role-catalog/SKILL.md](pwos-role-catalog/SKILL.md) |
+| pwos-runtime-ports | runtime-ports | tier-2-methodology-shim | runtime-and-ports | [pwos-runtime-ports/SKILL.md](pwos-runtime-ports/SKILL.md) |
+| pwos-session-ownership | session-ownership | tier-2-methodology-shim | sessions-and-leases | [pwos-session-ownership/SKILL.md](pwos-session-ownership/SKILL.md) |
+| pwos-skill-authoring | skill-authoring | tier-2-methodology-shim | skills-and-packages | [pwos-skill-authoring/SKILL.md](pwos-skill-authoring/SKILL.md) |
+| pwos-workflow-router | workflow-router | tier-2-methodology-shim | routing-and-orchestration | [pwos-workflow-router/SKILL.md](pwos-workflow-router/SKILL.md) |
+
+## Portable Infrastructure Profile
+
+[Architecture and capability map](../docs/architecture/portable-agent-infrastructure.md)
+provides a generic LLM-wiki, deterministic navigation, and automatic memory
+injection design without an external wiki application or mandatory MCP server.
+These are procedures and schema sketches for independent implementations.
 
 ## End-to-End Cognitive Pipeline Flow
 
