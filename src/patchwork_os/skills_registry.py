@@ -24,6 +24,7 @@ REQUIRED_CORE_SKILLS: tuple[str, ...] = (
     "pwos-runtime-dispatch",
     "pwos-deploy-cli",
     "pwos-session-lifecycle",
+    "pwos-terminal-messaging",
     "pwos-mcp-bridge",
     "pwos-browser-vla",
     "pwos-harness-audit",

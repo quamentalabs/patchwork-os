@@ -44,7 +44,7 @@ flowchart TD
   INIT --> MCPP["mcp_printing_press.py: 3-Tier MCP"]
   INIT --> HARN["harness_audit.py: 4-Axis Audit"]
   INIT --> SESS["session_lifecycle.py: Checkpoints"]
-  INIT --> SKIL["skills_registry.py: 18 Skills"]
+  INIT --> SKIL["skills_registry.py: 19 Skills"]
 ```
 
 ---

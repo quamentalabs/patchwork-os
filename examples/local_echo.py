@@ -44,7 +44,7 @@ def main() -> int:
     index = skill_root.joinpath("INDEX.md").read_bytes()
     skill_count = sum(item.is_dir() and item.joinpath("SKILL.md").is_file()
                       for item in skill_root.iterdir())
-    require(skill_count == 18, "Expected all 18 packaged procedure resources.")
+    require(skill_count == 19, "Expected all 19 packaged procedure resources.")
 
     workspace.mkdir(parents=True)
     operations: list[str] = []

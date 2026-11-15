@@ -1438,6 +1438,7 @@ def build_vla_wfc_mpt_hub_spoke_map(
                 "skills/pwos-stdd/SKILL.md",
                 "skills/pwos-systematic-debugging/SKILL.md",
                 "skills/pwos-tdd/SKILL.md",
+                "skills/pwos-terminal-messaging/SKILL.md",
                 "skills/pwos-wfc/SKILL.md",
             ],
             "governing_skills": [

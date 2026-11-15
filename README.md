@@ -52,6 +52,16 @@ pwos --root /path/to/workspace serve
 
 Vendor CLIs must be installed, authenticated and configured separately. The `cc`, `codex`, `agy` and `muse` labels do not establish successful native integration. A process exit or transcript does not prove native Edit, observed model/effort or independent review; the local echo run keeps native and review acceptance at `not_run`. [External native result attachment](docs/external-native.md) documents the optional, explicitly configured collector boundary. The package does not supply that external collector or establish its evidence by itself.
 
+## Terminal messaging between live sessions
+
+`patchwork_os.terminal_messaging` hands another live terminal session one pointer line and counts the message as delivered only when the recipient's own transcript records the exact acknowledgement. [docs/terminal-messaging.md](docs/terminal-messaging.md) describes the protocol, the backend matrix and the setup for a terminal that runs inside an editor.
+
+~~~text
+python examples/terminal_messaging_local.py --workspace ../patchwork-messaging-demo
+~~~
+
+The [example](examples/terminal_messaging_local.py) starts a plain local child process and exercises the `owned-pipe` backend only. Multiplexer, pseudo terminal, Windows console and editor routes are interfaces marked `not_run`; no vendor runtime or editor terminal is started or claimed.
+
 ## Python planning API
 
 This separate example returns a nonexecuting plan dictionary:
@@ -124,6 +134,7 @@ This table preserves design references and intended counterpart coverage. Upstre
 - [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) — Design references, their observed licenses, and the included MIT helper code
 - [`pyproject.toml`](pyproject.toml) — Package version, Python requirement and license-file reference
 - `docs/architecture/patchwork-os-blueprint.md` — Full architectural blueprint
+- [`docs/terminal-messaging.md`](docs/terminal-messaging.md) — Cross-terminal messaging protocol and its measured limits
 - `knowledge/` — CMDS 3-layer knowledge hub (`index.md`, `raw/`, `wiki/`, `rules/`)
 - `src/patchwork_os/` — Python configuration, binding, contract and dispatch-planning APIs; external runtime effects need separate evidence
 - `.claude/` — Empty local-evaluation defaults, inactive opt-in settings example, and preserved optional helpers (`statusline.js`, `patchwork-statusline-hybrid.cjs`, `graft-statusline.cjs`)
@@ -135,8 +146,9 @@ The project is licensed under the Apache License 2.0 ([`LICENSE`](LICENSE)), wit
 
 ## Generalized Skill Skeleton Procedures (`skills/pwos-*`)
 
-The repository contains 18 Markdown procedure skeletons under the `pwos-*` namespace. [`skills/INDEX.md`](skills/INDEX.md) is the canonical complete inventory; `patchwork_os.skills_registry.resolve_skill_id` resolves aliases. The package declares copies under `patchwork_os/resources/skills/`; the quickstart reads their packaged index. These resources are not registered automatically as vendor-native skills. Procedure descriptions are design/runbook instructions, not proof that a launcher, hook or integration is implemented. Selected existing pointers are retained below; use the index for all 18:
+The repository contains 19 Markdown procedure skeletons under the `pwos-*` namespace. [`skills/INDEX.md`](skills/INDEX.md) is the canonical complete inventory; `patchwork_os.skills_registry.resolve_skill_id` resolves aliases. The package declares copies under `patchwork_os/resources/skills/`; the quickstart reads their packaged index. These resources are not registered automatically as vendor-native skills. Procedure descriptions are design/runbook instructions, not proof that a launcher, hook or integration is implemented. Selected existing pointers are retained below; use the index for all 19:
 
+- [`skills/pwos-terminal-messaging/SKILL.md`](skills/pwos-terminal-messaging/SKILL.md) - Route by observed terminal backend, type a pointer line once, accept only the recipient's own acknowledgement
 - [`skills/pwos-grilling/SKILL.md`](skills/pwos-grilling/SKILL.md) - Relentless one-question-at-a-time decision-tree interview
 - [`skills/pwos-quarry/SKILL.md`](skills/pwos-quarry/SKILL.md) - Durable write-before-next-question requirement extraction
 - [`skills/pwos-deconstruct/SKILL.md`](skills/pwos-deconstruct/SKILL.md) - 7-stage `KK/KU/UK/UU` + `FRR` epistemic deconstruction and option scoring

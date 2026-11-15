@@ -25,4 +25,5 @@ flowchart TD
 - **Raw Layer (Immutable Source Manifest)**: [raw/source-manifest.md](raw/source-manifest.md)
 - **Wiki Layer (5-Pillar Hybrid Synthesis)**: [wiki/patchwork-os-architecture.md](wiki/patchwork-os-architecture.md)
 - **Rules Layer (Deterministic Contracts & Hygiene Gates)**: [rules/patchwork-os-contract.md](rules/patchwork-os-contract.md)
-- [skills/INDEX.md](../skills/INDEX.md) — Canonical inventory of the 18 procedure skeletons present in this repository; Markdown resources are not included in the observed wheel.
+- [skills/INDEX.md](../skills/INDEX.md) — Canonical inventory of the 19 procedure skeletons present in this repository; Markdown resources are not included in the observed wheel.
+- [docs/terminal-messaging.md](../docs/terminal-messaging.md) — Cross-terminal messaging protocol, its backend matrix and what has not been measured.
