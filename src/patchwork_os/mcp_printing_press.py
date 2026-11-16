@@ -1,8 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 """Generalized 3-Tier Progressive MCP-to-CLI Printing-Press Bridge.
 
-Assimilates and generalizes Upstream-Agentic-OS's ``mcp_cli_printing_press.py`` and
-``Hermes-Agent`` 3-tier progressive disclosure pattern:
+Three-tier MCP tool discovery and controlled execution:
 1. **Tier 0 (`list-tools`)**: Compact ~20-token/tool index without dumping
    10,000-token JSON schemas into theHop-0 context window.
 2. **Tier 1 (`describe-tool`)**: On-demand input/output schema hydration for a

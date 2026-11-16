@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 """Generalized Session Lifecycle, Carry/Close Handover, Inter-Session Messenger & Backlog Ledger.
 
-Assimilates and generalizes Upstream-Agentic-OS's session continuity subsystems:
+Session continuity helpers:
 1. ``build_session_checkpoint_and_handover`` (generalized from ``session-close`` & ``session-carry``):
    Produces both a deterministic machine checkpoint JSON and a human-readable
    Markdown handover block that survives context compaction.

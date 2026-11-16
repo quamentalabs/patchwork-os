@@ -16,7 +16,7 @@ license: Apache-2.0
 
 ## Overview
 
-Generalizes Upstream-Agentic-OS's `mcp_cli_printing_press.py` and Hermes-Agent 3-tier progressive disclosure into `mcp_printing_press.py`. Replaces memory-heavy persistent MCP daemons and 10,000-token startup schema dumps with on-demand Tier-0/1/2 CLI discovery and deterministic mutation gating.
+Provides tiered MCP tool discovery and controlled execution in `mcp_printing_press.py`. Replaces memory-heavy persistent MCP daemons and 10,000-token startup schema dumps with on-demand Tier-0/1/2 CLI discovery and deterministic mutation gating.
 
 ## Invariants
 

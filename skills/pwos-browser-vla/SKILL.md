@@ -16,7 +16,7 @@ license: Apache-2.0
 
 ## Overview
 
-Generalizes Upstream-Agentic-OS's `hybrid-browser-control`, `exec-pw-cli`, and `closed_feedback_visual_gate.py` into `browser_vla.py`. Enforces closed-loop visual + DOM verification (`vision_before_digest -> browser action -> dom_after_digest + vision_after_digest`) for web data extraction and UI validation, alongside the `<= 79` character Mermaid terminal width gate.
+Provides browser verification helpers in `browser_vla.py`. Enforces closed-loop visual + DOM verification (`vision_before_digest -> browser action -> dom_after_digest + vision_after_digest`) for web data extraction and UI validation, alongside the `<= 79` character Mermaid terminal width gate.
 
 ## Invariants
 

@@ -16,7 +16,7 @@ license: Apache-2.0
 
 ## Overview
 
-Generalizes Upstream-Agentic-OS's session continuity quartet (`session-close`, `session-carry`, `session-messenger`, and `backlog-task`) into `session_lifecycle.py`. Ensures that active plans, lease boundaries, cross-session messages, and deferred obligations survive context compaction and multi-session handoffs without silent drops.
+Provides session continuity helpers in `session_lifecycle.py`. Ensures that active plans, lease boundaries, cross-session messages, and deferred obligations survive context compaction and multi-session handoffs without silent drops.
 
 ## Invariants
 

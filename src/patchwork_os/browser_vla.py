@@ -1,8 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 """Generalized Hybrid Browser Control, VLA Receipt Verifier & Visual Width Gate.
 
-Assimilates and generalizes Upstream-Agentic-OS's ``hybrid-browser-control``,
-``exec-pw-cli``, and ``closed_feedback_visual_gate.py``:
+Browser verification and diagram-width helpers:
 1. ``verify_vla_capture_receipt``:
    Verifies that a browser VLA roundtrip includes pre-action and post-action
    visual digests (`vision_before_digest != vision_after_digest`), DOM digest,
