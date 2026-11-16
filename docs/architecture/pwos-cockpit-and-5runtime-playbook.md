@@ -39,7 +39,7 @@ flowchart TD
   DCLI --> HSG["hub_spoke_gate.py: Lease & 3-Tier"]
   INIT --> RDSP["runtime_dispatch.py: 5-Runtime"]
   RDSP --> CFG["config_loader.py: 4-Tier Config"]
-  INIT --> WIKI["llm_wiki.py: Obsidian-Free Wiki"]
+  INIT --> WIKI["llm_wiki.py: Plain Markdown Wiki"]
   INIT --> BVLA["browser_vla.py: Headed VLA Gate"]
   INIT --> MCPP["mcp_printing_press.py: 3-Tier MCP"]
   INIT --> HARN["harness_audit.py: 4-Axis Audit"]
