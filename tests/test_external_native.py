@@ -7,6 +7,28 @@ from pathlib import Path
 import pytest
 from patchwork_os.runtime_backend import LocalRuntimeBackend, RuntimeErrorDetail, initialize_workspace
 
+# A virtual environment's interpreter is usually a symbolic link, which the collector binding refuses.
+# Fixtures therefore bind the canonical interpreter file, as a consumer configuration must.
+PYTHON = str(Path(sys.executable).resolve())
+
+
+def _pin(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def test_external_collector_refuses_linked_interpreter(tmp_path):
+    from patchwork_os.external_native import attach
+    source = tmp_path / 'collector.py'
+    source.write_text('print("{}")\n')
+    linked = tmp_path / 'linked-python'
+    try:
+        linked.symlink_to(PYTHON)
+    except (OSError, NotImplementedError) as exc:
+        pytest.skip(f'native symlink fixture unavailable: {exc}')
+    config = {'argv': [str(linked), str(source)], 'cwd': str(tmp_path), 'source_pins': {str(linked): _pin(PYTHON), str(source): _pin(source)}}
+    with pytest.raises(RuntimeErrorDetail, match='EXTERNAL_LINK_REFUSED'):
+        attach(config)
+
 
 def test_external_collector_roundtrip_and_refusals(tmp_path):
     root = tmp_path / 'workspace'
@@ -24,7 +46,7 @@ def test_external_collector_roundtrip_and_refusals(tmp_path):
     script = tmp_path / 'collector.py'
     script.write_text('import pathlib,sys\nprint(pathlib.Path(sys.argv[1]).read_text())\n')
     cfg = json.loads((root / '.patchwork/config.json').read_text())
-    cfg['external_collector'] = {'argv': [sys.executable, str(script), str(fixture)], 'cwd': str(tmp_path), 'source_pins': {sys.executable: hashlib.sha256(Path(sys.executable).read_bytes()).hexdigest(), str(script): hashlib.sha256(script.read_bytes()).hexdigest()}, 'artifact_root': str(tmp_path), 'answer_path': 'answer.md', 'run_id': 'example-run', 'owner_session': 'example-owner', 'runtime': 'muse', 'model': 'example-model'}
+    cfg['external_collector'] = {'argv': [PYTHON, str(script), str(fixture)], 'cwd': str(tmp_path), 'source_pins': {PYTHON: _pin(PYTHON), str(script): _pin(script)}, 'artifact_root': str(tmp_path), 'answer_path': 'answer.md', 'run_id': 'example-run', 'owner_session': 'example-owner', 'runtime': 'muse', 'model': 'example-model'}
     (root / '.patchwork/config.json').write_text(json.dumps(cfg))
     backend = LocalRuntimeBackend(root)
     attached = backend.attach_external()
@@ -73,6 +95,6 @@ def test_actual_post_close_refusal_stays_blocked(tmp_path):
     response = {'kind': 'deploy2-collect', 'state': 'refused', 'current_completion_allowed': False, 'completion_basis': 'current_observation', 'done': {'ok': False, 'status': 'contract_refused', 'reason': 'ANSWER_LEASE_NOT_LIVE', 'answer_contract': {'ok': False, 'required': True, 'completion_allowed': False, 'reason': 'ANSWER_LEASE_NOT_LIVE', 'status': 'refused', 'main_escalation': True}}}
     source = tmp_path / 'collector.py'
     source.write_text('print('+repr(json.dumps(response))+')')
-    config = {'argv': [sys.executable, str(source)], 'cwd': str(tmp_path), 'source_pins': {sys.executable: hashlib.sha256(Path(sys.executable).read_bytes()).hexdigest(), str(source): hashlib.sha256(source.read_bytes()).hexdigest()}}
+    config = {'argv': [PYTHON, str(source)], 'cwd': str(tmp_path), 'source_pins': {PYTHON: _pin(PYTHON), str(source): _pin(source)}}
     with pytest.raises(RuntimeErrorDetail):
         attach(config)
